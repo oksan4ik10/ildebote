@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+@font-face {
+    font-family: 'Carisma Classic';
+    src: local('Carisma Classic 400 Regular'), local('Carisma-Classic-400-Regular'),
+        url('CarismaClassic-400Regular.woff2') format('woff2'),
+        url('CarismaClassic-400Regular.woff') format('woff'),
+        url('CarismaClassic-400Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Carisma Classic';
+    src: local('Carisma Classic 600 DemiBold'), local('Carisma-Classic-600-DemiBold'),
+        url('CarismaClassic-600DemiBold.woff2') format('woff2'),
+        url('CarismaClassic-600DemiBold.woff') format('woff'),
+        url('CarismaClassic-600DemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}

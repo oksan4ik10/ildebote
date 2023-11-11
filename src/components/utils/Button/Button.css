@@ -1,0 +1,30 @@
+.btn {
+    border-radius: 10px;
+    border: 0px solid #141414;
+    background: linear-gradient(270deg, #967C3F 0%, #DACDA0 21.2%, #F2E9C5 47.31%, #DACDA0 76.28%, #977D40 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    padding: 12px 0px;
+    width: 100%;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.screen__btn {
+    margin-top: 20px;
+}
+
+#check {
+    display: none;
+}
+
+#check:checked+.btn {
+    background: #E2DAB9;
+}

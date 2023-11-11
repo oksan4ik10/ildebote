@@ -1,33 +1,25 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
+import Task0 from './components/Tasks/Task0/Task0';
+import Task1 from './components/Tasks/Task1/Task1';
+import Task2 from './components/Tasks/Task2/Task2';
+import Task3 from './components/Tasks/Task3/Task3';
+import Task4 from './components/Tasks/Task4/Task4';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [task, setTask] = useState(0);
+  const nextLevel = () => {
+    setTask(task + 1);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {task === 0 && <Task0 nextLevel={nextLevel} />}
+      {task === 1 && <Task1 nextLevel={nextLevel} />}
+      {task === 2 && <Task2 nextLevel={nextLevel} />}
+      {task === 3 && <Task3 nextLevel={nextLevel} />}
+      {task === 4 && <Task4 nextLevel={nextLevel} />}
     </>
   )
 }

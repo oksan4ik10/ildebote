@@ -1,0 +1,549 @@
+.area {
+    transform: rotateX(55deg) rotateZ(45deg);
+    width: 100%;
+    height: 300px;
+    transform-origin: left top;
+    background-color: #292929;
+    margin-left: 150px;
+    position: relative;
+    margin-top: 190px;
+
+}
+
+.area::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/images/bg.jfif");
+    background-size: cover;
+    opacity: .25;
+    z-index: -1;
+
+}
+
+
+
+.wall {
+    width: 245px;
+    height: 190px;
+    position: absolute;
+
+}
+
+.wall-left {
+    top: -190px;
+    left: -96px;
+    width: 100%;
+    height: 190px;
+    transform: skewX(45deg);
+
+}
+
+.wall-right {
+    transform: skewY(45deg);
+    left: -190px;
+    top: -96px;
+    width: 190px;
+    height: 100%;
+    background-color: #DFDFDF;
+
+}
+
+
+.wall-left::after,
+.wall-right::after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-image: url("./images/white-texture.jfif");
+    background-size: cover;
+    opacity: .5;
+    z-index: -1;
+
+}
+
+.wall-right::after {
+    width: 190px;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.wall-left::after {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 190px;
+
+}
+
+.wall-left::before,
+.wall-right::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: #C8C8C8;
+
+}
+
+.wall-right::before {
+    width: 5px;
+    height: 100%;
+    left: -5px;
+    top: 3px;
+    transform: skewY(-45deg);
+
+}
+
+.wall-left::before {
+    top: -5px;
+    left: 3px;
+    transform: skewX(-45deg);
+
+}
+
+.area__shelf {
+    transform: skewX(45deg) skewY(-30deg);
+    transform-origin: center center;
+    position: absolute;
+    top: -102px;
+    left: -62px;
+    z-index: 2;
+}
+
+.area__makeup {
+    transform: skewX(45deg) skewY(-30deg);
+    transform-origin: center center;
+    position: absolute;
+    top: -58px;
+    left: 150px;
+    z-index: 3;
+}
+
+.area__care {
+    transform: skewX(45deg) skewY(-21deg);
+    transform-origin: center center;
+    position: absolute;
+    top: 32px;
+    left: -98px;
+    z-index: 3;
+}
+
+.area__makeup-table {
+    display: none;
+    transform: skewX(44deg) skewY(330deg);
+    transform-origin: center center;
+    position: absolute;
+    bottom: 30px;
+    left: 50px;
+    z-index: 6;
+}
+
+.area__makeup-table.error img {
+    filter: drop-shadow(0px 0px 12px #FF6868);
+}
+
+.area__makeup-table.success img {
+    filter: drop-shadow(0px 0px 12px #86EF8C);
+}
+
+
+.area__makeup-table .animation {
+    background-color: transparent;
+    color: #fff;
+    transform: scale(.4);
+}
+
+canvas {
+    position: absolute;
+    transform: skewX(339deg) skewY(21deg);
+    top: -300px;
+    left: -200px;
+    transition: all .5s;
+
+}
+
+canvas.active {
+    opacity: 0;
+}
+
+
+.animation__img {
+    display: none;
+
+}
+
+
+
+/*===area-room 3.3===*/
+.room {
+    display: none;
+    transform: skewX(45deg) skewY(330deg);
+    transform-origin: center center;
+    position: absolute;
+    bottom: 34px;
+    right: -15px;
+    transform-style: preserve-3d;
+}
+
+
+.modal__room {
+    position: absolute;
+    transform: skewX(0deg) skewY(5deg) scale(1) translateX(70px) translateY(-120px) translateZ(10px);
+    width: 172px;
+    height: 62px;
+    padding: 16px 19px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 7px;
+
+}
+
+.modal__room .modal__title {
+    color: #000;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: 0.1px;
+}
+
+.modal__room .modal__text {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+
+
+@media screen and (min-width: 700px) and (orientation: landscape) {
+    .container {
+        height: 95vh;
+        border-radius: 20px;
+        border: 5px solid #666;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-self: center;
+        width: 100%;
+        height: 100vh;
+    }
+
+}
+
+/*==========clients=============*/
+
+.clients {
+    display: grid;
+    grid-template-columns: repeat(4, 64px);
+    justify-content: space-between;
+    padding: 0px 16px 16px 16px;
+    min-height: 162px;
+}
+
+.client {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+}
+
+.client__lives {
+    display: flex;
+    align-items: start;
+    flex-direction: row-reverse;
+}
+
+.client__lives span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 0.7px solid #FFF;
+    background: #90D494;
+    margin-left: -3px;
+    z-index: 0;
+}
+
+.client__photo {
+    width: 64px;
+    height: 64px;
+    background-color: #90D494;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.client__photo img {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+}
+
+/*=======WALL-COMPONENT=========*/
+.area__wall {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
+
+}
+
+.area__wall>*::after {
+    content: "";
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    top: -2px;
+    left: -2px;
+    position: absolute;
+    border-radius: 7px;
+    z-index: -1;
+    background: linear-gradient(127deg, #9A9943 0%, #E8DDB2 52.08%, #977C3F 100%, #977C3F 100%);
+}
+
+.wall__title {
+    color: #292929;
+    font-family: Carisma Classic;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background: #FFF;
+    padding: 1px 4px;
+    text-transform: lowercase;
+    position: relative;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+.wall__img {
+    background: #FFF;
+    padding: 2px;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.wallParfum {
+    transform: skewX(45deg);
+    top: -175px;
+    left: -100px;
+    z-index: 5;
+}
+
+.wallParfum img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+}
+
+.wallMake {
+    transform: skewX(45deg);
+    top: -175px;
+    left: 90px;
+}
+
+.wallMake img {
+    width: 25px;
+    height: 59px;
+    object-fit: cover;
+}
+
+.wallCare {
+    transform: skewX(45deg) skewY(315deg);
+    transform-origin: center center;
+    top: -14px;
+    left: -151px;
+}
+
+.wallCare img {
+    width: 25px;
+    height: 40px;
+    object-fit: cover;
+}
+
+/*===============Check square Parfum=======*/
+
+.checkParfum {
+    display: none;
+    position: absolute;
+    top: -76px;
+    left: -60px;
+    width: 163px;
+    z-index: 2;
+}
+
+.squareParfum {
+    position: relative;
+    width: 100%;
+
+
+}
+
+.squareParfum>* {
+    background-color: rgba(111, 255, 116, 0.30);
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.squareParfum div.top {
+    transform: skewX(0deg) skewY(0deg);
+    top: -114px;
+    left: -130px;
+    height: 71px;
+}
+
+.squareParfum div.left {
+    transform: skewX(45deg) skewY(0deg);
+    top: -43px;
+    left: -36px;
+    height: 190px;
+}
+
+.squareParfum div.right {
+    transform: skewX(0deg) skewY(45deg);
+    top: -18px;
+    left: 33px;
+    height: 70px;
+    width: 190px;
+}
+
+/*===============Check square Make=======*/
+
+.checkMake {
+    display: none;
+    position: absolute;
+    top: -76px;
+    left: 109px;
+    width: 190px;
+}
+
+.squareMake {
+    position: relative;
+    width: 100%;
+
+
+}
+
+.squareMake>* {
+    background-color: rgba(111, 255, 116, 0.30);
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 6;
+}
+
+.squareMake div.top {
+    transform: skewX(0deg) skewY(0deg);
+    top: -113px;
+    left: -132px;
+}
+
+.squareMake div.left {
+    transform: skewX(45deg) skewY(0deg);
+    top: -43px;
+    left: -40px;
+    height: 190px;
+}
+
+.squareMake div.back {
+    transform: skewX(0deg) skewY(45deg);
+    top: -19px;
+    left: -135px;
+    height: 70px;
+    width: 190px;
+    z-index: -1;
+}
+
+.squareMake div.front {
+    transform: skewX(0deg) skewY(45deg);
+    top: -18px;
+    left: 58px;
+    height: 71px;
+    width: 186px;
+}
+
+/*===============Check square Care=======*/
+
+.checkCare {
+    display: none;
+    position: absolute;
+    top: -76px;
+    left: -60px;
+    width: 163px;
+    z-index: 5;
+}
+
+.squareCare {
+    width: 100%;
+
+
+}
+
+.squareCare>* {
+    background-color: rgba(111, 255, 116, 0.30);
+    width: 100%;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.squareCare div.top {
+    transform: skewX(0deg) skewY(0deg);
+    top: -40px;
+    left: -130px;
+    height: 175px;
+}
+
+.squareCare div.back {
+    transform: skewX(45deg) skewY(0deg);
+    top: -43px;
+    left: -36px;
+    height: 190px;
+}
+
+.squareCare div.right {
+    transform: skewX(0deg) skewY(45deg);
+    top: 51px;
+    left: 33px;
+    height: 180px;
+    width: 190px;
+}
+
+.squareCare div.front {
+    transform: skewX(45deg) skewY(0deg);
+    top: 135px;
+    left: -36px;
+    height: 190px;
+}
