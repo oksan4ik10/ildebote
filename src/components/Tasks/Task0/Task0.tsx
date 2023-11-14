@@ -8,7 +8,7 @@ import logoSrc from "../../../assets/images/logo.png"
 function Task0(props: IPropsTask) {
     const { nextLevel } = props;
     const delayNext = () => {
-        setTimeout(nextLevel, 200)
+        setTimeout(nextLevel, 100)
     }
 
     return (
@@ -24,8 +24,8 @@ function Task0(props: IPropsTask) {
             </ScreenBlur>
             </>
                 )
-}              
-        
+           
+    
+}
 
-      
 export default Task0;                        

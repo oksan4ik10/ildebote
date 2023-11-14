@@ -1,0 +1,7 @@
+.clients {
+    display: grid;
+    grid-template-columns: repeat(4, 64px);
+    justify-content: space-between;
+    padding: 0px 16px 16px 16px;
+    min-height: 162px;
+}

@@ -394,7 +394,7 @@ canvas.active {
     position: absolute;
     top: -76px;
     left: -60px;
-    width: 163px;
+    width: 168px;
     z-index: 2;
 }
 
@@ -408,7 +408,7 @@ canvas.active {
 .squareParfum>* {
     background-color: rgba(111, 255, 116, 0.30);
     width: 100%;
-    height: 70px;
+    height: 80px;
     position: absolute;
     top: 0;
     left: 0;
@@ -418,21 +418,21 @@ canvas.active {
     transform: skewX(0deg) skewY(0deg);
     top: -114px;
     left: -130px;
-    height: 71px;
+    height: 83px;
 }
 
 .squareParfum div.left {
     transform: skewX(45deg) skewY(0deg);
-    top: -43px;
+    top: -31px;
     left: -36px;
     height: 190px;
 }
 
 .squareParfum div.right {
     transform: skewX(0deg) skewY(45deg);
-    top: -18px;
-    left: 33px;
-    height: 70px;
+    top: -15px;
+    left: 38px;
+    height: 80px;
     width: 190px;
 }
 
@@ -443,7 +443,7 @@ canvas.active {
     position: absolute;
     top: -76px;
     left: 109px;
-    width: 190px;
+    width: 200px;
 }
 
 .squareMake {
@@ -456,7 +456,7 @@ canvas.active {
 .squareMake>* {
     background-color: rgba(111, 255, 116, 0.30);
     width: 100%;
-    height: 70px;
+    height: 80px;
     position: absolute;
     top: 0;
     left: 0;
@@ -467,30 +467,32 @@ canvas.active {
     transform: skewX(0deg) skewY(0deg);
     top: -113px;
     left: -132px;
+    width: 97%;
 }
 
 .squareMake div.left {
     transform: skewX(45deg) skewY(0deg);
-    top: -43px;
-    left: -40px;
+    top: -33px;
+    left: -39px;
     height: 190px;
+    width: 97%;
 }
 
 .squareMake div.back {
     transform: skewX(0deg) skewY(45deg);
     top: -19px;
     left: -135px;
-    height: 70px;
+    height: 80px;
     width: 190px;
     z-index: -1;
 }
 
 .squareMake div.front {
     transform: skewX(0deg) skewY(45deg);
-    top: -18px;
-    left: 58px;
-    height: 71px;
-    width: 186px;
+    top: -16px;
+    left: 62px;
+    height: 80px;
+    width: 190px;
 }
 
 /*===============Check square Care=======*/
@@ -500,7 +502,7 @@ canvas.active {
     position: absolute;
     top: -76px;
     left: -60px;
-    width: 163px;
+    width: 168px;
     z-index: 5;
 }
 
@@ -521,29 +523,29 @@ canvas.active {
 
 .squareCare div.top {
     transform: skewX(0deg) skewY(0deg);
-    top: -40px;
+    top: -33px;
     left: -130px;
-    height: 175px;
+    height: 205px;
 }
 
 .squareCare div.back {
     transform: skewX(45deg) skewY(0deg);
-    top: -43px;
-    left: -36px;
+    top: -31px;
+    left: -34px;
     height: 190px;
 }
 
 .squareCare div.right {
     transform: skewX(0deg) skewY(45deg);
-    top: 51px;
-    left: 33px;
-    height: 180px;
+    top: 63px;
+    left: 40px;
+    height: 201px;
     width: 190px;
 }
 
 .squareCare div.front {
     transform: skewX(45deg) skewY(0deg);
-    top: 135px;
-    left: -36px;
-    height: 190px;
+    top: 171px;
+    left: -31px;
+    height: 188px;
 }

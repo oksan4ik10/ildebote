@@ -1,0 +1,39 @@
+.client {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.client__lives {
+    display: flex;
+    align-items: start;
+    flex-direction: row-reverse;
+}
+
+.client__lives span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 0.7px solid #FFF;
+    background: #90D494;
+    margin-left: -3px;
+    z-index: 0;
+}
+
+.client__photo {
+    width: 64px;
+    height: 64px;
+    background-color: #90D494;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.client__photo img {
+    position: absolute;
+    top: 5px;
+    left: 8px;
+}

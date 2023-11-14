@@ -13,8 +13,6 @@ interface IProps {
 function Area(props: IProps) {
     const { task } = props;
 
-    console.log(task);
-
     return (
         <>
             <div className="area" style={task === 0 ? { "marginTop": "calc(150% - 190px)" } : { "marginTop": "190px" }}>
