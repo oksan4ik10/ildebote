@@ -7,8 +7,9 @@ import src4 from "../../assets/images/services/4.png"
 import src5 from "../../assets/images/services/1-wall.png"
 import src6 from "../../assets/images/services/2-wall.png"
 import src7 from "../../assets/images/services/3-wall.png"
-import { useAppSelector } from "../../store/store";
-import { useState, useRef } from "react";
+import { useAppSelector, useAppDispatch } from "../../store/store";
+import { setCheckArea } from "../../store/reducers/checkAreaReducer";
+import { useRef } from "react";
 
 export interface IClient {
     img: string;
@@ -24,6 +25,9 @@ function Client(props: IClient) {
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
+    const dispatch = useAppDispatch();
+    console.log(coordinate);
+
 
 
     const refServices = useRef<HTMLDivElement>(null);
@@ -57,6 +61,7 @@ function Client(props: IClient) {
 
     }
     const start = () => {
+        // dispatch(setCheckArea({ category: 0, check: "error" }))
         if (targetDrag) {
             targetDrag = targetDrag.closest(".client") as HTMLElement;
             targetDrag.style.position = "absolute";
@@ -81,6 +86,7 @@ function Client(props: IClient) {
     }
     const move = (clientY: number, clientX: number) => {
         if (targetDrag) {
+
             let y = clientY - container.top - (targetDrag.offsetHeight / 2);
             let x = clientX - container.left - (targetDrag.offsetWidth / 2);
             if (x < 0) x = 0;
@@ -89,6 +95,7 @@ function Client(props: IClient) {
             if (y > container.height - 80) y = container.height - 80;
             targetDrag.style.top = y + "px";
             targetDrag.style.left = x + "px";
+            dispatch(setCheckArea({ category: 0, check: "error" }))
         }
     }
     const mouseEnd = () => {

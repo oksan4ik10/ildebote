@@ -8,7 +8,7 @@ import diorSrc from "../../assets/images/dior.png";
 import pomadeSrc from "../../assets/images/pomade.png";
 import creamSrc from "../../assets/images/cream.png";
 import "./Area.css";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinate, setTopArea } from "../../store/reducers/areaCoordinateReducer";
 
 interface IProps {
@@ -20,6 +20,8 @@ function Area(props: IProps) {
     const ref = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
 
+    const areaCheck = useAppSelector((state) => state.checkAreaReducer).checkArea;
+
 
 
     useEffect(() => {
@@ -27,13 +29,14 @@ function Area(props: IProps) {
 
         if (ref.current) {
             const top = ref.current.getBoundingClientRect().top;
-            dispatch(setCoordinate([{ top: top - 30, left: ref.current.offsetWidth - 50 - 64 }, { top: top - 30, left: ref.current.offsetWidth - 50 - 64 }]))
+            dispatch(setCoordinate([{ top: top - 30, left: ref.current.offsetWidth - 50 - 64 }]))
             dispatch(setTopArea(top))
 
 
         }
 
     }, [dispatch, task])
+
 
 
 
@@ -98,7 +101,8 @@ function Area(props: IProps) {
                         <div className="right"></div>
                     </div>
                 </div>
-                <div className="checkMake">
+                <div className={"checkMake " +
+                    `${(areaCheck.length === 0 || areaCheck[0] === "wait") ? "" : areaCheck[0] === "error" ? "check error" : "check success"}`}>
                     <div className="squareMake">
                         <div className="back"></div>
                         <div className="top"></div>
@@ -106,6 +110,7 @@ function Area(props: IProps) {
                         <div className="front"></div>
                     </div>
                 </div>
+
                 <div className="checkCare">
                     <div className="squareCare">
                         <div className="top"></div>

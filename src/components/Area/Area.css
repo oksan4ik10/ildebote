@@ -549,3 +549,17 @@ canvas.active {
     left: -31px;
     height: 188px;
 }
+
+
+.checkMake.check {
+    display: block;
+}
+
+
+.check.success div>* {
+    background-color: rgba(111, 255, 116, 0.30);
+}
+
+.check.error div>* {
+    background-color: rgba(234, 99, 99, 0.30);
+}

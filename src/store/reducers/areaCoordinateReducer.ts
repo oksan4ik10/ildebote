@@ -7,12 +7,13 @@ export interface IAreaCoordinate {
 interface IStateArea {
     arr: IAreaCoordinate[];
     topArea: number;
+
 }
 const initialState: IStateArea = {
     arr: [
         {
             top: 0,
-            left: 0
+            left: 0,
         }
     ],
     topArea: 0
