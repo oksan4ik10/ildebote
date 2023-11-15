@@ -28,7 +28,7 @@ function Client(props: IClient) {
 
     const refServices = useRef<HTMLDivElement>(null);
 
-
+    const startClick = useRef(false);
 
     if (category === -1) {
         return (
@@ -41,24 +41,40 @@ function Client(props: IClient) {
         )
     }
 
+
+
     let targetDrag: HTMLElement | undefined;
+    const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
+        targetDrag = e.target as HTMLElement;
+        startClick.current = true;
+        start();
+    }
 
     const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
         targetDrag = e.changedTouches[0].target as HTMLElement;
-        targetDrag = targetDrag.closest(".client") as HTMLElement;
-        targetDrag.style.position = "absolute";
-        const x = targetDrag.offsetLeft;
-        let y = 0;
-        if (refServices.current) {
-            y = targetDrag.offsetTop + 8 + refServices.current.offsetHeight;
-            refServices.current.classList.add("none");
-        }
-        targetDrag.style.left = x + "px";
-        targetDrag.style.top = y + "px";
+        start();
 
 
     }
-    const dragMove = (e: React.TouchEvent<HTMLSpanElement>) => {
+    const start = () => {
+        if (targetDrag) {
+            targetDrag = targetDrag.closest(".client") as HTMLElement;
+            targetDrag.style.position = "absolute";
+            const x = targetDrag.offsetLeft;
+            let y = 0;
+            if (refServices.current) {
+                y = targetDrag.offsetTop + 8 + refServices.current.offsetHeight;
+                refServices.current.classList.add("none");
+            }
+            targetDrag.style.left = x + "px";
+            targetDrag.style.top = y + "px";
+        }
+    }
+    const mouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!startClick.current) return;
+        move(e.pageY, e.pageX);
+    }
+    const dragMove = (e: React.TouchEvent<HTMLDivElement>) => {
         const data = e.changedTouches[0];
         move(data.clientY, data.clientX);
 
@@ -75,10 +91,23 @@ function Client(props: IClient) {
             targetDrag.style.left = x + "px";
         }
     }
+    const mouseEnd = () => {
+        startClick.current = false;
+        end();
 
-    const dragEnd = () => {
+    }
+    const mouseOut = () => {
+        if (!startClick.current) return;
+        startClick.current = false;
+        end();
+    }
+    const dragEnd = () => end();
+
+    const end = () => {
         if (targetDrag) {
             targetDrag.style.position = "static";
+            targetDrag.style.top = "auto";
+            targetDrag.style.left = "auto"
             refServices.current?.classList.remove("none");
 
         }
@@ -90,7 +119,14 @@ function Client(props: IClient) {
     return (
         <>
             <div className="client__wrap">
-                <div className="client" onTouchStart={startTouch} onTouchMove={dragMove} onTouchEnd={dragEnd}>
+                <div className="client"
+                    onMouseDown={mouseStart}
+                    onMouseMove={mouseMove}
+                    onMouseLeave={mouseOut}
+                    onMouseUp={mouseEnd}
+                    onTouchStart={startTouch}
+                    onTouchMove={dragMove}
+                    onTouchEnd={dragEnd}>
                     <div className="client__services" ref={refServices}>
                         <img src={arrImgCategories[category]} alt={category + ""} />
                     </div>
@@ -101,7 +137,7 @@ function Client(props: IClient) {
                         <span></span>
                     </div>
                     <div className="client__photo">
-                        <img src={img} alt="photo" />
+                        <img src={img} alt="photo" draggable="false" />
                     </div>
 
                 </div>
