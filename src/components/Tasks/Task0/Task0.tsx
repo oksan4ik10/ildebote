@@ -7,9 +7,6 @@ import logoSrc from "../../../assets/images/logo.png"
 
 function Task0(props: IPropsTask) {
     const { nextLevel } = props;
-    const delayNext = () => {
-        setTimeout(nextLevel, 100)
-    }
 
     return (
         <>
@@ -19,12 +16,12 @@ function Task0(props: IPropsTask) {
                     <div className="logo">
                         <img src={logoSrc} alt="logo" />
                     </div>
-                    <Popup title="ПРИВЕТСТВУЕМ ТЕБЯ В ИЛЬ ДЕ БОТЭ!" text="Познакомься с компанией поближе в нашей игре — ты узнаешь о профессии консультанта и тонкостях бьюти-индустрии много интересного, а в конце получишь шанс стать обладателем приятного приза! Начнём?" size="14px" padding="20px" funcBtn={delayNext} textBtn="Начнем" classBtn="screen__btn"></Popup>
+                    <Popup title="ПРИВЕТСТВУЕМ ТЕБЯ В ИЛЬ ДЕ БОТЭ!" text="Познакомься с компанией поближе в нашей игре — ты узнаешь о профессии консультанта и тонкостях бьюти-индустрии много интересного, а в конце получишь шанс стать обладателем приятного приза! Начнём?" size="14px" padding="20px" funcBtn={nextLevel} textBtn="Начнем" classBtn="screen__btn"></Popup>
                 </div>
             </ScreenBlur>
             </>
                 )
-           
+        
     
 }
 

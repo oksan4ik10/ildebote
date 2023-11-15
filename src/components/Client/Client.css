@@ -5,6 +5,7 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+
 }
 
 .client__lives {
@@ -36,4 +37,8 @@
     position: absolute;
     top: 5px;
     left: 8px;
+}
+
+.client__services.none {
+    display: none;
 }

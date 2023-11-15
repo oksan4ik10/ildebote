@@ -8,7 +8,7 @@
   color: #000;
 }
 
-#root {
+.container {
   min-width: 375px;
   max-width: 400px;
   margin: auto;
@@ -24,7 +24,7 @@
 
 
 @media screen and (min-width: 700px) and (orientation: landscape) {
-  #root {
+  .container {
     height: 95vh;
     border-radius: 20px;
     border: 5px solid #666;

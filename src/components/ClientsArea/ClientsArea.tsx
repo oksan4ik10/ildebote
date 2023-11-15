@@ -23,7 +23,7 @@ function ClientsArea(props: IProps) {
     return (
         <>
             <div className="clients">
-                {clients.map((item) => <Client {...item}></Client>)}
+                {clients.map((item, index) => <Client key={index + "" + item.img} {...item}></Client>)}
             </div>
         </>
     )

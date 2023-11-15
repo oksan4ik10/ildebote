@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import parfumSrc from "../../assets/images/parfum.png";
 import makeupSrc from "../../assets/images/makeup.png";
 import careSrc from "../../assets/images/care.png";
@@ -6,6 +8,8 @@ import diorSrc from "../../assets/images/dior.png";
 import pomadeSrc from "../../assets/images/pomade.png";
 import creamSrc from "../../assets/images/cream.png";
 import "./Area.css";
+import { useAppDispatch } from "../../store/store";
+import { setCoordinate, setTopArea } from "../../store/reducers/areaCoordinateReducer";
 
 interface IProps {
     task: number;
@@ -13,9 +17,29 @@ interface IProps {
 function Area(props: IProps) {
     const { task } = props;
 
+    const ref = useRef<HTMLDivElement>(null);
+    const dispatch = useAppDispatch();
+
+
+
+    useEffect(() => {
+        if (task === 0) return;
+
+        if (ref.current) {
+            const top = ref.current.getBoundingClientRect().top;
+            dispatch(setCoordinate([{ top: top - 30, left: ref.current.offsetWidth - 50 - 64 }, { top: top - 30, left: ref.current.offsetWidth - 50 - 64 }]))
+            dispatch(setTopArea(top))
+
+
+        }
+
+    }, [dispatch, task])
+
+
+
     return (
         <>
-            <div className="area" style={task === 0 ? { "marginTop": "calc(150% - 190px)" } : { "marginTop": "190px" }}>
+            <div className="area" style={task === 0 ? { "marginTop": "calc(150% - 190px)" } : { "marginTop": "190px" }} ref={ref}>
                 <img src={parfumSrc} alt="parfum-table" className="area__shelf" />
                 <img src={makeupSrc} alt="makeup-table" className="area__makeup" />
                 <img src={careSrc} alt="care-table" className="area__care" />

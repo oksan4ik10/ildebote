@@ -2,10 +2,14 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import pointsReducer from './reducers/pointsReducer';
+import areaCoordinateReducer from './reducers/areaCoordinateReducer';
+import containerCoordinateReducer from './reducers/containerCoordinateReducer';
 
 
 const rootReducer = combineReducers({
-    pointsReducer
+    pointsReducer,
+    areaCoordinateReducer,
+    containerCoordinateReducer
 
 });
 
