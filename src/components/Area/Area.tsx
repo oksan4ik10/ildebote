@@ -7,6 +7,7 @@ import makeupTable from "../../assets/images/makeup-table.png";
 import diorSrc from "../../assets/images/dior.png";
 import pomadeSrc from "../../assets/images/pomade.png";
 import creamSrc from "../../assets/images/cream.png";
+import roomSrc from "../../assets/images/room.png";
 import "./Area.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinate, setTopArea } from "../../store/reducers/areaCoordinateReducer";
@@ -22,12 +23,15 @@ function Area(props: IProps) {
     const dispatch = useAppDispatch();
 
     const areaCheck = useAppSelector((state) => state.checkAreaReducer).checkArea;
+    const refMakeTable = useRef<HTMLDivElement>(null);
+    const refRoom = useRef<HTMLDivElement>(null);
     useEffect(() => {
         if (task === 0) return;
 
         if (ref.current) {
 
-            const top = ref.current.getBoundingClientRect().top;
+            const dataArea = ref.current.getBoundingClientRect();
+            const top = dataArea.top;
             const width = ref.current.offsetWidth;
             const leftCare = width * 55 / 100;
 
@@ -49,9 +53,33 @@ function Area(props: IProps) {
                 y1: top - 65,
                 y2: top + 190 / 2 - 64,
             }
+            if (refMakeTable.current) {
+                const data = refMakeTable.current.getBoundingClientRect();
+                const makeTable = {
+                    y1: data.top - 20,
+                    y2: data.top + 20,
+                    x1: data.left - dataArea.left - 64 - 20,
+                    x2: data.left - dataArea.left - 64 + 20,
+                }
+
+                if (refRoom.current) {
+                    const dataRoom = refRoom.current.getBoundingClientRect();
+
+                    const room = {
+                        y1: dataRoom.top - 10,
+                        y2: dataRoom.top + 100,
+                        x1: dataRoom.left - data.left + 40,
+                        x2: dataRoom.left - data.left + 180,
+                    }
+                    dispatch(setCoordinate([careArea, parfumArea, makeupArea, makeTable, room]))
+                }
 
 
-            dispatch(setCoordinate([careArea, parfumArea, makeupArea]))
+
+            }
+
+
+
             dispatch(setTopArea(top))
 
 
@@ -69,14 +97,14 @@ function Area(props: IProps) {
                 <img src={parfumSrc} alt="parfum-table" className="area__shelf" />
                 <img src={makeupSrc} alt="makeup-table" className="area__makeup" />
                 <img src={careSrc} alt="care-table" className="area__care" />
-                <div className="room">
-                    <img src="./images/room.png" alt="room" />
-                    <div className="modal modal__room">
+                <div className={"room " + `${(areaCheck.length === 0 || areaCheck[4] === "wait") ? "" : areaCheck[4] === "error" ? "error" : "success"}`} ref={refRoom}>
+                    <img src={roomSrc} alt="room" />
+                    {/* <div className="modal modal__room">
                         <span className="modal__title">Диагностировано: </span>
                         <span className="modal__text">сухая кожа</span>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="area__makeup-table">
+                <div className={"area__makeup-table " + `${(areaCheck.length === 0 || areaCheck[3] === "wait") ? "" : areaCheck[3] === "error" ? "error" : "success"}`} ref={refMakeTable}>
                     <img src={makeupTable} alt="makeup-table" />
                     <div className="animation">
                         <canvas id="canvas"></canvas>

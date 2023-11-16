@@ -12,6 +12,8 @@ import { setCheckArea, createCheckArea } from "../../store/reducers/checkAreaRed
 import { useRef } from "react";
 import { TCheck } from "../../store/reducers/checkAreaReducer";
 
+import animation from "../utils/animation";
+
 export interface IClient {
     img: string;
     category: number;
@@ -27,8 +29,6 @@ function Client(props: IClient) {
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
     const dispatch = useAppDispatch();
-    console.log(coordinate);
-
 
     const refServices = useRef<HTMLDivElement>(null);
 
@@ -44,6 +44,8 @@ function Client(props: IClient) {
             </>
         )
     }
+
+    let win = false;
 
 
 
@@ -96,13 +98,19 @@ function Client(props: IClient) {
             targetDrag.style.top = y + "px";
             targetDrag.style.left = x + "px";
 
-
             coordinate.forEach((item, index) => {
                 let check: TCheck;
                 if ((x > item.x1) && (x < item.x2) && (y > item.y1) && (y < item.y2)) {
-                    check = category === index ? "success" : "error";
+                    if (category === index) {
+                        win = true;
+                        check = "success"
+                    } else {
+                        win = false;
+                        check = "error";
+                    }
 
                 } else {
+                    win = false;
                     check = "wait";
                 }
                 dispatch(setCheckArea({ category: index, check: check }))
@@ -130,6 +138,13 @@ function Client(props: IClient) {
             targetDrag.style.left = "auto"
             refServices.current?.classList.remove("none");
             const arrArea: TCheck[] = coordinate.map(() => "wait");
+
+            //если пользователь разместил в нужную область
+            if (win) {
+                if (category === 3) {
+                    animation();
+                }
+            }
             dispatch(createCheckArea(arrArea));
         }
     }
