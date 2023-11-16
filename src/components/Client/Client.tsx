@@ -8,8 +8,9 @@ import src5 from "../../assets/images/services/1-wall.png"
 import src6 from "../../assets/images/services/2-wall.png"
 import src7 from "../../assets/images/services/3-wall.png"
 import { useAppSelector, useAppDispatch } from "../../store/store";
-import { setCheckArea } from "../../store/reducers/checkAreaReducer";
+import { setCheckArea, createCheckArea } from "../../store/reducers/checkAreaReducer";
 import { useRef } from "react";
+import { TCheck } from "../../store/reducers/checkAreaReducer";
 
 export interface IClient {
     img: string;
@@ -27,7 +28,6 @@ function Client(props: IClient) {
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
     const dispatch = useAppDispatch();
     console.log(coordinate);
-
 
 
     const refServices = useRef<HTMLDivElement>(null);
@@ -48,6 +48,7 @@ function Client(props: IClient) {
 
 
     let targetDrag: HTMLElement | undefined;
+
     const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
         targetDrag = e.target as HTMLElement;
         startClick.current = true;
@@ -61,7 +62,6 @@ function Client(props: IClient) {
 
     }
     const start = () => {
-        // dispatch(setCheckArea({ category: 0, check: "error" }))
         if (targetDrag) {
             targetDrag = targetDrag.closest(".client") as HTMLElement;
             targetDrag.style.position = "absolute";
@@ -95,7 +95,20 @@ function Client(props: IClient) {
             if (y > container.height - 80) y = container.height - 80;
             targetDrag.style.top = y + "px";
             targetDrag.style.left = x + "px";
-            dispatch(setCheckArea({ category: 0, check: "error" }))
+
+
+            coordinate.forEach((item, index) => {
+                let check: TCheck;
+                if ((x > item.x1) && (x < item.x2) && (y > item.y1) && (y < item.y2)) {
+                    check = category === index ? "success" : "error";
+
+                } else {
+                    check = "wait";
+                }
+                dispatch(setCheckArea({ category: index, check: check }))
+
+            })
+
         }
     }
     const mouseEnd = () => {
@@ -116,7 +129,8 @@ function Client(props: IClient) {
             targetDrag.style.top = "auto";
             targetDrag.style.left = "auto"
             refServices.current?.classList.remove("none");
-
+            const arrArea: TCheck[] = coordinate.map(() => "wait");
+            dispatch(createCheckArea(arrArea));
         }
     }
 

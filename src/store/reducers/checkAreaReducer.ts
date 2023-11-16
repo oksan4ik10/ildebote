@@ -1,26 +1,30 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-type ICheck = "success" | "error" | "wait";
+export type TCheck = "success" | "error" | "wait";
 export interface IArrCheck {
-    checkArea: ICheck[];
+    checkArea: TCheck[];
 }
 
 const initialState: IArrCheck = { checkArea: [] };
 
 interface ISetCheck {
     category: number,
-    check: ICheck
+    check: TCheck
 }
 
 export const checkAreaSlice = createSlice({
     name: 'checkArea',
     initialState,
     reducers: {
+        createCheckArea(state, action: PayloadAction<TCheck[]>) {
+            state.checkArea = [...action.payload];
+        },
         setCheckArea(state, action: PayloadAction<ISetCheck>) {
-            state.checkArea[action.payload.category] = action.payload.check
+            state.checkArea[action.payload.category] = action.payload.check;
+
         },
     },
 });
 
 export default checkAreaSlice.reducer;
-export const { setCheckArea } = checkAreaSlice.actions;
+export const { setCheckArea, createCheckArea } = checkAreaSlice.actions;

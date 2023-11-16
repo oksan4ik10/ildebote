@@ -11,6 +11,7 @@ import "./Area.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinate, setTopArea } from "../../store/reducers/areaCoordinateReducer";
 
+
 interface IProps {
     task: number;
 }
@@ -21,16 +22,38 @@ function Area(props: IProps) {
     const dispatch = useAppDispatch();
 
     const areaCheck = useAppSelector((state) => state.checkAreaReducer).checkArea;
-
-
-
     useEffect(() => {
         if (task === 0) return;
 
         if (ref.current) {
+
             const top = ref.current.getBoundingClientRect().top;
-            dispatch(setCoordinate([{ top: top - 30, left: ref.current.offsetWidth - 50 - 64 }]))
+            const width = ref.current.offsetWidth;
+            const leftCare = width * 55 / 100;
+
+            const careArea = {
+                x1: 0,
+                x2: leftCare - 64,
+                y1: top - 190 / 2 - 64 - 10 - 8,
+                y2: top + 190 / 2 - 64,
+            }
+            const parfumArea = {
+                x1: leftCare - 64,
+                x2: leftCare + 50,
+                y1: top - 190 / 2 - 64 - 10 - 8,
+                y2: top,
+            }
+            const makeupArea = {
+                x1: leftCare + 0.5,
+                x2: width - 64,
+                y1: top - 65,
+                y2: top + 190 / 2 - 64,
+            }
+
+
+            dispatch(setCoordinate([careArea, parfumArea, makeupArea]))
             dispatch(setTopArea(top))
+
 
 
         }
@@ -94,7 +117,7 @@ function Area(props: IProps) {
                 <div className="wall wall-left"></div>
                 <div className="wall wall-right">
                 </div>
-                <div className="checkParfum">
+                <div className={"checkParfum " + `${(areaCheck.length === 0 || areaCheck[1] === "wait") ? "" : areaCheck[1] === "error" ? "check error" : "check success"}`}>
                     <div className="squareParfum">
                         <div className="top"></div>
                         <div className="left"></div>
@@ -102,7 +125,7 @@ function Area(props: IProps) {
                     </div>
                 </div>
                 <div className={"checkMake " +
-                    `${(areaCheck.length === 0 || areaCheck[0] === "wait") ? "" : areaCheck[0] === "error" ? "check error" : "check success"}`}>
+                    `${(areaCheck.length === 0 || areaCheck[2] === "wait") ? "" : areaCheck[2] === "error" ? "check error" : "check success"}`}>
                     <div className="squareMake">
                         <div className="back"></div>
                         <div className="top"></div>
@@ -111,7 +134,7 @@ function Area(props: IProps) {
                     </div>
                 </div>
 
-                <div className="checkCare">
+                <div className={"checkCare " + `${(areaCheck.length === 0 || areaCheck[0] === "wait") ? "" : areaCheck[0] === "error" ? "check error" : "check success"}`}>
                     <div className="squareCare">
                         <div className="top"></div>
                         <div className="back"></div>

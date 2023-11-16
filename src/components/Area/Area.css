@@ -137,7 +137,7 @@
 }
 
 .area__makeup-table {
-    display: none;
+    display: block;
     transform: skewX(44deg) skewY(330deg);
     transform-origin: center center;
     position: absolute;
@@ -551,7 +551,9 @@ canvas.active {
 }
 
 
-.checkMake.check {
+.checkMake.check,
+.checkParfum.check,
+.checkCare.check {
     display: block;
 }
 

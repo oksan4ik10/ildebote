@@ -7,6 +7,7 @@ import ClientsArea from "../../ClientsArea/ClientsArea";
 
 import src1 from "../../../assets/images/clients/1-1.png";
 import { IClient } from "../../Client/Client";
+import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
 
 function Task1(props: IPropsTask) {
     const { nextLevel } = props;
@@ -16,9 +17,11 @@ function Task1(props: IPropsTask) {
         dispatch(setWidth(2)); //добавление очков
     }
 
+
+    dispatch(createCheckArea(["wait", "wait", "wait"]))
     const arrClients: IClient[] = [
         {
-            category: 0,
+            category: 3,
             img: src1,
             check: false
         }
