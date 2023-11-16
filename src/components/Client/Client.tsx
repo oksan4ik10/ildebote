@@ -9,7 +9,7 @@ import src6 from "../../assets/images/services/2-wall.png"
 import src7 from "../../assets/images/services/3-wall.png"
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setCheckArea, createCheckArea } from "../../store/reducers/checkAreaReducer";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { TCheck } from "../../store/reducers/checkAreaReducer";
 
 import animation from "../utils/animation";
@@ -18,11 +18,12 @@ export interface IClient {
     img: string;
     category: number;
     check: boolean;
+    funcWin: () => void;
 
 }
 
 function Client(props: IClient) {
-    const { img, category } = props;
+    const { img, category, funcWin } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
 
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
@@ -33,6 +34,8 @@ function Client(props: IClient) {
     const refServices = useRef<HTMLDivElement>(null);
 
     const startClick = useRef(false);
+    const win = useRef(false);
+    const [stopGame, setStopGame] = useState(false);
 
     if (category === -1) {
         return (
@@ -44,9 +47,6 @@ function Client(props: IClient) {
             </>
         )
     }
-
-    let win = false;
-
 
 
     let targetDrag: HTMLElement | undefined;
@@ -97,21 +97,24 @@ function Client(props: IClient) {
             if (y > container.height - 80) y = container.height - 80;
             targetDrag.style.top = y + "px";
             targetDrag.style.left = x + "px";
-
+            let check: TCheck = "wait";
+            let checkWin = false;
             coordinate.forEach((item, index) => {
-                let check: TCheck;
                 if ((x > item.x1) && (x < item.x2) && (y > item.y1) && (y < item.y2)) {
                     if (category === index) {
-                        win = true;
-                        check = "success"
+                        checkWin = true;
+                        win.current = true;
+                        check = "success";
                     } else {
-                        win = false;
+                        win.current = false;
                         check = "error";
                     }
 
                 } else {
-                    win = false;
                     check = "wait";
+                }
+                if ((index === coordinate.length - 1) && (!checkWin)) {
+                    win.current = false;
                 }
                 dispatch(setCheckArea({ category: index, check: check }))
 
@@ -131,6 +134,8 @@ function Client(props: IClient) {
     }
     const dragEnd = () => end();
 
+
+
     const end = () => {
         if (targetDrag) {
             targetDrag.style.position = "static";
@@ -140,9 +145,14 @@ function Client(props: IClient) {
             const arrArea: TCheck[] = coordinate.map(() => "wait");
 
             //если пользователь разместил в нужную область
-            if (win) {
+            if (win.current) {
                 if (category === 3) {
                     animation();
+                    setStopGame(true);
+                    setTimeout(() => setStopGame(false), 4500)
+                }
+                if (category === 4) {
+                    funcWin();
                 }
             }
             dispatch(createCheckArea(arrArea));
@@ -154,6 +164,8 @@ function Client(props: IClient) {
 
     return (
         <>
+            {stopGame && <div className="stopGame"></div>}
+
             <div className="client__wrap">
                 <div className="client"
                     onMouseDown={mouseStart}

@@ -29,7 +29,7 @@ function Task1(props: IPropsTask) {
             category: 4,
             img: src1,
             check: false
-        }
+        },
     ]
 
 

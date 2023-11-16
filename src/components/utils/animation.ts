@@ -1,9 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-inner-declarations */
 const animation = () => {
+    console.log(23);
     // eslint-disable-next-line prefer-const
     let canvas = document.getElementById("canvas") as HTMLCanvasElement;
+
     if (canvas) {
+
+
         const ctx = canvas.getContext("2d");
         let loading = true;
         canvas.height = 300;
@@ -20,7 +24,7 @@ const animation = () => {
         function spawn() {
             if (new Date().getTime() > lastTime + minSpawnTime) {
                 lastTime = new Date().getTime();
-                parts.push(new (smoke(emitterX, emitterY) as any));
+                parts.push(new (smoke as any)(emitterX, emitterY));
             }
         }
 
@@ -73,7 +77,7 @@ const animation = () => {
         }
 
 
-        function smoke(this: any, x: number, y: number) {
+        function smoke(x: number, y: number) {
             this.x = x;
             this.y = y;
 
