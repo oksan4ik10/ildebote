@@ -21,7 +21,7 @@ const initialState: IStateContainer = {
 }
 
 export const containerSlice = createSlice({
-    name: 'areaCoordinate',
+    name: 'clientsCoordinate',
     initialState,
     reducers: {
         setCoordinateContainer(state, action: PayloadAction<IContainerCoordinate>) {

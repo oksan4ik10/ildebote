@@ -92,6 +92,8 @@ function Area(props: IProps) {
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
 
+    const coordinateClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients;
+
     const startClick = useRef(false);
 
     const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -114,14 +116,13 @@ function Area(props: IProps) {
         const parentElem = elem.closest(".area__wall") as HTMLElement;
         const id = parentElem.className.split(" ")[1];
         targetDrag = document.querySelector(`#${id}`) as HTMLElement;
-        console.log(targetDrag);
-
         if (targetDrag) {
             targetDrag.style.display = "block";
             const y = clientY - container.top - (targetDrag.offsetHeight / 2);
             const x = clientX - container.left - (targetDrag.offsetWidth / 2);
             targetDrag.style.left = x + "px";
             targetDrag.style.top = y + "px";
+
 
         }
     }
@@ -132,9 +133,6 @@ function Area(props: IProps) {
         move(data.clientY, data.clientX);
     }
     const mouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        console.log(startClick);
-
-
         if (!startClick.current) return;
         move(e.pageY, e.pageX);
     }
@@ -143,12 +141,21 @@ function Area(props: IProps) {
         if (targetDrag) {
             let y = clientY - container.top - ((targetDrag.offsetHeight + 4) / 2);
             let x = clientX - container.left - ((targetDrag.offsetWidth + 4) / 2);
-            if (x < 4) x = 4;
+            if (x < 2) x = 2;
             if (x > container.width - targetDrag.offsetWidth - 4) x = container.width - targetDrag.offsetWidth - 4;
             if (y < topArea + 4) y = topArea + 4;
             if (y > container.height - 88) y = container.height - 88;
             targetDrag.style.top = y + "px"
             targetDrag.style.left = x + "px";
+            coordinateClients.forEach((item) => {
+                if ((x > item.x1) && (x < item.x2) && (y > item.y1) && (y < item.y2)) {
+                    console.log("нужен диспатч");
+
+                }
+
+
+
+            })
         }
     }
     const dragEnd = () => end();

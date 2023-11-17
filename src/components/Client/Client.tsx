@@ -17,7 +17,7 @@ import animation from "../utils/animation";
 export interface IClient {
     img: string;
     category: number;
-    check: boolean;
+    check: TCheck;
     funcWin?: () => void;
 
 }
