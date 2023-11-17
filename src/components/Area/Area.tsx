@@ -88,21 +88,109 @@ function Area(props: IProps) {
 
     }, [dispatch, task])
 
+    let targetDrag: HTMLElement | null;
+    const container = useAppSelector((state) => state.containerCoordinateReducer).container;
+    const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
+
+    const startClick = useRef(false);
+
+    const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
+        const elem = e.target as HTMLElement;
+
+        startClick.current = true;
+        start(elem, e.pageY, e.pageX);
+    }
 
 
+    const dragStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        const dataElem = e.changedTouches[0];
+        const elem = dataElem.target as HTMLElement;
+        start(elem, dataElem.clientY, dataElem.clientX);
+
+    }
+
+    const start = (elem: HTMLElement, clientY: number, clientX: number) => {
+
+        const parentElem = elem.closest(".area__wall") as HTMLElement;
+        const id = parentElem.className.split(" ")[1];
+        targetDrag = document.querySelector(`#${id}`) as HTMLElement;
+        console.log(targetDrag);
+
+        if (targetDrag) {
+            targetDrag.style.display = "block";
+            const y = clientY - container.top - (targetDrag.offsetHeight / 2);
+            const x = clientX - container.left - (targetDrag.offsetWidth / 2);
+            targetDrag.style.left = x + "px";
+            targetDrag.style.top = y + "px";
+
+        }
+    }
+    const dragMove = (e: React.TouchEvent<HTMLDivElement>) => {
+        const data = e.changedTouches[0];
+
+
+        move(data.clientY, data.clientX);
+    }
+    const mouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        console.log(startClick);
+
+
+        if (!startClick.current) return;
+        move(e.pageY, e.pageX);
+    }
+
+    const move = (clientY: number, clientX: number) => {
+        if (targetDrag) {
+            let y = clientY - container.top - ((targetDrag.offsetHeight + 4) / 2);
+            let x = clientX - container.left - ((targetDrag.offsetWidth + 4) / 2);
+            if (x < 4) x = 4;
+            if (x > container.width - targetDrag.offsetWidth - 4) x = container.width - targetDrag.offsetWidth - 4;
+            if (y < topArea + 4) y = topArea + 4;
+            if (y > container.height - 88) y = container.height - 88;
+            targetDrag.style.top = y + "px"
+            targetDrag.style.left = x + "px";
+        }
+    }
+    const dragEnd = () => end();
+    const mouseEnd = () => {
+        startClick.current = false;
+        end();
+
+    }
+    const mouseOut = () => {
+        if (!startClick.current) return;
+        startClick.current = false;
+        end();
+    }
+
+    const end = () => {
+
+        if (targetDrag) {
+
+            targetDrag.style.left = "auto";
+            targetDrag.style.top = "auto";
+            targetDrag.style.display = "none";
+        }
+    }
 
     return (
         <>
+            <div id="wallCare" className="drag-block wall__img">
+                <img src={creamSrc} alt="parfumWall" />
+            </div>
+            <div id="wallParfum" className="drag-block wall__img" onMouseMove={mouseMove} onMouseLeave={mouseOut}
+                onMouseUp={mouseEnd}>
+                <img src={diorSrc} alt="parfumWall" draggable={false} />
+            </div>
+            <div id="wallMake" className="drag-block wall__img">
+                <img src={pomadeSrc} alt="parfumWall" />
+            </div>
             <div className="area" style={task === 0 ? { "marginTop": "calc(150% - 190px)" } : { "marginTop": "190px" }} ref={ref}>
                 <img src={parfumSrc} alt="parfum-table" className="area__shelf" />
                 <img src={makeupSrc} alt="makeup-table" className="area__makeup" />
                 <img src={careSrc} alt="care-table" className="area__care" />
                 <div className={"room " + `${(areaCheck.length === 0 || areaCheck[4] === "wait") ? "" : areaCheck[4] === "error" ? "error" : "success"}`} ref={refRoom}>
                     <img src={roomSrc} alt="room" />
-                    {/* <div className="modal modal__room">
-                        <span className="modal__title">Диагностировано: </span>
-                        <span className="modal__text">сухая кожа</span>
-                    </div> */}
                 </div>
                 <div className={"area__makeup-table " + `${(areaCheck.length === 0 || areaCheck[3] === "wait") ? "" : areaCheck[3] === "error" ? "error" : "success"}`} ref={refMakeTable}>
                     <img src={makeupTable} alt="makeup-table" />
@@ -119,8 +207,12 @@ function Area(props: IProps) {
                     <h3 className="wall__title">
                         Парфюмерия
                     </h3>
-                    <div className="wall__img">
-                        <img src={diorSrc} alt="parfum" />
+                    <div className="wall__img"
+                        onMouseDown={mouseStart}
+
+
+                        onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
+                        <img src={diorSrc} alt="parfum" draggable={false} />
                     </div>
 
                 </div>
@@ -129,7 +221,7 @@ function Area(props: IProps) {
                         макияж
                     </h3>
                     <div className="wall__img">
-                        <img src={pomadeSrc} alt="pomade" />
+                        <img src={pomadeSrc} alt="pomade" draggable={false} />
                     </div>
 
                 </div>
@@ -138,7 +230,7 @@ function Area(props: IProps) {
                         уход
                     </h3>
                     <div className="wall__img">
-                        <img src={creamSrc} alt="cream" />
+                        <img src={creamSrc} alt="cream" draggable={false} />
                     </div>
 
                 </div>

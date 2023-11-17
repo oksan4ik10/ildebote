@@ -33,7 +33,7 @@ function ClientsArea(props: IProps) {
             <div className="clients">
                 {clients.map((item, index) => {
                     if (item.category === 4) return <Client key={index + "" + item.img} {...item} funcWin={openModalDiagnostics} />
-                    return <Client key={index + "" + item.img} {...item} funcWin={console.log} />
+                    return <Client key={index + "" + item.img} {...item} />
                 })}
             </div>
         </>

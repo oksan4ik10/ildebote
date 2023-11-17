@@ -24,6 +24,7 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  min-height: 660px;
 
 }
 

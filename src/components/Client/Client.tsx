@@ -18,7 +18,7 @@ export interface IClient {
     img: string;
     category: number;
     check: boolean;
-    funcWin: () => void;
+    funcWin?: () => void;
 
 }
 
@@ -152,7 +152,7 @@ function Client(props: IClient) {
                     setTimeout(() => setStopGame(false), 4500)
                 }
                 if (category === 4) {
-                    funcWin();
+                    if (funcWin) funcWin();
                 }
             }
             dispatch(createCheckArea(arrArea));

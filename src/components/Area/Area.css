@@ -200,38 +200,6 @@ canvas.active {
     filter: drop-shadow(0px 0px 12px #86EF8C);
 }
 
-/* 
-.modal__room {
-    position: absolute;
-    transform: skewX(0deg) skewY(5deg) scale(1) translateX(70px) translateY(-120px) translateZ(10px);
-    width: 172px;
-    height: 62px;
-    padding: 16px 19px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: 7px;
-
-}
-
-.modal__room .modal__title {
-    color: #000;
-    text-align: center;
-    font-family: Montserrat;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 120%;
-    letter-spacing: 0.1px;
-}
-
-.modal__room .modal__text {
-    font-weight: 400;
-    font-size: 16px;
-} */
-
 
 
 @media screen and (min-width: 700px) and (orientation: landscape) {
@@ -313,7 +281,8 @@ canvas.active {
 
 }
 
-.area__wall>*::after {
+.area__wall>*::after,
+.drag-block::after {
     content: "";
     width: calc(100% + 4px);
     height: calc(100% + 4px);
@@ -324,6 +293,21 @@ canvas.active {
     z-index: -1;
     background: linear-gradient(127deg, #9A9943 0%, #E8DDB2 52.08%, #977C3F 100%, #977C3F 100%);
 }
+
+.drag-block::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #fff;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: 7px;
+}
+
+
 
 .wall__title {
     color: #292929;
@@ -347,12 +331,13 @@ canvas.active {
 
 .wall__img {
     background: #FFF;
-    padding: 2px;
+    padding: 3px;
     border-radius: 5px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 
@@ -364,7 +349,7 @@ canvas.active {
 }
 
 .wallParfum img {
-    width: 45px;
+    width: 39px;
     height: 45px;
     object-fit: cover;
 }
@@ -392,6 +377,28 @@ canvas.active {
     width: 25px;
     height: 40px;
     object-fit: cover;
+}
+
+.drag-block {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    background: #fff;
+    height: 72px;
+}
+
+.drag-block img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#wallParfum {
+    padding: 3px 7px;
 }
 
 /*===============Check square Parfum=======*/
