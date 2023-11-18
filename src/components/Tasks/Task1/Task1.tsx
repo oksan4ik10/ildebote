@@ -19,7 +19,7 @@ function Task1(props: IPropsTask) {
         dispatch(setWidth(2)); //добавление очков
     }
     useEffect(() => {
-        dispatch(createCheckArea(["wait", "wait", "wait", "wait", "wait"]));
+        dispatch(createCheckArea(["wait", "wait", "wait", "wait", "wait"])); //площадки, которые работают в данном таске
         dispatch(setArrClients(arrClients));
 
     })
@@ -34,22 +34,22 @@ function Task1(props: IPropsTask) {
             check: "wait",
         },
         {
-            category: 4,
-            img: src1,
-            check: "wait",
-        },
-        {
-            category: 4,
-            img: src1,
-            check: "wait",
-        },
-        {
-            category: 4,
-            img: src1,
-            check: "wait",
-        },
-        {
             category: 3,
+            img: src1,
+            check: "wait",
+        },
+        {
+            category: 2,
+            img: src1,
+            check: "wait",
+        },
+        {
+            category: 1,
+            img: src1,
+            check: "wait",
+        },
+        {
+            category: 2,
             img: src1,
             check: "wait",
         },

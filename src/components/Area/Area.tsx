@@ -47,9 +47,9 @@ function Area(props: IProps) {
             }
             const parfumArea = {
                 x1: leftCare - 64,
-                x2: leftCare + 50,
+                x2: leftCare,
                 y1: top - 190 / 2 - 64 - 10 - 8,
-                y2: top,
+                y2: top - 10,
             }
             const makeupArea = {
                 x1: leftCare + 0.5,
@@ -57,6 +57,7 @@ function Area(props: IProps) {
                 y1: top - 65,
                 y2: top + 190 / 2 - 64,
             }
+
             if (refMakeTable.current) {
                 const data = refMakeTable.current.getBoundingClientRect();
                 const makeTable = {

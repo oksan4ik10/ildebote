@@ -36,14 +36,13 @@ function Client(props: IPropsClient) {
     const dispatch = useAppDispatch();
 
     const refServices = useRef<HTMLDivElement>(null);
-
     const startClick = useRef(false);
     const win = useRef(false);
     const stopGame = useRef(false);
 
 
     let targetDrag: HTMLElement | undefined;
-
+    const topAreaClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients[0].y1;
     const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
         targetDrag = e.target as HTMLElement;
         startClick.current = true;
@@ -57,13 +56,15 @@ function Client(props: IPropsClient) {
 
     }
     const start = () => {
+
+
         if (targetDrag) {
             targetDrag = targetDrag.closest(".client") as HTMLElement;
             targetDrag.style.position = "absolute";
             const x = targetDrag.offsetLeft;
             let y = 0;
             if (refServices.current) {
-                y = targetDrag.offsetTop + 8 + refServices.current.offsetHeight;
+                y = topAreaClients + (178 - targetDrag.offsetHeight) + refServices.current.offsetHeight - 8;
                 refServices.current.classList.add("none");
             }
             targetDrag.style.left = x + "px";
@@ -88,7 +89,7 @@ function Client(props: IPropsClient) {
             if (x < 0) x = 0;
             if (x > container.width - 64) x = container.width - 64;
             if (y < topArea) y = topArea;
-            if (y > container.height - 80) y = container.height - 80;
+            if (y > container.height - 83) y = container.height - 83;
             targetDrag.style.top = y + "px";
             targetDrag.style.left = x + "px";
             let check: TCheck = "wait";

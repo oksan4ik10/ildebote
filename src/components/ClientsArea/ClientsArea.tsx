@@ -28,34 +28,36 @@ function ClientsArea(props: IProps) {
     const handler = useCallback(() => {
         if (ref.current) {
             const data = ref.current.getBoundingClientRect();
-            const yy2 = data.top + 168;
+            const yy2 = data.top + 178;
             const gap = (data.width - 64 * 4) / 3;
             const arrCoordinate = [
                 {
                     x1: 0,
-                    x2: 64 + 15,
+                    x2: 64,
                     y1: data.top,
                     y2: yy2
                 },
                 {
-                    x1: 64 + gap - 15,
-                    x2: 64 + gap + 64 + 15,
+                    x1: 64 + gap - gap + 5,
+                    x2: 64 + gap + 64,
                     y1: data.top,
                     y2: yy2
                 },
                 {
-                    x1: (64 + gap) * 2 - 15,
-                    x2: (64 + gap) * 2 + 64 + 15,
+                    x1: (64 + gap) * 2 - gap + 5,
+                    x2: (64 + gap) * 2 + 64,
                     y1: data.top,
                     y2: yy2
                 },
                 {
-                    x1: (64 + gap) * 3 - 15,
+                    x1: (64 + gap) * 3 - gap + 5,
                     x2: (64 + gap) * 3 + 64,
                     y1: data.top,
                     y2: yy2
                 },
             ]
+            console.log(arrCoordinate);
+
             dispatch(setCoordinateClients(arrCoordinate));
 
         }
@@ -66,6 +68,8 @@ function ClientsArea(props: IProps) {
     }, [handler])
 
     useEffect(() => {
+        console.log(clients);
+
         if (clients.filter((item) => item).length === 0) {
             console.log("ЗАПУСТИТЬ ФУНКЦИЮ смены таска или окна");
 
