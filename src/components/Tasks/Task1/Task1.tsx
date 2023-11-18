@@ -8,6 +8,7 @@ import ClientsArea from "../../ClientsArea/ClientsArea";
 import src1 from "../../../assets/images/clients/1-1.png";
 import { IClient } from "../../Client/Client";
 import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
+import { setArrClients } from "../../../store/reducers/arrClientsReducer";
 import { useEffect } from "react";
 
 function Task1(props: IPropsTask) {
@@ -18,7 +19,9 @@ function Task1(props: IPropsTask) {
         dispatch(setWidth(2)); //добавление очков
     }
     useEffect(() => {
-        dispatch(createCheckArea(["wait", "wait", "wait", "wait", "wait"]))
+        dispatch(createCheckArea(["wait", "wait", "wait", "wait", "wait"]));
+        dispatch(setArrClients(arrClients));
+
     })
 
 
@@ -28,7 +31,27 @@ function Task1(props: IPropsTask) {
         {
             category: 4,
             img: src1,
-            check: false,
+            check: "wait",
+        },
+        {
+            category: 4,
+            img: src1,
+            check: "wait",
+        },
+        {
+            category: 4,
+            img: src1,
+            check: "wait",
+        },
+        {
+            category: 4,
+            img: src1,
+            check: "wait",
+        },
+        {
+            category: 3,
+            img: src1,
+            check: "wait",
         },
     ]
 

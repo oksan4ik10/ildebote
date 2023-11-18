@@ -3,8 +3,9 @@ import "./ClientsArea.css";
 import Client from "../Client/Client";
 import { IClient } from "../Client/Client";
 import ModalDiagnostics from "../Client/ModalDiagnostics";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
+
 
 interface IProps {
     clients: IClient[];
@@ -12,21 +13,17 @@ interface IProps {
 
 
 function ClientsArea(props: IProps) {
-    let { clients } = props;
+    //let { clients } = props;
 
-    const nullClient: IClient = {
-        img: "",
-        category: -1,
-        check: "wait",
+    const clients = useAppSelector((store) => store.arrClientsReducer).arrClients.slice(0, 4);
+    console.log(clients);
 
-    }
-    if (clients.length === 1) {
-        clients = [nullClient, nullClient, nullClient, ...clients];
-    }
+
+
     const [modal, setModal] = useState(false);
     const openModalDiagnostics = () => {
         setModal(true);
-        setTimeout(() => setModal(false), 3000)
+        setTimeout(() => setModal(false), 1000)
     }
 
     const ref = useRef<HTMLDivElement>(null);
@@ -71,13 +68,25 @@ function ClientsArea(props: IProps) {
         handler();
     }, [handler])
 
+    useEffect(() => {
+        console.log(23);
+        if (clients.filter((item) => item).length === 0) {
+            console.log("ЗАПУСТИТЬ ФУНКЦИЮ смены таска или окна");
+
+        }
+
+
+    })
+
+
     return (
         <>
             {modal && <ModalDiagnostics />}
             <div className="clients" ref={ref}>
                 {clients.map((item, index) => {
-                    if (item.category === 4) return <Client key={index + "" + item.img} {...item} funcWin={openModalDiagnostics} />
-                    return <Client key={index + "" + item.img} {...item} />
+                    if (!item) return <div className="client" key={Math.random()}></div>
+                    if (item.category === 4) return <Client key={Math.random()} index={index} {...item} funcWin={openModalDiagnostics} />
+                    return <Client key={Math.random()} index={index}{...item} />
                 })}
             </div>
         </>

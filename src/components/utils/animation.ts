@@ -4,6 +4,9 @@ const animation = () => {
     console.log(23);
     // eslint-disable-next-line prefer-const
     let canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    const div = document.createElement("div");
+    div.className = "stop-game";
+    document.body.append(div);
 
     if (canvas) {
 
@@ -65,6 +68,7 @@ const animation = () => {
 
                     cancelAnimationFrame(id);
                     canvas.classList.add("active");
+                    div.remove();
                     setTimeout(() => {
                         ctx.clearRect(0, 0, canvas.width, canvas.height)
                     }, 500);

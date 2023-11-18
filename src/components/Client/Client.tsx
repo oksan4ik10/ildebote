@@ -11,6 +11,7 @@ import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setCheckArea, createCheckArea } from "../../store/reducers/checkAreaReducer";
 import { useRef, useState } from "react";
 import { TCheck } from "../../store/reducers/checkAreaReducer";
+import { deleteClient } from "../../store/reducers/arrClientsReducer";
 
 import animation from "../utils/animation";
 
@@ -21,9 +22,12 @@ export interface IClient {
     funcWin?: () => void;
 
 }
+interface IPropsClient extends IClient {
+    index: number
+}
 
-function Client(props: IClient) {
-    const { img, category, funcWin } = props;
+function Client(props: IPropsClient) {
+    const { img, category, funcWin, index } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
 
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
@@ -35,18 +39,7 @@ function Client(props: IClient) {
 
     const startClick = useRef(false);
     const win = useRef(false);
-    const [stopGame, setStopGame] = useState(false);
-
-    if (category === -1) {
-        return (
-            <>
-                <div className="client__wrap">
-
-                </div>
-
-            </>
-        )
-    }
+    const stopGame = useRef(false);
 
 
     let targetDrag: HTMLElement | undefined;
@@ -86,6 +79,7 @@ function Client(props: IClient) {
         move(data.clientY, data.clientX);
 
     }
+
     const move = (clientY: number, clientX: number) => {
         if (targetDrag) {
 
@@ -148,12 +142,12 @@ function Client(props: IClient) {
             if (win.current) {
                 if (category === 3) {
                     animation();
-                    setStopGame(true);
-                    setTimeout(() => setStopGame(false), 4500)
+
                 }
                 if (category === 4) {
                     if (funcWin) funcWin();
                 }
+                dispatch(deleteClient(index))
             }
             dispatch(createCheckArea(arrArea));
         }
@@ -164,7 +158,7 @@ function Client(props: IClient) {
 
     return (
         <>
-            {stopGame && <div className="stopGame"></div>}
+            {stopGame.current && <div className="stopGame"></div>}
 
             <div className="client__wrap">
                 <div className="client"
