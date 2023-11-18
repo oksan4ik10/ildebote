@@ -201,8 +201,6 @@ function Area(props: IProps) {
             targetDrag.style.left = "auto";
             targetDrag.style.top = "auto";
             targetDrag.style.display = "none";
-            console.log(indexCheck.current);
-
             if (indexCheck.current !== -1) {
                 const dataDelete: IDeleteClient = {
                     area: "area",
@@ -211,25 +209,23 @@ function Area(props: IProps) {
                 dispatch(setCheckClient({ category: category.current, index: indexCheck.current }));
                 dispatch(deleteClient(dataDelete))
                 dispatch(setCheckClient({ category: -1, index: indexCheck.current }));
-
-
-
-
             }
         }
     }
 
     return (
         <>
-            <div id="wallCare" className="drag-block wall__img">
-                <img src={creamSrc} alt="parfumWall" />
+            <div id="wallCare" className="drag-block wall__img" onMouseMove={mouseMove} onMouseLeave={mouseOut}
+                onMouseUp={mouseEnd}>
+                <img src={creamSrc} alt="parfumWall" draggable={false} />
             </div>
             <div id="wallParfum" className="drag-block wall__img" onMouseMove={mouseMove} onMouseLeave={mouseOut}
                 onMouseUp={mouseEnd}>
                 <img src={diorSrc} alt="parfumWall" draggable={false} />
             </div>
-            <div id="wallMake" className="drag-block wall__img">
-                <img src={pomadeSrc} alt="parfumWall" />
+            <div id="wallMake" className="drag-block wall__img" onMouseMove={mouseMove} onMouseLeave={mouseOut}
+                onMouseUp={mouseEnd}>
+                <img src={pomadeSrc} alt="parfumWall" draggable={false} />
             </div>
             <div className="area" style={task === 0 ? { "marginTop": "calc(150% - 190px)" } : { "marginTop": "190px" }} ref={ref}>
                 <img src={parfumSrc} alt="parfum-table" className="area__shelf" />
@@ -254,10 +250,7 @@ function Area(props: IProps) {
                         Парфюмерия
                     </h3>
                     <div className="wall__img"
-                        onMouseDown={mouseStart}
-
-
-                        onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
+                        onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
                         <img src={diorSrc} alt="parfum" draggable={false} />
                     </div>
 
@@ -266,7 +259,7 @@ function Area(props: IProps) {
                     <h3 className="wall__title">
                         макияж
                     </h3>
-                    <div className="wall__img">
+                    <div className="wall__img" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
                         <img src={pomadeSrc} alt="pomade" draggable={false} />
                     </div>
 
@@ -275,7 +268,7 @@ function Area(props: IProps) {
                     <h3 className="wall__title">
                         уход
                     </h3>
-                    <div className="wall__img">
+                    <div className="wall__img" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
                         <img src={creamSrc} alt="cream" draggable={false} />
                     </div>
 

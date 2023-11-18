@@ -56,8 +56,7 @@ function Client(props: IPropsClient) {
 
     }
     const start = () => {
-
-
+        if (category > 4) return;
         if (targetDrag) {
             targetDrag = targetDrag.closest(".client") as HTMLElement;
             targetDrag.style.position = "absolute";
@@ -82,6 +81,7 @@ function Client(props: IPropsClient) {
     }
 
     const move = (clientY: number, clientX: number) => {
+        if (category > 4) return;
         if (targetDrag) {
 
             let y = clientY - container.top - (targetDrag.offsetHeight / 2);
@@ -118,11 +118,13 @@ function Client(props: IPropsClient) {
         }
     }
     const mouseEnd = () => {
+        if (category > 4) return;
         startClick.current = false;
         end();
 
     }
     const mouseOut = () => {
+        if (category > 4) return;
         if (!startClick.current) return;
         startClick.current = false;
         end();
@@ -132,6 +134,7 @@ function Client(props: IPropsClient) {
 
 
     const end = () => {
+        if (category > 4) return;
         if (targetDrag) {
             targetDrag.style.position = "static";
             targetDrag.style.top = "auto";
