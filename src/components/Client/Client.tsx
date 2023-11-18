@@ -9,8 +9,9 @@ import src6 from "../../assets/images/services/2-wall.png"
 import src7 from "../../assets/images/services/3-wall.png"
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setCheckArea, createCheckArea } from "../../store/reducers/checkAreaReducer";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { TCheck } from "../../store/reducers/checkAreaReducer";
+import { IDeleteClient } from "../../store/reducers/arrClientsReducer";
 import { deleteClient } from "../../store/reducers/arrClientsReducer";
 
 import animation from "../utils/animation";
@@ -27,9 +28,8 @@ interface IPropsClient extends IClient {
 }
 
 function Client(props: IPropsClient) {
-    const { img, category, funcWin, index } = props;
+    const { img, category, funcWin, index, check } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
-
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
@@ -147,7 +147,11 @@ function Client(props: IPropsClient) {
                 if (category === 4) {
                     if (funcWin) funcWin();
                 }
-                dispatch(deleteClient(index))
+                const dataDelete: IDeleteClient = {
+                    area: "clients",
+                    index: index
+                }
+                dispatch(deleteClient(dataDelete))
             }
             dispatch(createCheckArea(arrArea));
         }
@@ -161,7 +165,7 @@ function Client(props: IPropsClient) {
             {stopGame.current && <div className="stopGame"></div>}
 
             <div className="client__wrap">
-                <div className="client"
+                <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "")}
                     onMouseDown={mouseStart}
                     onMouseMove={mouseMove}
                     onMouseLeave={mouseOut}

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
 
 
+
 interface IProps {
     clients: IClient[];
 }
@@ -16,10 +17,6 @@ function ClientsArea(props: IProps) {
     //let { clients } = props;
 
     const clients = useAppSelector((store) => store.arrClientsReducer).arrClients.slice(0, 4);
-    console.log(clients);
-
-
-
     const [modal, setModal] = useState(false);
     const openModalDiagnostics = () => {
         setModal(true);
@@ -69,7 +66,6 @@ function ClientsArea(props: IProps) {
     }, [handler])
 
     useEffect(() => {
-        console.log(23);
         if (clients.filter((item) => item).length === 0) {
             console.log("ЗАПУСТИТЬ ФУНКЦИЮ смены таска или окна");
 

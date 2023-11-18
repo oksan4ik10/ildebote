@@ -29,7 +29,7 @@ function Task1(props: IPropsTask) {
 
     const arrClients: IClient[] = [
         {
-            category: 4,
+            category: 6,
             img: src1,
             check: "wait",
         },

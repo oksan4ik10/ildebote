@@ -11,6 +11,9 @@ import roomSrc from "../../assets/images/room.png";
 import "./Area.css";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinate, setTopArea } from "../../store/reducers/areaCoordinateReducer";
+import { setCheckClient, deleteClient } from "../../store/reducers/arrClientsReducer";
+import { ISetCheck } from "../../store/reducers/arrClientsReducer";
+import { IDeleteClient } from "../../store/reducers/arrClientsReducer";
 
 
 interface IProps {
@@ -21,6 +24,7 @@ function Area(props: IProps) {
 
     const ref = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
+
 
     const areaCheck = useAppSelector((state) => state.checkAreaReducer).checkArea;
     const refMakeTable = useRef<HTMLDivElement>(null);
@@ -95,6 +99,7 @@ function Area(props: IProps) {
     const coordinateClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients;
 
     const startClick = useRef(false);
+    const category = useRef(-1);
 
     const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
         const elem = e.target as HTMLElement;
@@ -116,6 +121,17 @@ function Area(props: IProps) {
         const parentElem = elem.closest(".area__wall") as HTMLElement;
         const id = parentElem.className.split(" ")[1];
         targetDrag = document.querySelector(`#${id}`) as HTMLElement;
+        switch (id) {
+            case "wallCare":
+                category.current = 5;
+                break
+            case "wallParfum":
+                category.current = 6;
+                break
+            case "wallMake":
+                category.current = 7;
+                break
+        }
         if (targetDrag) {
             targetDrag.style.display = "block";
             const y = clientY - container.top - (targetDrag.offsetHeight / 2);
@@ -137,6 +153,8 @@ function Area(props: IProps) {
         move(e.pageY, e.pageX);
     }
 
+    const indexCheck = useRef(-1);
+
     const move = (clientY: number, clientX: number) => {
         if (targetDrag) {
             let y = clientY - container.top - ((targetDrag.offsetHeight + 4) / 2);
@@ -147,13 +165,19 @@ function Area(props: IProps) {
             if (y > container.height - 88) y = container.height - 88;
             targetDrag.style.top = y + "px"
             targetDrag.style.left = x + "px";
-            coordinateClients.forEach((item) => {
+            const setCheck: ISetCheck = {
+                index: -1,
+                category: -1
+            };
+            coordinateClients.forEach((item, index) => {
+                setCheck.index = index;
                 if ((x > item.x1) && (x < item.x2) && (y > item.y1) && (y < item.y2)) {
-                    console.log("нужен диспатч");
-
+                    indexCheck.current = index;
+                    setCheck.category = category.current;
+                } else {
+                    setCheck.category = -1;
                 }
-
-
+                dispatch(setCheckClient(setCheck))
 
             })
         }
@@ -171,12 +195,26 @@ function Area(props: IProps) {
     }
 
     const end = () => {
-
         if (targetDrag) {
 
             targetDrag.style.left = "auto";
             targetDrag.style.top = "auto";
             targetDrag.style.display = "none";
+            console.log(indexCheck.current);
+
+            if (indexCheck.current !== -1) {
+                const dataDelete: IDeleteClient = {
+                    area: "area",
+                    index: indexCheck.current
+                }
+                dispatch(setCheckClient({ category: category.current, index: indexCheck.current }));
+                dispatch(deleteClient(dataDelete))
+                dispatch(setCheckClient({ category: -1, index: indexCheck.current }));
+
+
+
+
+            }
         }
     }
 
