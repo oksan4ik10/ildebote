@@ -1,3 +1,4 @@
+import { useRef, useCallback, useEffect, memo } from "react";
 import "./Client.css";
 import src0 from "../../assets/images/services/0.png";
 import src1 from "../../assets/images/services/1.png"
@@ -9,26 +10,29 @@ import src6 from "../../assets/images/services/2-wall.png"
 import src7 from "../../assets/images/services/3-wall.png"
 import { useAppSelector, useAppDispatch } from "../../store/store";
 import { setCheckArea, createCheckArea } from "../../store/reducers/checkAreaReducer";
-import { useRef } from "react";
+
 import { TCheck } from "../../store/reducers/checkAreaReducer";
 import { IDeleteClient } from "../../store/reducers/arrClientsReducer";
-import { deleteClient } from "../../store/reducers/arrClientsReducer";
+import { deleteClient, setTimeClass } from "../../store/reducers/arrClientsReducer";
 
 import animation from "../utils/animation";
 
+export type TTimeClass = "errorTime" | "dangerTime" | "waitTime";
 export interface IClient {
+    id: string;
     img: string;
     category: number;
     check: TCheck;
     funcWin?: () => void;
+    timeClass: TTimeClass;
 
 }
 interface IPropsClient extends IClient {
     index: number
 }
 
-function Client(props: IPropsClient) {
-    const { img, category, funcWin, index, check } = props;
+export const Client = memo(function (props: IPropsClient) {
+    const { img, category, funcWin, index, check, id, timeClass } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
@@ -58,6 +62,8 @@ function Client(props: IPropsClient) {
     const start = () => {
         if (category > 4) return;
         if (targetDrag) {
+            timerActive.current = (false)
+
             targetDrag = targetDrag.closest(".client") as HTMLElement;
             targetDrag.style.position = "absolute";
             const x = targetDrag.offsetLeft;
@@ -82,8 +88,9 @@ function Client(props: IPropsClient) {
 
     const move = (clientY: number, clientX: number) => {
         if (category > 4) return;
-        if (targetDrag) {
 
+        if (targetDrag) {
+            timerActive.current = (false)
             let y = clientY - container.top - (targetDrag.offsetHeight / 2);
             let x = clientX - container.left - (targetDrag.offsetWidth / 2);
             if (x < 0) x = 0;
@@ -161,40 +168,69 @@ function Client(props: IPropsClient) {
         }
     }
 
+    const timerActive = useRef(true);
+
+    const changeTimeClass = useCallback((time: number) => {
+        if (!timerActive.current) return;
+
+        if (time === 7) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
+        if (time === 4) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
+        if (time === 1) {
+            timerActive.current = false;
+            dispatch(deleteClient({
+                area: "clients",
+                index: index
+            }))
+        }
+    }, [dispatch, index])
+
+
+
+    useEffect(() => {
+        let count = 10;
+        const idInterval = setInterval(() => {
+            if ((count < 0) || !timerActive.current) clearInterval(idInterval);
+            else {
+                changeTimeClass(count);
+            }
+            count--;
+        }, 1000)
+
+    }, [changeTimeClass])
 
 
 
     return (
         <>
             {stopGame.current && <div className="stopGame"></div>}
+            {(id || check || timeClass) &&
+                <div className="client__wrap">
+                    <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "") + (timeClass === "errorTime" ? " errorTime" : timeClass === "dangerTime" ? " dangerTime" : "")}
+                        onMouseDown={mouseStart}
+                        onMouseMove={mouseMove}
+                        onMouseLeave={mouseOut}
+                        onMouseUp={mouseEnd}
+                        onTouchStart={startTouch}
+                        onTouchMove={dragMove}
+                        onTouchEnd={dragEnd}>
+                        <div className="client__services" ref={refServices}>
+                            <img src={arrImgCategories[category]} alt={category + ""} />
+                        </div>
+                        <div className="client__lives">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div className="client__photo">
+                            <img src={img} alt="photo" draggable="false" />
+                        </div>
 
-            <div className="client__wrap">
-                <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "")}
-                    onMouseDown={mouseStart}
-                    onMouseMove={mouseMove}
-                    onMouseLeave={mouseOut}
-                    onMouseUp={mouseEnd}
-                    onTouchStart={startTouch}
-                    onTouchMove={dragMove}
-                    onTouchEnd={dragEnd}>
-                    <div className="client__services" ref={refServices}>
-                        <img src={arrImgCategories[category]} alt={category + ""} />
                     </div>
-                    <div className="client__lives">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <div className="client__photo">
-                        <img src={img} alt="photo" draggable="false" />
-                    </div>
-
-                </div>
-            </div>
-
+                </div >
+            }
         </>
     )
-}
+})
 
 export default Client;

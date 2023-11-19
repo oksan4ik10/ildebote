@@ -208,7 +208,6 @@ function Area(props: IProps) {
                 }
                 dispatch(setCheckClient({ category: category.current, index: indexCheck.current }));
                 dispatch(deleteClient(dataDelete))
-                dispatch(setCheckClient({ category: -1, index: indexCheck.current }));
             }
         }
     }

@@ -76,3 +76,22 @@
 .modal__room .modal::before {
     z-index: 2;
 }
+
+.client.errorTime .client__photo,
+.client.errorTime .client__lives span {
+    background-color: #CF6363;
+
+}
+
+.client.errorTime .client__lives span:last-child,
+.client.dangerTime .client__lives span:last-child,
+.client.errorTime .client__lives span:nth-child(3) {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.client.dangerTime .client__photo,
+.client.dangerTime .client__lives span {
+    background-color: #D3CA75;
+
+}

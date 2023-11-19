@@ -29,29 +29,39 @@ function Task1(props: IPropsTask) {
 
     const arrClients: IClient[] = [
         {
+            id: "1",
             category: 6,
             img: src1,
             check: "wait",
+            timeClass: "waitTime"
         },
         {
+            id: "2",
             category: 3,
             img: src1,
             check: "wait",
+            timeClass: "waitTime"
         },
         {
+            id: "3",
             category: 2,
             img: src1,
             check: "wait",
+            timeClass: "waitTime"
         },
         {
+            id: "4",
             category: 1,
             img: src1,
             check: "wait",
+            timeClass: "waitTime"
         },
         {
+            id: "5",
             category: 2,
             img: src1,
             check: "wait",
+            timeClass: "waitTime"
         },
     ]
 
@@ -60,7 +70,7 @@ function Task1(props: IPropsTask) {
         <>
             <Experience></Experience>
             <Area task={1}></Area>
-            <ClientsArea clients={arrClients}></ClientsArea>
+            <ClientsArea></ClientsArea>
         </>
     )
 }

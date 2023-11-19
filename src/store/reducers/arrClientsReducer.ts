@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IClient } from '../../components/Client/Client';
+import { TTimeClass } from '../../components/Client/Client';
 
 export interface IArrClients {
     arrClients: IClient[];
@@ -12,6 +13,11 @@ export interface ISetCheck {
 export interface IDeleteClient {
     index: number;
     area: "clients" | "area";
+}
+
+export interface ISetTimeClass {
+    index: number;
+    timeClass: TTimeClass;
 }
 const initialState: IArrClients = { arrClients: [] };
 
@@ -46,19 +52,27 @@ export const arrClientsSlice = createSlice({
 
         },
         setCheckClient(state, action: PayloadAction<ISetCheck>) {
+
             const { index, category } = action.payload;
             const arr = [...state.arrClients]
+            if (!arr[index]) return;
             if (category === -1) {
-                //console.log(1212);
-
                 arr[index].check = "wait";
             }
             else if (arr[index].category === category) arr[index].check = "success";
             else arr[index].check = "error";
             state.arrClients = [...arr];
+        },
+        setTimeClass(state, action: PayloadAction<ISetTimeClass>) {
+            const { index, timeClass } = action.payload;
+            const arr = [...state.arrClients]
+            arr[index].timeClass = timeClass;
+            state.arrClients = [...arr]
+
+
         }
     },
 });
 
 export default arrClientsSlice.reducer;
-export const { setArrClients, deleteClient, setCheckClient } = arrClientsSlice.actions;
+export const { setArrClients, deleteClient, setCheckClient, setTimeClass } = arrClientsSlice.actions;

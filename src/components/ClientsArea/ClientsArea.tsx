@@ -1,20 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
-import { IClient } from "../Client/Client";
 import ModalDiagnostics from "../Client/ModalDiagnostics";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
 
 
 
-interface IProps {
-    clients: IClient[];
-}
 
 
-function ClientsArea(props: IProps) {
-    //let { clients } = props;
+
+function ClientsArea() {
+
 
     const clients = useAppSelector((store) => store.arrClientsReducer).arrClients.slice(0, 4);
     const [modal, setModal] = useState(false);
@@ -56,8 +53,6 @@ function ClientsArea(props: IProps) {
                     y2: yy2
                 },
             ]
-            console.log(arrCoordinate);
-
             dispatch(setCoordinateClients(arrCoordinate));
 
         }
@@ -67,16 +62,17 @@ function ClientsArea(props: IProps) {
         handler();
     }, [handler])
 
-    useEffect(() => {
-        console.log(clients);
 
+
+    useEffect(() => {
+
+        if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
             console.log("ЗАПУСТИТЬ ФУНКЦИЮ смены таска или окна");
 
         }
 
-
-    })
+    }, [clients])
 
 
     return (
@@ -85,8 +81,8 @@ function ClientsArea(props: IProps) {
             <div className="clients" ref={ref}>
                 {clients.map((item, index) => {
                     if (!item) return <div className="client" key={Math.random()}></div>
-                    if (item.category === 4) return <Client key={Math.random()} index={index} {...item} funcWin={openModalDiagnostics} />
-                    return <Client key={Math.random()} index={index}{...item} />
+                    if (item.category === 4) return <Client key={item.id} index={index} {...item} funcWin={openModalDiagnostics} />
+                    return <Client key={item.id} index={index}{...item} />
                 })}
             </div>
         </>
