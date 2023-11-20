@@ -204,7 +204,8 @@ function Area(props: IProps) {
             if (indexCheck.current !== -1) {
                 const dataDelete: IDeleteClient = {
                     area: "area",
-                    index: indexCheck.current
+                    index: indexCheck.current,
+                    timer: false
                 }
                 dispatch(setCheckClient({ category: category.current, index: indexCheck.current }));
                 dispatch(deleteClient(dataDelete))

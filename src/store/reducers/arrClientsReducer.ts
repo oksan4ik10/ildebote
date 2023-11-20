@@ -4,6 +4,7 @@ import { TTimeClass } from '../../components/Client/Client';
 
 export interface IArrClients {
     arrClients: IClient[];
+    width: number;
 }
 export interface ISetCheck {
     index: number,
@@ -13,13 +14,14 @@ export interface ISetCheck {
 export interface IDeleteClient {
     index: number;
     area: "clients" | "area";
+    timer: boolean;
 }
 
 export interface ISetTimeClass {
     index: number;
     timeClass: TTimeClass;
 }
-const initialState: IArrClients = { arrClients: [] };
+const initialState: IArrClients = { arrClients: [], width: 7 };
 
 export const arrClientsSlice = createSlice({
     name: 'arrClients',
@@ -37,18 +39,25 @@ export const arrClientsSlice = createSlice({
         },
         deleteClient(state, action: PayloadAction<IDeleteClient>) {
             const arrData = state.arrClients.slice(4);
-            const { index, area } = action.payload;
+            const { index, area, timer } = action.payload;
             if (area === "area") {
                 if (state.arrClients[index].check !== "success") {
                     setCheckClient({ index: index, category: -1 })
                     return
                 }
             }
+            if (!timer) {
+                let points = 1;
+                if (state.arrClients[index].category === 3) points = 3;
+                state.width = state.width + points * 1.06;
+            }
             delete state.arrClients[index];
+
             if (arrData.length !== 0) {
                 state.arrClients[index] = arrData[0];
                 state.arrClients.splice(4, 1);
             }
+
 
         },
         setCheckClient(state, action: PayloadAction<ISetCheck>) {
@@ -70,7 +79,11 @@ export const arrClientsSlice = createSlice({
             state.arrClients = [...arr]
 
 
-        }
+        },
+        //для консультантов
+        setWidth(state, action: PayloadAction<number>) {
+            state.width = state.width + action.payload * 1.06;
+        },
     },
 });
 

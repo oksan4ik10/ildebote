@@ -4,7 +4,7 @@ import { useAppSelector } from "../../store/store";
 
 
 function Experience() {
-    const widthExperience = useAppSelector((state) => state.pointsReducer).width;
+    const widthExperience = useAppSelector((state) => state.arrClientsReducer).width;
     return (
         <>
             <div className="experience">

@@ -160,7 +160,8 @@ export const Client = memo(function (props: IPropsClient) {
                 }
                 const dataDelete: IDeleteClient = {
                     area: "clients",
-                    index: index
+                    index: index,
+                    timer: false
                 }
                 dispatch(deleteClient(dataDelete))
             }
@@ -179,7 +180,8 @@ export const Client = memo(function (props: IPropsClient) {
             timerActive.current = false;
             dispatch(deleteClient({
                 area: "clients",
-                index: index
+                index: index,
+                timer: true
             }))
         }
     }, [dispatch, index])
