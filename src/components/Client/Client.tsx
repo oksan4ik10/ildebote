@@ -28,11 +28,12 @@ export interface IClient {
 
 }
 interface IPropsClient extends IClient {
-    index: number
+    index: number;
+    task: number;
 }
 
 export const Client = memo(function (props: IPropsClient) {
-    const { img, category, funcWin, index, check, id, timeClass } = props;
+    const { img, category, funcWin, index, check, id, timeClass, task } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
@@ -189,6 +190,7 @@ export const Client = memo(function (props: IPropsClient) {
 
 
     useEffect(() => {
+        if (task === 1) return;
         let count = 10;
         const idInterval = setInterval(() => {
             if ((count < 0) || !timerActive.current) clearInterval(idInterval);

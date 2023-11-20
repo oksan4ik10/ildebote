@@ -8,10 +8,12 @@ import { setCoordinateClients } from "../../store/reducers/clientsCoordinateRedu
 
 
 
+interface IProps {
+    task: number;
+}
 
-
-function ClientsArea() {
-
+function ClientsArea(props: IProps) {
+    const { task } = props;
 
     const clients = useAppSelector((store) => store.arrClientsReducer).arrClients.slice(0, 4);
     const [modal, setModal] = useState(false);
@@ -81,8 +83,8 @@ function ClientsArea() {
             <div className="clients" ref={ref}>
                 {clients.map((item, index) => {
                     if (!item) return <div className="client" key={Math.random()}></div>
-                    if (item.category === 4) return <Client key={item.id} index={index} {...item} funcWin={openModalDiagnostics} />
-                    return <Client key={item.id} index={index}{...item} />
+                    if (item.category === 4) return <Client key={item.id} index={index} task={task}  {...item} funcWin={openModalDiagnostics} />
+                    return <Client key={item.id} index={index} task={task} {...item} />
                 })}
             </div>
         </>

@@ -1,13 +1,13 @@
 import "./Modal.css";
 
-interface IProps {
+export interface IPropsModal {
     title: string;
     text: string;
     size: string;
     padding: string;
 }
 
-function Modal(props: IProps) {
+function Modal(props: IPropsModal) {
     const { title, text, size, padding } = props;
 
     return (

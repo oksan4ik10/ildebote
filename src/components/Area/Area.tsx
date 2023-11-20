@@ -231,10 +231,10 @@ function Area(props: IProps) {
                 <img src={parfumSrc} alt="parfum-table" className="area__shelf" />
                 <img src={makeupSrc} alt="makeup-table" className="area__makeup" />
                 <img src={careSrc} alt="care-table" className="area__care" />
-                <div className={"room " + `${(areaCheck.length === 0 || areaCheck[4] === "wait") ? "" : areaCheck[4] === "error" ? "error" : "success"}`} ref={refRoom}>
+                <div className={"room " + `${(areaCheck.length === 0 || areaCheck[4] === "wait") ? "" : areaCheck[4] === "error" ? "error" : "success"}` + `${task < 3 ? " noWait" : ""}`} ref={refRoom}>
                     <img src={roomSrc} alt="room" />
                 </div>
-                <div className={"area__makeup-table " + `${(areaCheck.length === 0 || areaCheck[3] === "wait") ? "" : areaCheck[3] === "error" ? "error" : "success"}`} ref={refMakeTable}>
+                <div className={"area__makeup-table " + `${(areaCheck.length === 0 || areaCheck[3] === "wait") ? "" : areaCheck[3] === "error" ? "error" : "success"}` + `${task < 2 ? " noWait" : ""}`} ref={refMakeTable}>
                     <img src={makeupTable} alt="makeup-table" />
                     <div className="animation">
                         <canvas id="canvas"></canvas>
