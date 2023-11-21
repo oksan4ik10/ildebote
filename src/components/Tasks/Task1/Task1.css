@@ -26,3 +26,7 @@
     top: calc(100% - 16px - 178px - 16px + 60px);
     width: 214px;
 }
+
+.modal-drag {
+    top: calc(100% - 16px - 178px - 50px);
+}

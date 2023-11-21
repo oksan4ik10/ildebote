@@ -29,6 +29,8 @@ export const arrClientsSlice = createSlice({
     reducers: {
         setArrClients(state, action: PayloadAction<IClient[]>) {
             let testArr: IClient[] = [];
+            console.log(action.payload[0]);
+
             if (action.payload.length === 1) {
                 testArr[3] = action.payload[0];
             } else {

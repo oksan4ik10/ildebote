@@ -145,6 +145,7 @@
 
 .nameTask1:focus::placeholder {
     background: #fff;
+    color: #fff;
 }
 
 .nameTask1::placeholder {

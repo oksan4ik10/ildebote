@@ -2,6 +2,8 @@ import { useState, useRef } from "react"
 import "./Test.css"
 import Modal from '../Modal/Modal';
 import { arrQuestions } from "./TestQuestions";
+import { useAppDispatch } from "../../../store/store";
+import { setNameUser } from "../../../store/reducers/nameUserReducer";
 
 interface IProps {
     task: number;
@@ -18,6 +20,7 @@ function Test(props: IProps) {
     const inputNameRef = useRef<HTMLInputElement>(null);
 
     const startTask1 = useRef(true);
+    const dispatch = useAppDispatch();
 
     const clickFormTest = (e: React.FormEvent<HTMLFormElement>) => {
         const target = e.target as HTMLInputElement;
@@ -37,6 +40,7 @@ function Test(props: IProps) {
                     setTextError("Введите имя, пожалуйста.");
                     return;
                 }
+                dispatch(setNameUser(value))
                 funcWin();
                 return;
 

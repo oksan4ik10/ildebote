@@ -70,14 +70,16 @@ function ClientsArea(props: IProps) {
 
 
     useEffect(() => {
+        console.log(clients);
+
 
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
-            console.log("ЗАПУСТИТЬ ФУНКЦИЮ смены таска или окна");
+            funcWin();
 
         }
 
-    }, [clients])
+    }, [clients, funcWin])
 
 
     return (

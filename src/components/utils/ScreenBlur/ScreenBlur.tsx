@@ -13,7 +13,7 @@ function ScreenBlur(props: IProps) {
     const screenTask = screen ? screen : -1;
     return (
         <>
-            <div className={"modal-dialog " + (((screenTask === 4) || (screenTask === 7)) ? "none" : "")}>
+            <div className={"modal-dialog " + (((screenTask === 4) || (screenTask === 7) || (screenTask === 8) || (screenTask === 10)) ? "none" : "")}>
                 {children}
             </div>
         </>

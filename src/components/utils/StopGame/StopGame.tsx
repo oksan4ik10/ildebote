@@ -10,7 +10,7 @@ function StopGame(props: IProps) {
 
     return (
         <>
-            <div className={"stop-game " + (screen === 4 ? "stop-task1Icon" : "")} onClick={funcBtn}></div>
+            <div className={"stop-game " + ((screen === 4 || screen > 7) ? "stop-task1Icon" : "")} onClick={funcBtn}></div>
         </>
     )
 }

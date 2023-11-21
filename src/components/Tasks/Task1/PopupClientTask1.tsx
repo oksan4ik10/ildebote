@@ -42,7 +42,24 @@ function PopupClientTask1(props: IProps) {
         {
             text: "Чтобы проводить клиента, зажми его изображение и перетащи в нужный отдел",
             className: "modal-bottom"
-        }
+        },
+        {
+            text: "",
+            className: "none"
+        },
+        {
+            text: "Это постоянная клиентка. Цель — удовлетворить её потребности и порадовать.",
+            className: "modal-top"
+
+        },
+        {
+            text: "Чтобы перенести товар, зажми его<br> изображение и перетащи нужному клиенту",
+            className: "modal-bottom modal-drag"
+        },
+        {
+            text: "",
+            className: "none"
+        },
 
     ]
 
@@ -52,7 +69,7 @@ function PopupClientTask1(props: IProps) {
     return (
         <>
             <div className={"modal-client " + arrObjInfo[screen].className}>
-                <Modal padding="16px 22px" size="12px" text={arrObjInfo[screen].text} title="" />
+                <Modal padding="16px 16px" size="12px" text={arrObjInfo[screen].text} title="" />
             </div>
         </>
     )
