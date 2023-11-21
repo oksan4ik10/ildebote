@@ -7,6 +7,7 @@ import containerCoordinateReducer from './reducers/containerCoordinateReducer';
 import checkAreaReducer from './reducers/checkAreaReducer';
 import clientsCoordinateReducer from './reducers/clientsCoordinateReducer';
 import arrClientsReducer from './reducers/arrClientsReducer';
+import nameUserReducer from './reducers/nameUserReducer';
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
     containerCoordinateReducer,
     checkAreaReducer,
     clientsCoordinateReducer,
-    arrClientsReducer
+    arrClientsReducer,
+    nameUserReducer
 
 });
 

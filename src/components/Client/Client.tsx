@@ -156,9 +156,10 @@ export const Client = memo(function (props: IPropsClient) {
                     animation();
 
                 }
-                if (category === 4) {
-                    if (funcWin) funcWin();
-                }
+                if (funcWin) funcWin();
+                // if (category === 4) {
+                //     if (funcWin) funcWin();
+                // }
                 const dataDelete: IDeleteClient = {
                     area: "clients",
                     index: index,

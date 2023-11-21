@@ -59,3 +59,12 @@
   height: 100vh;
   z-index: 999;
 }
+
+.stop-task1Icon {
+  width: 64px;
+  top: auto;
+  left: auto;
+  bottom: 16px;
+  right: 16px;
+  height: 64px;
+}

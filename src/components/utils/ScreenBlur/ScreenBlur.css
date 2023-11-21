@@ -10,3 +10,7 @@
     backdrop-filter: blur(5px);
     padding: 16px;
 }
+
+.modal-dialog.none {
+    display: none;
+}

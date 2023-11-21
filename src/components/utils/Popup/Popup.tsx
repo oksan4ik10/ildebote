@@ -7,21 +7,18 @@ import "./Popup.css";
 interface IProps {
     title: string;
     text: string;
-    size: string;
-    padding: string;
     funcBtn: () => void;
     textBtn: string;
-    classBtn: string;
 }
 
 function Popup(props: IProps) {
-    const { title, text, size, padding, funcBtn, textBtn, classBtn } = props;
+    const { title, text, funcBtn, textBtn } = props;
 
     return (
         <>
             <div className="screen__popup">
-                <Modal title={title} text={text} size={size} padding={padding} />
-                <Button funcBtn={funcBtn} textBtn={textBtn} classBtn={classBtn} />
+                <Modal title={title} text={text} size="14px" padding="25px 22px" />
+                <Button funcBtn={funcBtn} textBtn={textBtn} classBtn="screen__btn" />
 
             </div>
         </>

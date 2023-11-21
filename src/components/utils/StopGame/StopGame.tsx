@@ -2,14 +2,15 @@
 
 interface IProps {
     funcBtn: () => void;
+    screen: number;
 }
 
 function StopGame(props: IProps) {
-    const { funcBtn } = props;
+    const { funcBtn, screen } = props;
 
     return (
         <>
-            <div className="stop-game" onClick={funcBtn}></div>
+            <div className={"stop-game " + (screen === 4 ? "stop-task1Icon" : "")} onClick={funcBtn}></div>
         </>
     )
 }

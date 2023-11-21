@@ -1,5 +1,28 @@
 .modal-client {
     position: absolute;
     top: 0;
-    left: 0;
+    left: 50%;
+    width: calc(100% - 34px);
+    transform: translateX(-50%);
+}
+
+.modal-bottom {
+    top: calc(100% - 16px - 178px - 16px);
+}
+
+.modal-top {
+    z-index: 199;
+    top: calc(16px + 23px + 24px)
+}
+
+.modal-client.none {
+    display: none;
+}
+
+.modal-icon {
+    left: auto;
+    transform: translateX(0);
+    right: calc(16px + 64px + 30px);
+    top: calc(100% - 16px - 178px - 16px + 60px);
+    width: 214px;
 }
