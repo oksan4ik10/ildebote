@@ -8,47 +8,17 @@ import Popup from "../../utils/Popup/Popup";
 import ClientsArea from "../../ClientsArea/ClientsArea";
 
 import { IClient } from "../../Client/Client";
+import { getClinets } from "../../utils/clients";
 
 import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
 import { setArrClients } from "../../../store/reducers/arrClientsReducer";
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
 
-import src1 from "../../../assets/images/clients/1-1.png";
-import src2 from "../../../assets/images/clients/1-2.png";
-import src3 from "../../../assets/images/clients/1-3.png";
 
 function Task2(props: IPropsTask) {
-    const arrClients: IClient[] = useMemo(() => [
-        {
-            id: "1",
-            category: 1,
-            img: src1,
-            check: "wait",
-            timeClass: "waitTime"
-        },
-        {
-            id: "2",
-            category: 7,
-            img: src2,
-            check: "wait",
-            timeClass: "waitTime"
-        },
-        {
-            id: "3",
-            category: 1,
-            img: src3,
-            check: "wait",
-            timeClass: "waitTime"
-        },
-        {
-            id: "4",
-            category: 3,
-            img: src3,
-            check: "wait",
-            timeClass: "waitTime"
-        }
-    ], [])
+    const arrClients: IClient[] = useMemo(() => getClinets(1), [])
+
     const { nextLevel } = props;
     console.log("task2");
     const dispatch = useAppDispatch();

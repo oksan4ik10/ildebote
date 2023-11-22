@@ -5,10 +5,9 @@ import { useAppDispatch } from "../../../store/store";
 import Area from "../../Area/Area";
 import ClientsArea from "../../ClientsArea/ClientsArea";
 import "./Task1.css";
+import { getClinets } from "../../utils/clients";
 
-import src1 from "../../../assets/images/clients/1-1.png";
-import src2 from "../../../assets/images/clients/1-2.png";
-import src3 from "../../../assets/images/clients/1-3.png";
+
 
 import { IClient } from "../../Client/Client";
 import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
@@ -22,29 +21,7 @@ import Dialog from "./Dialog/Dialog";
 function Task1(props: IPropsTask) {
     const { nextLevel } = props;
     const dispatch = useAppDispatch();
-    const arrClients: IClient[] = useMemo(() => [
-        {
-            id: "1",
-            category: 0,
-            img: src1,
-            check: "wait",
-            timeClass: "waitTime"
-        },
-        {
-            id: "2",
-            category: 7,
-            img: src2,
-            check: "wait",
-            timeClass: "waitTime"
-        },
-        {
-            id: "3",
-            category: 1,
-            img: src3,
-            check: "wait",
-            timeClass: "waitTime"
-        }
-    ], [])
+    const arrClients: IClient[] = useMemo(() => getClinets(0), [])
 
 
     useEffect(() => {

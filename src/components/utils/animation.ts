@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-inner-declarations */
 const animation = () => {
-    console.log(23);
     // eslint-disable-next-line prefer-const
     let canvas = document.getElementById("canvas") as HTMLCanvasElement;
     const div = document.createElement("div");

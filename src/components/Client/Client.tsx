@@ -28,6 +28,7 @@ export interface IClient {
     check: TCheck;
     funcOpenModal?: () => void;
     timeClass: TTimeClass;
+    classIcon?: string;
 
 }
 interface IPropsClient extends IClient {
@@ -36,7 +37,7 @@ interface IPropsClient extends IClient {
 }
 
 export const Client = memo(function (props: IPropsClient) {
-    const { img, category, funcOpenModal, index, check, id, timeClass, task } = props;
+    const { img, category, funcOpenModal, index, check, id, timeClass, task, classIcon } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
@@ -49,7 +50,6 @@ export const Client = memo(function (props: IPropsClient) {
     const win = useRef(false);
     const stopGame = useRef(false);
 
-    console.log(coordinate);
 
     let targetDrag: HTMLElement | undefined;
     const topAreaClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients[0].y1;
@@ -160,8 +160,6 @@ export const Client = memo(function (props: IPropsClient) {
             //если пользователь разместил в нужную область
             if (win.current) {
                 if (category === 3) {
-                    console.log(23);
-
                     dispatch(setTimer(false));
                     animation();
                     setTimeout(() => {
@@ -178,20 +176,20 @@ export const Client = memo(function (props: IPropsClient) {
                     timer: false
                 }
                 dispatch(deleteClient(dataDelete))
+            } else {
+                timerActive.current = true;
+                if (typeof (funcTimer.current) === "function") funcTimer.current();
             }
             dispatch(createCheckArea(arrArea));
         }
     }
 
     const timerActive = useRef(true);
-    console.log(timeClass);
-
 
     const changeTimeClass = useCallback((time: number) => {
-        if ((!timerActive.current) || !timerAll) return;
-
-        if (time === 7) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
-        if (time === 4) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
+        if ((!timerActive.current) || !timerAll) return false;
+        if (time === 15) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
+        if (time === 5) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
         if (time === 1) {
             timerActive.current = false;
             dispatch(deleteClient({
@@ -199,23 +197,33 @@ export const Client = memo(function (props: IPropsClient) {
                 index: index,
                 timer: true
             }))
+            return false;
         }
+        return true;
     }, [dispatch, index, timerAll])
 
 
+    const funcTimer = useRef<unknown>(null);
 
     useEffect(() => {
         if (task === 1) return;
-        let count = 10;
-        const idInterval = setInterval(() => {
-            if ((count < 0) || !timerActive.current) clearInterval(idInterval);
-            else {
-                changeTimeClass(count);
-            }
-            count--;
-        }, 1000)
 
-    }, [changeTimeClass, task])
+        const timerPlay = () => {
+            let count = 21;
+            return function () {
+                const idInterval = setInterval(() => {
+                    const timerStop = changeTimeClass(count);
+                    if (!timerStop) clearInterval(idInterval);
+                    else count--;
+                }, 1000)
+            }
+        }
+        if ((!timerAll) || !timerActive.current) return;
+
+        funcTimer.current = timerPlay();
+        if (typeof (funcTimer.current) === "function") funcTimer.current();
+
+    }, [changeTimeClass, task, timerAll])
 
 
 
@@ -241,7 +249,7 @@ export const Client = memo(function (props: IPropsClient) {
                             <span></span>
                             <span></span>
                         </div>
-                        <div className="client__photo">
+                        <div className={"client__photo " + (classIcon ? classIcon : "")}>
                             <img src={img} alt="photo" draggable="false" />
                         </div>
 
