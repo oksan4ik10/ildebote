@@ -18,9 +18,10 @@ import { IDeleteClient } from "../../store/reducers/arrClientsReducer";
 
 interface IProps {
     task: number;
+    screen?: number;
 }
 function Area(props: IProps) {
-    const { task } = props;
+    const { task, screen } = props;
 
     const ref = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
@@ -118,6 +119,7 @@ function Area(props: IProps) {
     }
 
     const start = (elem: HTMLElement, clientY: number, clientX: number) => {
+        if (screen && ((screen < 9) || (screen === 11))) return;
 
         const parentElem = elem.closest(".area__wall") as HTMLElement;
         const id = parentElem.className.split(" ")[1];
@@ -157,6 +159,7 @@ function Area(props: IProps) {
     const indexCheck = useRef(-1);
 
     const move = (clientY: number, clientX: number) => {
+        if (screen && ((screen < 9) || (screen === 11))) return;
         if (targetDrag) {
             let y = clientY - container.top - ((targetDrag.offsetHeight + 4) / 2);
             let x = clientX - container.left - ((targetDrag.offsetWidth + 4) / 2);
@@ -196,6 +199,7 @@ function Area(props: IProps) {
     }
 
     const end = () => {
+        if (screen && ((screen < 9) || (screen === 11))) return;
         if (targetDrag) {
 
             targetDrag.style.left = "auto";

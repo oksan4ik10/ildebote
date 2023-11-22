@@ -8,8 +8,8 @@ import srcQuote1 from "./quote1.png";
 import srcQuote2 from "./quote2.png";
 import srcQuote3 from "./quote3.png";
 import srcQuote4 from "./quote4.png";
-import src1Client from "../../../assets/images/clients/1-2.png";
-import src2Client from "../../../assets/images/clients/1-3.png";
+import src1Client from "../../../../assets/images/clients/1-2.png";
+import src2Client from "../../../../assets/images/clients/1-3.png";
 interface IProps {
     funcBtn: () => void;
     screen: number;
@@ -50,7 +50,7 @@ function Dialog(props: IProps) {
     const [btnHelp, setBtnHelp] = useState(false);
     const clickHelp = () => {
         setBtnHelp(true);
-        setInterval(() => funcBtn(), 5000)
+        setTimeout(() => funcBtn(), 5000)
     }
 
 

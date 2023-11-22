@@ -23,7 +23,7 @@ export interface IClient {
     img: string;
     category: number;
     check: TCheck;
-    funcWin?: () => void;
+    funcOpenModal?: () => void;
     timeClass: TTimeClass;
 
 }
@@ -33,7 +33,7 @@ interface IPropsClient extends IClient {
 }
 
 export const Client = memo(function (props: IPropsClient) {
-    const { img, category, funcWin, index, check, id, timeClass, task } = props;
+    const { img, category, funcOpenModal, index, check, id, timeClass, task } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
@@ -158,7 +158,7 @@ export const Client = memo(function (props: IPropsClient) {
                 }
 
                 if (category === 4) {
-                    if (funcWin) funcWin();
+                    if (funcOpenModal) funcOpenModal();
                 }
                 const dataDelete: IDeleteClient = {
                     area: "clients",
@@ -201,7 +201,7 @@ export const Client = memo(function (props: IPropsClient) {
             count--;
         }, 1000)
 
-    }, [changeTimeClass])
+    }, [changeTimeClass, task])
 
 
 

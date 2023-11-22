@@ -38,21 +38,22 @@ function Test(props: IProps) {
                 if (!value) {
                     setCheckAnswer(true);
                     setTextError("Введите имя, пожалуйста.");
-                    return;
+                } else {
+                    dispatch(setNameUser(value))
+                    funcWin();
                 }
-                dispatch(setNameUser(value))
-                funcWin();
-                return;
-
             }
 
         } else {
-            setCheckAnswer(true)
+            setCheckAnswer(true);
+            setTextError("Этот ответ не подходит. Попробуй ещё раз");
+
         }
         if ((task === 1) && startTask1.current) {
             if (funcError) funcError();
             startTask1.current = false;
         }
+
     }
 
     return (

@@ -75,11 +75,14 @@ function ClientsArea(props: IProps) {
 
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
+            if (screen && (screen > 13)) return;
             funcWin();
 
         }
 
-    }, [clients, funcWin])
+    }, [clients, funcWin, screen]);
+
+
 
 
     return (
@@ -89,8 +92,8 @@ function ClientsArea(props: IProps) {
                 {task === 1 && <PopupClientTask1 screen={screen ? screen : -1} />}
                 {clients.map((item, index) => {
                     if (!item) return <div className="client" key={Math.random()}></div>
-                    if (item.category === 4) return <Client key={item.id} index={index} task={task}  {...item} funcWin={openModalDiagnostics} />
-                    return <Client key={item.id} index={index} task={task} {...item} funcWin={funcWin} />
+                    if (item.category === 4) return <Client key={item.id} index={index} task={task}  {...item} funcOpenModal={openModalDiagnostics} />
+                    return <Client key={item.id} index={index} task={task} {...item} />
                 })}
             </div>
         </>

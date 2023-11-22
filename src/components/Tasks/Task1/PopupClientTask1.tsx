@@ -60,6 +60,18 @@ function PopupClientTask1(props: IProps) {
             text: "",
             className: "none"
         },
+        {
+            text: "Клиент ищет подарок для своих близких, но ещё не определился с выбором. Он прислушается к вашим рекомендациям. Цель — помочь ему сделать выбор и оставить хорошее впечатление о магазине.",
+            className: "modal-top"
+        },
+        {
+            text: "",
+            className: "none"
+        },
+        {
+            text: "",
+            className: "none"
+        },
 
     ]
 
