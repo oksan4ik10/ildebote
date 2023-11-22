@@ -172,6 +172,8 @@ export const Client = memo(function (props: IPropsClient) {
     }
 
     const timerActive = useRef(true);
+    console.log(timeClass);
+
 
     const changeTimeClass = useCallback((time: number) => {
         if (!timerActive.current) return;

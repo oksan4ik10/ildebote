@@ -11,7 +11,9 @@ import { useAppDispatch } from './store/store';
 import { setCoordinateContainer } from './store/reducers/containerCoordinateReducer';
 
 function App() {
-  const [task, setTask] = useState(0);
+  console.log("поменять номер таска после теста второго тура");
+
+  const [task, setTask] = useState(2);
   const nextLevel = () => {
     setTask(task + 1);
   }
