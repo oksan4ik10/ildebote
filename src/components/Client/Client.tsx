@@ -1,4 +1,5 @@
 import { useRef, useCallback, useEffect, memo } from "react";
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import "./Client.css";
 import src0 from "../../assets/images/services/0.png";
 import src1 from "../../assets/images/services/1.png"
@@ -67,6 +68,7 @@ export const Client = memo(function (props: IPropsClient) {
     }
     const start = () => {
         if (category > 4) return;
+        disablePageScroll();
         if (targetDrag) {
             timerActive.current = (false)
 
@@ -144,7 +146,10 @@ export const Client = memo(function (props: IPropsClient) {
         startClick.current = false;
         end();
     }
-    const dragEnd = () => end();
+    const dragEnd = () => {
+        enablePageScroll();
+        end();
+    }
 
 
 

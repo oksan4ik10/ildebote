@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 
 import parfumSrc from "../../assets/images/parfum.png";
 import makeupSrc from "../../assets/images/makeup.png";
@@ -117,7 +118,7 @@ function Area(props: IProps) {
 
     const start = (elem: HTMLElement, clientY: number, clientX: number) => {
         if (screen && ((screen < 9) || (screen === 11))) return;
-
+        disablePageScroll();
         const parentElem = elem.closest(".area__wall") as HTMLElement;
         const id = parentElem.className.split(" ")[1];
         targetDrag = document.querySelector(`#${id}`) as HTMLElement;
@@ -183,7 +184,10 @@ function Area(props: IProps) {
             })
         }
     }
-    const dragEnd = () => end();
+    const dragEnd = () => {
+        end();
+        enablePageScroll();
+    }
     const mouseEnd = () => {
         startClick.current = false;
         end();
