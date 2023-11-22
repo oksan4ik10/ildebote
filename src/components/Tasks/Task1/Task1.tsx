@@ -18,7 +18,7 @@ import StopGame from "../../utils/StopGame/StopGame";
 import ScreenBlur from "../../utils/ScreenBlur/ScreenBlur";
 import Popup from "../../utils/Popup/Popup";
 import Test from "../../utils/Test/Test";
-import Dialog from "./Dialog";
+import Dialog from "./Dialog/Dialog";
 function Task1(props: IPropsTask) {
     // const { nextLevel } = props;
     const dispatch = useAppDispatch();

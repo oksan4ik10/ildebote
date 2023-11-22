@@ -2,7 +2,7 @@
 //for Task 1
 import { useState, useMemo } from "react";
 import "./Dialog.css";
-import { useAppSelector } from "../../../store/store";
+import { useAppSelector } from "../../../../store/store";
 
 import srcQuote1 from "./quote1.png";
 import srcQuote2 from "./quote2.png";

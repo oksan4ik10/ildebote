@@ -29,8 +29,6 @@ export const arrClientsSlice = createSlice({
     reducers: {
         setArrClients(state, action: PayloadAction<IClient[]>) {
             let testArr: IClient[] = [];
-            console.log(action.payload[0]);
-
             if (action.payload.length === 1) {
                 testArr[3] = action.payload[0];
             } else {
@@ -44,7 +42,7 @@ export const arrClientsSlice = createSlice({
             const { index, area, timer } = action.payload;
             if (area === "area") {
                 if (state.arrClients[index].check !== "success") {
-                    setCheckClient({ index: index, category: -1 })
+                    state.arrClients[index].check = "wait";
                     return
                 }
             }
