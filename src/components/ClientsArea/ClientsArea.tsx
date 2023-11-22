@@ -1,12 +1,10 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
 import ModalDiagnostics from "../Client/ModalDiagnostics";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
-
 import PopupClientTask1 from "../Tasks/Task1/PopupClientTask1";
-
 
 
 interface IProps {
@@ -67,20 +65,18 @@ function ClientsArea(props: IProps) {
         handler();
     }, [handler])
 
-
-
-    useEffect(() => {
-        console.log(clients);
-
-
+    useLayoutEffect(() => {
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
-            if (screen && (screen > 13)) return;
+            if ((task === 1) && screen && (screen > 13)) return;
+
+
             funcWin();
+            console.log(task);
 
         }
 
-    }, [clients, funcWin, screen]);
+    }, [funcWin, screen, task, dispatch, clients]);
 
 
 

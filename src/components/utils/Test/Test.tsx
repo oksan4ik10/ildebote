@@ -35,12 +35,15 @@ function Test(props: IProps) {
             target.checked = false;
             if (task === 1) {
                 const value = inputNameRef.current?.value;
+                console.log(value);
+
                 if (!value) {
                     setCheckAnswer(true);
                     setTextError("Введите имя, пожалуйста.");
                 } else {
                     dispatch(setNameUser(value))
                     funcWin();
+                    return;
                 }
             }
 

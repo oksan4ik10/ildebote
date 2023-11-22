@@ -7,10 +7,7 @@ import ClientsArea from "../../ClientsArea/ClientsArea";
 import "./Task1.css";
 import { getClinets } from "../../utils/clients";
 
-
-
 import { IClient } from "../../Client/Client";
-import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
 import { setArrClients } from "../../../store/reducers/arrClientsReducer";
 import StopGame from "../../utils/StopGame/StopGame";
 
@@ -25,7 +22,7 @@ function Task1(props: IPropsTask) {
 
 
     useEffect(() => {
-        dispatch(createCheckArea(["wait", "wait", "wait"])); //площадки, которые работают в данном таске
+
         dispatch(setArrClients([arrClients[0]]));
 
     }, [dispatch, arrClients])
@@ -36,10 +33,7 @@ function Task1(props: IPropsTask) {
         setScreen(7);
     }
     const changeScreen = () => {
-
-
         setScreen(screen + 1);
-        console.log("change", screen);
     }
 
     //смена CientsArea
@@ -61,7 +55,7 @@ function Task1(props: IPropsTask) {
         <>
             <ScreenBlur screen={screen}>
                 {screen === 3 && <Popup text="В ИЛЬ ДЕ БОТЭ много обучения — сотрудники проходят тренингипо технике продаж, уходу за кожей, подбору парфюмерии, макияжуи другим темам.<br><br>Чтобы успешно справиться с работой консультанта, необходимо понимать, как вести себя с клиентом. Давай начнём с изучения техники продаж!" textBtn="Давай" title="Очаровывай клиентов и развивай магазин!" funcBtn={changeScreen} />}
-                {screen === 14 && <Popup text="Теперь ты можешь пройти дополнительное обучение и начать оказывать сервис по макияжу." textBtn="Давай" title="У тебя прекрасно получается помогать клиентам!" funcBtn={nextLevel} />}
+                {screen === 14 && <Popup text="Теперь ты можешь пройти <br> дополнительное обучение и начать <br> оказывать сервис по макияжу." textBtn="Давай" title="У тебя прекрасно получается помогать клиентам!" funcBtn={nextLevel} />}
             </ScreenBlur>
 
             <Experience screen={screen}></Experience>

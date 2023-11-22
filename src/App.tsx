@@ -10,12 +10,16 @@ import Task4 from './components/Tasks/Task4/Task4';
 import { useAppDispatch } from './store/store';
 import { setCoordinateContainer } from './store/reducers/containerCoordinateReducer';
 
-function App() {
-  console.log("поменять номер таска после теста второго тура");
+import { setArrClients } from './store/reducers/arrClientsReducer';
+import { getClinets } from './components/utils/clients';
 
-  const [task, setTask] = useState(2);
+function App() {
+  const [task, setTask] = useState(0);
   const nextLevel = () => {
     setTask(task + 1);
+
+    if (task === 0) return;
+    dispatch(setArrClients(getClinets(task)))
   }
 
   const ref = useRef<HTMLDivElement>(null);

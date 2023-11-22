@@ -368,9 +368,9 @@ export const getClinets = (task: number) => {
 
     const arrClientsTask = [
         arrTask1,
-        arrTask4,
         arrTask2,
         arrTask3,
+        arrTask4,
     ]
     return arrClientsTask[task]
 }

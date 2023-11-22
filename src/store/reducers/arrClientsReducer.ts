@@ -63,6 +63,7 @@ export const arrClientsSlice = createSlice({
         setCheckClient(state, action: PayloadAction<ISetCheck>) {
 
             const { index, category } = action.payload;
+
             const arr = [...state.arrClients]
             if (!arr[index]) return;
             if (category === -1) {

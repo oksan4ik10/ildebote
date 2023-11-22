@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { IPropsTask } from "../types";
 import ScreenBlur from "../../utils/ScreenBlur/ScreenBlur";
 import Experience from "../../Experience/Experience";
@@ -9,29 +9,25 @@ import ClientsArea from "../../ClientsArea/ClientsArea";
 
 import { IClient } from "../../Client/Client";
 import { getClinets } from "../../utils/clients";
-
-import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
-import { setArrClients } from "../../../store/reducers/arrClientsReducer";
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
 
 
 function Task2(props: IPropsTask) {
-    const arrClients: IClient[] = useMemo(() => getClinets(1), [])
+
+    const arrClients: IClient[] = useMemo(() => getClinets(1), []);
+    console.log(arrClients);
 
     const { nextLevel } = props;
-    console.log("task2");
     const dispatch = useAppDispatch();
 
 
     const [screen, setScreen] = useState(20);
     const changeScreen = () => {
         setScreen(screen + 1);
-
     }
 
     const funcWinClient = () => {
-        ("win!");
         nextLevel();
     }
     const startGame = () => {
@@ -39,13 +35,6 @@ function Task2(props: IPropsTask) {
         dispatch(setTimer(true));
     }
 
-
-
-    useEffect(() => {
-        dispatch(createCheckArea(["wait", "wait", "wait", "wait"])); //площадки, которые работают в данном таске
-        dispatch(setArrClients(arrClients));
-
-    }, [dispatch, arrClients])
 
     return (
         <>

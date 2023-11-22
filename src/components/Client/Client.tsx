@@ -206,7 +206,7 @@ export const Client = memo(function (props: IPropsClient) {
     const funcTimer = useRef<unknown>(null);
 
     useEffect(() => {
-        if (task === 1) return;
+        if (task < 10) return; //поменять, когда буду фиксить таймер
 
         const timerPlay = () => {
             let count = 21;
