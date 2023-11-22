@@ -147,7 +147,7 @@
 }
 
 .area__makeup-table.noWait {
-    display: none;
+    opacity: 0;
 }
 
 .area__makeup-table.error img {
@@ -198,7 +198,7 @@ canvas.active {
 }
 
 .room.noWait {
-    display: none;
+    opacity: 0;
 }
 
 .room.error img {

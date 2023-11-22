@@ -39,7 +39,6 @@ function Area(props: IProps) {
             const top = dataArea.top;
             const width = ref.current.offsetWidth;
             const leftCare = width * 55 / 100;
-
             const careArea = {
                 x1: 0,
                 x2: leftCare - 64,
@@ -59,6 +58,8 @@ function Area(props: IProps) {
                 y2: top + 190 / 2 - 64,
             }
 
+            const arrCoordinate = [careArea, parfumArea, makeupArea];
+
             if (refMakeTable.current) {
                 const data = refMakeTable.current.getBoundingClientRect();
                 const makeTable = {
@@ -67,28 +68,24 @@ function Area(props: IProps) {
                     x1: data.left - dataArea.left - 64 - 20,
                     x2: data.left - dataArea.left - 64 + 20,
                 }
+                arrCoordinate.push(makeTable);
+            }
+            if (refRoom.current) {
+                const dataRoom = refRoom.current.getBoundingClientRect();
 
-                if (refRoom.current) {
-                    const dataRoom = refRoom.current.getBoundingClientRect();
-
-                    const room = {
-                        y1: dataRoom.top - 10,
-                        y2: dataRoom.top + 100,
-                        x1: dataRoom.left - data.left + 40,
-                        x2: dataRoom.left - data.left + 180,
-                    }
-                    dispatch(setCoordinate([careArea, parfumArea, makeupArea, makeTable, room]))
+                const room = {
+                    y1: dataRoom.top - 10,
+                    y2: dataRoom.top + 100,
+                    x1: dataRoom.left - dataArea.left + 40,
+                    x2: dataRoom.left - dataArea.left + 180,
                 }
-
-
+                arrCoordinate.push(room);
 
             }
 
-
+            dispatch(setCoordinate(arrCoordinate));
 
             dispatch(setTopArea(top))
-
-
 
         }
 

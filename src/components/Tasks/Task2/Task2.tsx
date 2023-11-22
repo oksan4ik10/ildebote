@@ -12,27 +12,13 @@ import { IClient } from "../../Client/Client";
 import { createCheckArea } from "../../../store/reducers/checkAreaReducer";
 import { setArrClients } from "../../../store/reducers/arrClientsReducer";
 import { useAppDispatch } from "../../../store/store";
+import { setTimer } from "../../../store/reducers/timerReducer";
 
 import src1 from "../../../assets/images/clients/1-1.png";
 import src2 from "../../../assets/images/clients/1-2.png";
 import src3 from "../../../assets/images/clients/1-3.png";
 
 function Task2(props: IPropsTask) {
-    const { nextLevel } = props;
-    console.log("task2");
-    const dispatch = useAppDispatch();
-
-
-    const [screen, setScreen] = useState(20);
-    const changeScreen = () => {
-        setScreen(screen + 1);
-    }
-
-    const funcWinClient = () => {
-        ("win!");
-        nextLevel();
-    }
-
     const arrClients: IClient[] = useMemo(() => [
         {
             id: "1",
@@ -57,12 +43,33 @@ function Task2(props: IPropsTask) {
         },
         {
             id: "4",
-            category: 5,
+            category: 3,
             img: src3,
             check: "wait",
             timeClass: "waitTime"
         }
     ], [])
+    const { nextLevel } = props;
+    console.log("task2");
+    const dispatch = useAppDispatch();
+
+
+    const [screen, setScreen] = useState(20);
+    const changeScreen = () => {
+        setScreen(screen + 1);
+
+    }
+
+    const funcWinClient = () => {
+        ("win!");
+        nextLevel();
+    }
+    const startGame = () => {
+        setScreen(screen + 1);
+        dispatch(setTimer(true));
+    }
+
+
 
     useEffect(() => {
         dispatch(createCheckArea(["wait", "wait", "wait", "wait"])); //площадки, которые работают в данном таске
@@ -74,13 +81,14 @@ function Task2(props: IPropsTask) {
         <>
             {screen === 21 &&
                 <ScreenBlur>
-                    <Popup text="В ИЛЬ ДЕ БОТЭ много обучения — сотрудники проходят тренингипо технике продаж, уходу за кожей, подбору парфюмерии, макияжуи другим темам.<br><br>Чтобы успешно справиться с работой консультанта, необходимо понимать, как вести себя с клиентом. Давай начнём с изучения техники продаж!" textBtn="Давай" title="Очаровывай клиентов и развивай магазин!" funcBtn={changeScreen} />
+                    <Popup text="Чтобы сделать макияж, перенеси клиента к визажному столику. Это займёт 5 секунд игрового времени и принесёт больше опыта. Помоги всем клиентам, чтобы получить максимум опыта!" textBtn="Хорошо" title="Ты можешь делать <br> макияж клиентам!" funcBtn={startGame} />
                 </ScreenBlur>}
 
             <Experience screen={screen}></Experience>
+
+            {(screen === 20) && <StopGame screen={screen} funcBtn={changeScreen} />}
             <Area task={2} screen={screen}></Area>
             <ClientsArea task={2} screen={screen} funcWin={funcWinClient}></ClientsArea>
-            {(screen === 20) && <StopGame screen={screen} funcBtn={changeScreen} />}
 
 
         </>

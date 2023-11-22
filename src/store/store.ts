@@ -1,23 +1,23 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import pointsReducer from './reducers/pointsReducer';
 import areaCoordinateReducer from './reducers/areaCoordinateReducer';
 import containerCoordinateReducer from './reducers/containerCoordinateReducer';
 import checkAreaReducer from './reducers/checkAreaReducer';
 import clientsCoordinateReducer from './reducers/clientsCoordinateReducer';
 import arrClientsReducer from './reducers/arrClientsReducer';
 import nameUserReducer from './reducers/nameUserReducer';
+import timerReducer from './reducers/timerReducer';
 
 
 const rootReducer = combineReducers({
-    pointsReducer,
     areaCoordinateReducer,
     containerCoordinateReducer,
     checkAreaReducer,
     clientsCoordinateReducer,
     arrClientsReducer,
-    nameUserReducer
+    nameUserReducer,
+    timerReducer
 
 });
 

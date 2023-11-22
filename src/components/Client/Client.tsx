@@ -15,9 +15,12 @@ import { TCheck } from "../../store/reducers/checkAreaReducer";
 import { IDeleteClient } from "../../store/reducers/arrClientsReducer";
 import { deleteClient, setTimeClass } from "../../store/reducers/arrClientsReducer";
 
+import { setTimer } from "../../store/reducers/timerReducer";
+
 import animation from "../utils/animation";
 
 export type TTimeClass = "errorTime" | "dangerTime" | "waitTime";
+
 export interface IClient {
     id: string;
     img: string;
@@ -38,6 +41,7 @@ export const Client = memo(function (props: IPropsClient) {
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
+    const timerAll = useAppSelector((state) => state.timerReducer).timerAll;
     const dispatch = useAppDispatch();
 
     const refServices = useRef<HTMLDivElement>(null);
@@ -45,6 +49,7 @@ export const Client = memo(function (props: IPropsClient) {
     const win = useRef(false);
     const stopGame = useRef(false);
 
+    console.log(coordinate);
 
     let targetDrag: HTMLElement | undefined;
     const topAreaClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients[0].y1;
@@ -102,6 +107,8 @@ export const Client = memo(function (props: IPropsClient) {
             targetDrag.style.left = x + "px";
             let check: TCheck = "wait";
             let checkWin = false;
+
+
             coordinate.forEach((item, index) => {
                 if ((x > item.x1) && (x < item.x2) && (y > item.y1) && (y < item.y2)) {
                     if (category === index) {
@@ -153,8 +160,13 @@ export const Client = memo(function (props: IPropsClient) {
             //если пользователь разместил в нужную область
             if (win.current) {
                 if (category === 3) {
-                    animation();
+                    console.log(23);
 
+                    dispatch(setTimer(false));
+                    animation();
+                    setTimeout(() => {
+                        dispatch(setTimer(true));
+                    }, 0)
                 }
 
                 if (category === 4) {
@@ -176,7 +188,7 @@ export const Client = memo(function (props: IPropsClient) {
 
 
     const changeTimeClass = useCallback((time: number) => {
-        if (!timerActive.current) return;
+        if ((!timerActive.current) || !timerAll) return;
 
         if (time === 7) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
         if (time === 4) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
@@ -188,7 +200,7 @@ export const Client = memo(function (props: IPropsClient) {
                 timer: true
             }))
         }
-    }, [dispatch, index])
+    }, [dispatch, index, timerAll])
 
 
 

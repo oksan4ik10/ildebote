@@ -25,7 +25,7 @@ function Task1(props: IPropsTask) {
     const arrClients: IClient[] = useMemo(() => [
         {
             id: "1",
-            category: 1,
+            category: 0,
             img: src1,
             check: "wait",
             timeClass: "waitTime"
