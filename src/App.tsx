@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     if (ref.current) {
-      // dispatch(setArrClients(getClinets(3)))
+      // dispatch(setArrClients(getClinets(2)))
       const data = ref.current.getBoundingClientRect();
       dispatch(setCoordinateContainer({ top: data.top, left: data.left, width: ref.current.clientWidth, height: ref.current.offsetHeight }))
 

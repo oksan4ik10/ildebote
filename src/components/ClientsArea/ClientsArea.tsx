@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
+import ClientFake from "../Client/ClientFake";
 import ModalDiagnostics from "../Client/ModalDiagnostics";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
@@ -87,7 +88,9 @@ function ClientsArea(props: IProps) {
             {modal && <ModalDiagnostics />}
             <div className="clients" style={(task === 1 && screen === 1) ? { "zIndex": "99" } : {}} ref={ref}>
                 {task === 1 && <PopupClientTask1 screen={screen ? screen : -1} />}
-                {clients.map((item, index) => {
+                {(screen === 20 || screen === 30) && clients.map((item) => <ClientFake key={item.id} {...item} />)}
+
+                {(task === 1 || ((task === 2) && (screen === 22)) || ((task === 3) && (screen === 32))) && clients.map((item, index) => {
                     if (!item) return <div className="client" key={Math.random()}></div>
                     if (item.category === 4) return <Client key={item.id} index={index} task={task}  {...item} funcOpenModal={openModalDiagnostics} />
                     return <Client key={item.id} index={index} task={task} {...item} />

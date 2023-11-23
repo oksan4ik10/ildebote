@@ -7,7 +7,6 @@ import StopGame from "../../utils/StopGame/StopGame";
 import Popup from "../../utils/Popup/Popup";
 import ClientsArea from "../../ClientsArea/ClientsArea";
 
-
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
 

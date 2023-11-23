@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { IPropsTask } from "../types";
 import ScreenBlur from "../../utils/ScreenBlur/ScreenBlur";
 import Experience from "../../Experience/Experience";
@@ -6,17 +6,11 @@ import Area from "../../Area/Area";
 import StopGame from "../../utils/StopGame/StopGame";
 import Popup from "../../utils/Popup/Popup";
 import ClientsArea from "../../ClientsArea/ClientsArea";
-
-import { IClient } from "../../Client/Client";
-import { getClinets } from "../../utils/clients";
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
 
 
 function Task2(props: IPropsTask) {
-
-    const arrClients: IClient[] = useMemo(() => getClinets(1), []);
-    console.log(arrClients);
 
     const { nextLevel } = props;
     const dispatch = useAppDispatch();

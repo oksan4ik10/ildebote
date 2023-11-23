@@ -46,6 +46,9 @@ export const Client = memo(function (props: IPropsClient) {
     const timerAll = useAppSelector((state) => state.timerReducer).timerAll;
     const dispatch = useAppDispatch();
 
+    console.log(timerAll);
+
+
     const refServices = useRef<HTMLDivElement>(null);
     const startClick = useRef(false);
     const win = useRef(false);
@@ -67,10 +70,9 @@ export const Client = memo(function (props: IPropsClient) {
     }
     const start = () => {
         if (category > 4) return;
+        paused.current = true;
         disablePageScroll();
         if (targetDrag) {
-            timerActive.current = (false)
-
             targetDrag = targetDrag.closest(".client") as HTMLElement;
             targetDrag.style.position = "absolute";
             const x = targetDrag.offsetLeft;
@@ -98,7 +100,6 @@ export const Client = memo(function (props: IPropsClient) {
         if (category > 4) return;
 
         if (targetDrag) {
-            timerActive.current = (false)
             let y = clientY - container.top - (targetDrag.offsetHeight / 2);
             let x = clientX - container.left - (targetDrag.offsetWidth / 2);
             if (x < 0) x = 0;
@@ -156,7 +157,9 @@ export const Client = memo(function (props: IPropsClient) {
 
     const end = () => {
         if (category > 4) return;
+
         if (targetDrag) {
+            paused.current = false;
             targetDrag.style.position = "static";
             targetDrag.style.top = "auto";
             targetDrag.style.left = "auto"
@@ -182,22 +185,22 @@ export const Client = memo(function (props: IPropsClient) {
                     timer: false
                 }
                 dispatch(deleteClient(dataDelete))
-            } else {
-                timerActive.current = true;
-                if (typeof (funcTimer.current) === "function") funcTimer.current();
             }
             dispatch(createCheckArea(arrArea));
         }
     }
 
-    const timerActive = useRef(true);
-
-    const changeTimeClass = useCallback((time: number) => {
-        if ((!timerActive.current) || !timerAll) return false;
-        if (time === 15) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
-        if (time === 5) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
-        if (time === 1) {
-            timerActive.current = false;
+    const paused = useRef(false);
+    const over = useRef(false);
+    const time = useRef(10);
+    const changeTimeClass = useCallback(() => {
+        if (!timerAll) return;
+        if (paused.current || over.current) return;
+        time.current--;
+        if (time.current === 5) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
+        if (time.current === 3) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
+        if (time.current === 1) {
+            over.current = true;
             dispatch(deleteClient({
                 area: "clients",
                 index: index,
@@ -206,30 +209,16 @@ export const Client = memo(function (props: IPropsClient) {
             return false;
         }
         return true;
-    }, [dispatch, index, timerAll])
+    }, [dispatch, index, over, paused, timerAll])
 
 
-    const funcTimer = useRef<unknown>(null);
 
     useEffect(() => {
-        if (task < 10) return; //поменять, когда буду фиксить таймер
+        if (task === 1) return;
+        const timerID = setInterval(() => changeTimeClass(), 1000);
+        return () => clearInterval(timerID);
 
-        const timerPlay = () => {
-            let count = 21;
-            return function () {
-                const idInterval = setInterval(() => {
-                    const timerStop = changeTimeClass(count);
-                    if (!timerStop) clearInterval(idInterval);
-                    else count--;
-                }, 1000)
-            }
-        }
-        if ((!timerAll) || !timerActive.current) return;
-
-        funcTimer.current = timerPlay();
-        if (typeof (funcTimer.current) === "function") funcTimer.current();
-
-    }, [changeTimeClass, task, timerAll])
+    }, [changeTimeClass, task, time])
 
 
 
