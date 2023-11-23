@@ -77,8 +77,9 @@ export const Client = memo(function (props: IPropsClient) {
             const x = targetDrag.offsetLeft;
             let y = 0;
             if (refServices.current) {
-                y = topAreaClients + (178 - targetDrag.offsetHeight) + refServices.current.offsetHeight - 8;
                 refServices.current.classList.add("none");
+                y = container.height - 83 - 16;
+                if (container.width > 400) y -= 10;
             }
             targetDrag.style.left = x + "px";
             targetDrag.style.top = y + "px";
@@ -103,6 +104,7 @@ export const Client = memo(function (props: IPropsClient) {
             let x = clientX - container.left - (targetDrag.offsetWidth / 2);
             if (x < 0) x = 0;
             if (x > container.width - 64) x = container.width - 64;
+            if (container.width > 400) y -= 10;
             if (y < topArea) y = topArea;
             if (y > container.height - 83) y = container.height - 83;
             targetDrag.style.top = y + "px";

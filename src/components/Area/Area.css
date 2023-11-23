@@ -398,6 +398,14 @@ canvas.active {
     height: 68px;
 }
 
+#wallParfum {
+    width: 59px;
+}
+
+#wallMake {
+    width: 45px;
+}
+
 .drag-block img {
     position: relative;
     z-index: 2;

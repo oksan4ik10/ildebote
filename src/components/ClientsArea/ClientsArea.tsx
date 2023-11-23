@@ -17,6 +17,7 @@ function ClientsArea(props: IProps) {
     const { task, screen, funcWin } = props;
 
     const clients = useAppSelector((store) => store.arrClientsReducer).arrClients.slice(0, 4);
+    const container = useAppSelector((state) => state.containerCoordinateReducer).container;
     const [modal, setModal] = useState(false);
     const openModalDiagnostics = () => {
         setModal(true);
@@ -28,38 +29,41 @@ function ClientsArea(props: IProps) {
     const handler = useCallback(() => {
         if (ref.current) {
             const data = ref.current.getBoundingClientRect();
-            const yy2 = data.top + 178;
+            const yy1 = data.top - container.top;
+            const yy2 = yy1 + 178;
             const gap = (data.width - 64 * 4) / 3;
             const arrCoordinate = [
                 {
                     x1: 0,
                     x2: 64,
-                    y1: data.top,
+                    y1: yy1,
                     y2: yy2
                 },
                 {
                     x1: 64 + gap - gap + 5,
                     x2: 64 + gap + 64,
-                    y1: data.top,
+                    y1: yy1,
                     y2: yy2
                 },
                 {
                     x1: (64 + gap) * 2 - gap + 5,
                     x2: (64 + gap) * 2 + 64,
-                    y1: data.top,
+                    y1: yy1,
                     y2: yy2
                 },
                 {
                     x1: (64 + gap) * 3 - gap + 5,
                     x2: (64 + gap) * 3 + 64,
-                    y1: data.top,
+                    y1: yy1,
                     y2: yy2
                 },
             ]
+            console.log(arrCoordinate);
+
             dispatch(setCoordinateClients(arrCoordinate));
 
         }
-    }, [dispatch])
+    }, [dispatch, container.top])
 
     useEffect(() => {
         handler();
@@ -72,7 +76,6 @@ function ClientsArea(props: IProps) {
 
 
             funcWin();
-            console.log(task);
 
         }
 
