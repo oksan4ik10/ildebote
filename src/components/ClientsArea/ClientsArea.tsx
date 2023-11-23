@@ -58,8 +58,6 @@ function ClientsArea(props: IProps) {
                     y2: yy2
                 },
             ]
-            console.log(arrCoordinate);
-
             dispatch(setCoordinateClients(arrCoordinate));
 
         }

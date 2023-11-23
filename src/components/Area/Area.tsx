@@ -29,6 +29,7 @@ function Area(props: IProps) {
 
 
     const areaCheck = useAppSelector((state) => state.checkAreaReducer).checkArea;
+
     const refMakeTable = useRef<HTMLDivElement>(null);
     const refRoom = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -72,13 +73,14 @@ function Area(props: IProps) {
                 arrCoordinate.push(makeTable);
             }
             if (refRoom.current) {
-                const dataRoom = refRoom.current.getBoundingClientRect();
+                const yy1 = container.top + dataArea.top + 100;
+                const xx1 = container.width / 2
 
                 const room = {
-                    y1: dataRoom.top - 10,
-                    y2: dataRoom.top + 100,
-                    x1: dataRoom.left - dataArea.left + 40,
-                    x2: dataRoom.left - dataArea.left + 180,
+                    y1: yy1,
+                    y2: yy1 + 100,
+                    x1: xx1 - 50,
+                    x2: xx1 + 50,
                 }
                 arrCoordinate.push(room);
 
