@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IPropsTask } from "../types";
 import ScreenBlur from "../../utils/ScreenBlur/ScreenBlur";
 import Experience from "../../Experience/Experience";
@@ -6,6 +6,9 @@ import Area from "../../Area/Area";
 import StopGame from "../../utils/StopGame/StopGame";
 import Popup from "../../utils/Popup/Popup";
 import ClientsArea from "../../ClientsArea/ClientsArea";
+
+import Test from "../../utils/Test/Test";
+import Dialog from "../../utils/Dialog/Dialog";
 
 import "./Task4.css"
 
@@ -15,6 +18,7 @@ import Modal from "../../utils/Modal/Modal";
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
 import Consultants from "./Consultants/Consultants";
+import { setWidth } from "../../../store/reducers/arrClientsReducer";
 
 
 function Task4(props: IPropsTask) {
@@ -33,14 +37,37 @@ function Task4(props: IPropsTask) {
     }
     const startGame = () => {
         setScreen(screen + 1);
-        changeQuestion(1);
-        // dispatch(setTimer(true));
+        setQuestion(1);
     }
 
     const [question, setQuestion] = useState(-1);
-    const changeQuestion = (data: number) => {
-        setQuestion(data);
+
+
+    const funcWinTest = () => {
+
+        dispatch(setWidth(1))
+        setQuestion(question + 1);
+
     }
+    const openTest = () => {
+        if (question === 1) setScreen(screen + 1); //для zIndex в консультантах
+        dispatch(setTimer(false));
+        setQuestion(question + 1);
+    }
+
+    useEffect(() => {
+        if (question === 3) {
+            setTimeout(() => setQuestion(question + 1), 2000)
+
+        }
+        if (question === 6) {
+            setTimeout(() => setQuestion(question + 1), 5000)
+
+        }
+    })
+
+
+
 
 
     return (
@@ -57,9 +84,22 @@ function Task4(props: IPropsTask) {
 
                 </ScreenBlur>}
 
+            {question === 2 &&
+                <ScreenBlur>
+                    <Test funcWin={funcWinTest} task={2} />
+                </ScreenBlur>}
+            {question === 8 &&
+                <ScreenBlur>
+                    <Test funcWin={funcWinTest} task={3} />
+                </ScreenBlur>}
+
+            {question === 5 &&
+                <ScreenBlur>
+                    <Dialog screen={49} funcBtn={funcWinTest} />
+                </ScreenBlur>}
             <Experience screen={screen}></Experience>
 
-            <Consultants screen={screen} changeQuestion={changeQuestion} question={question} />
+            <Consultants openTest={openTest} screen={screen} question={question} />
 
             {(screen === 40) && <StopGame screen={screen} funcBtn={changeScreen} />}
             <Area task={4} screen={screen}></Area>

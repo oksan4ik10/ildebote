@@ -1,4 +1,6 @@
 import urlImg1 from "../../../assets/images/clients/1-1.png"
+import urlImg2 from "../../Tasks/Task4/Consultants/1.svg";
+
 export const arrQuestions = [
     {
         img: urlImg1,
@@ -9,7 +11,27 @@ export const arrQuestions = [
             "Здравствуйте! Это мой первый рабочий день, но вроде отдел ухода вон там в конце зала. Уточните у другого консультанта на всякий случай."
         ],
         win: "answer1"
+    },
+    {
+        img: urlImg2,
+        question: "Как узнать у клиента <br> о его ритуалах красоты?",
+        answers: [
+            "Какие продукты по уходу за кожей вы используете?",
+            "Какой продукт вы ищете?",
+            "Для кого вы выбираете продукт?"
+        ],
+        win: "answer1"
+    },
+    {
+        img: urlImg2,
+        question: "К клиенту нужно <br> обращаться на «Вы»?",
+        answers: [
+            "Нет",
+            "Да",
+        ],
+        win: "answer2"
     }
+
 
 
 ]

@@ -35,8 +35,6 @@ function Test(props: IProps) {
             target.checked = false;
             if (task === 1) {
                 const value = inputNameRef.current?.value;
-                console.log(value);
-
                 if (!value) {
                     setCheckAnswer(true);
                     setTextError("Введите имя, пожалуйста.");
@@ -45,7 +43,7 @@ function Test(props: IProps) {
                     funcWin();
                     return;
                 }
-            }
+            } else funcWin();
 
         } else {
             setCheckAnswer(true);

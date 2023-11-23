@@ -5,28 +5,29 @@ import srcQuetion from "./question.svg";
 import "./Consultants.css"
 
 interface IProps {
-    changeQuestion: (data: number) => void;
+    openTest: () => void;
     question: number;
     screen: number;
 }
 
 function Consultants(props: IProps) {
-    const { changeQuestion, question, screen } = props;
-    const openDialog = () => {
-        if (question === -1) return;
-        console.log(23);
-
+    const { openTest, question, screen } = props;
+    const openDialog1 = () => {
+        if ((question === 1) || (question === 7)) openTest();
     }
+    const openDialog2 = () => {
 
+        if (question === 4) openTest();
+    }
     return (
         <>
             <div className="consultants" style={(screen === 42) ? { "zIndex": "99" } : {}} >
-                <img src={srcQuetion} alt="question" className={"cons__question " + ((question === 1) ? "first" : (question === 2) ? "second" : "")} />
-                <div className="cons" onClick={openDialog}>
+                <img src={srcQuetion} alt="question" className={"cons__question " + (((question === 1) || (question === 7)) ? "first" : (question === 4) ? "second" : "")} />
+                <div className="cons" onClick={openDialog1}>
                     <img src={src1} alt="cons1" className="cons__img" />
 
                 </div>
-                <div className="cons">
+                <div className="cons" onClick={openDialog2}>
                     <img src={src2} alt="cons2" className="cons__img" />
                 </div>
             </div>

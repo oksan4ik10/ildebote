@@ -90,4 +90,4 @@ export const arrClientsSlice = createSlice({
 });
 
 export default arrClientsSlice.reducer;
-export const { setArrClients, deleteClient, setCheckClient, setTimeClass } = arrClientsSlice.actions;
+export const { setArrClients, deleteClient, setCheckClient, setTimeClass, setWidth } = arrClientsSlice.actions;

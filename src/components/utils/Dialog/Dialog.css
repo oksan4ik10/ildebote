@@ -115,3 +115,16 @@
 .dialog__info.active img {
     width: 90%;
 }
+
+.task4 .dialog__img img {
+    top: 5px;
+    left: 0;
+}
+
+.task4 .dialog__info {
+    margin-left: -60px;
+}
+
+.task4 .dialog__text img {
+    width: auto;
+}
