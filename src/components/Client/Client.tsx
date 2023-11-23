@@ -46,8 +46,6 @@ export const Client = memo(function (props: IPropsClient) {
     const timerAll = useAppSelector((state) => state.timerReducer).timerAll;
     const dispatch = useAppDispatch();
 
-    console.log(timerAll);
-
 
     const refServices = useRef<HTMLDivElement>(null);
     const startClick = useRef(false);

@@ -12,7 +12,7 @@ function Modal(props: IPropsModal) {
 
     return (
         <>
-            <div className="modal" style={{ "padding": padding }}>
+            <div className={"modal"} style={{ "padding": padding }}>
                 {title && <h3 className="modal__title" dangerouslySetInnerHTML={{ __html: title }}></h3>}
                 <span className="modal__text" style={{ "fontSize": size }} dangerouslySetInnerHTML={{ __html: text }}></span>
 
