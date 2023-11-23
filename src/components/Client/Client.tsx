@@ -53,7 +53,6 @@ export const Client = memo(function (props: IPropsClient) {
 
 
     let targetDrag: HTMLElement | undefined;
-    const topAreaClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients[0].y1;
     const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
         targetDrag = e.target as HTMLElement;
         startClick.current = true;
