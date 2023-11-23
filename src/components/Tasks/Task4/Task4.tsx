@@ -47,6 +47,7 @@ function Task4(props: IPropsTask) {
 
         dispatch(setWidth(1))
         setQuestion(question + 1);
+        dispatch(setTimer(true));
 
     }
     const openTest = () => {

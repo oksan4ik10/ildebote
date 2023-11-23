@@ -70,7 +70,6 @@ function Dialog(props: IProps) {
     const closeDialog = () => {
         if (!close) return;
         funcBtn();
-        setClose(false);
     }
 
 

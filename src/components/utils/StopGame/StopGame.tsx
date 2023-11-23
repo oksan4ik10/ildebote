@@ -1,5 +1,4 @@
 //for Task 1
-import { useState } from "react";
 interface IProps {
     funcBtn: () => void;
     screen: number;
@@ -7,11 +6,8 @@ interface IProps {
 
 function StopGame(props: IProps) {
     const { funcBtn, screen } = props;
-    const [touchClick, setTouchClick] = useState(true);
     const click = () => {
-        if (!touchClick) return;
         funcBtn();
-        setTouchClick(false);
     }
     return (
         <>

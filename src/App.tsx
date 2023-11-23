@@ -14,7 +14,7 @@ import { setArrClients } from './store/reducers/arrClientsReducer';
 import { getClinets } from './components/utils/clients';
 
 function App() {
-  const [task, setTask] = useState(4);
+  const [task, setTask] = useState(0);
   const nextLevel = () => {
     setTask(task + 1);
 
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     if (ref.current) {
-      dispatch(setArrClients(getClinets(3)))
+      // dispatch(setArrClients(getClinets(3)))
       const data = ref.current.getBoundingClientRect();
       dispatch(setCoordinateContainer({ top: data.top, left: data.left, width: ref.current.clientWidth, height: ref.current.offsetHeight }))
 
