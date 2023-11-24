@@ -32,6 +32,7 @@ function Area(props: IProps) {
 
     const refMakeTable = useRef<HTMLDivElement>(null);
     const refRoom = useRef<HTMLDivElement>(null);
+    const container = useAppSelector((state) => state.containerCoordinateReducer).container;
     useEffect(() => {
         if (task === 0) return;
 
@@ -92,10 +93,10 @@ function Area(props: IProps) {
 
         }
 
-    }, [dispatch, task])
+    }, [dispatch, task, container.top, container.width])
 
     let targetDrag: HTMLElement | null;
-    const container = useAppSelector((state) => state.containerCoordinateReducer).container;
+
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
 
     const coordinateClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients;

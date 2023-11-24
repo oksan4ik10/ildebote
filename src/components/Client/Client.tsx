@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, memo } from "react";
+import { useRef, useCallback, useEffect, memo, useState } from "react";
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import "./Client.css";
 import src0 from "../../assets/images/services/0.png";
@@ -22,12 +22,13 @@ import animation from "../utils/animation";
 
 export type TTimeClass = "errorTime" | "dangerTime" | "waitTime";
 
+import ModalDiagnostics from "./ModalDiagnostics";
+
 export interface IClient {
     id: string;
     img: string;
     category: number;
     check: TCheck;
-    funcOpenModal?: () => void;
     timeClass: TTimeClass;
     classIcon?: string;
 
@@ -38,7 +39,7 @@ interface IPropsClient extends IClient {
 }
 
 export const Client = memo(function (props: IPropsClient) {
-    const { img, category, funcOpenModal, index, check, id, timeClass, task, classIcon } = props;
+    const { img, category, index, check, id, timeClass, task, classIcon } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
@@ -151,7 +152,7 @@ export const Client = memo(function (props: IPropsClient) {
         end();
     }
 
-
+    const [modal, setModal] = useState(false);
 
     const end = () => {
         if (category > 4) return;
@@ -175,7 +176,18 @@ export const Client = memo(function (props: IPropsClient) {
                 }
 
                 if (category === 4) {
-                    if (funcOpenModal) funcOpenModal();
+                    targetDrag.style.opacity = "0";
+                    setModal(true);
+                    setTimeout(() => {
+                        const dataDelete: IDeleteClient = {
+                            area: "clients",
+                            index: index,
+                            timer: false
+                        }
+                        dispatch(deleteClient(dataDelete))
+                        dispatch(createCheckArea(arrArea));
+                    }, 1000)
+                    return;
                 }
                 const dataDelete: IDeleteClient = {
                     area: "clients",
@@ -222,7 +234,9 @@ export const Client = memo(function (props: IPropsClient) {
 
     return (
         <>
+            {modal && <ModalDiagnostics />}
             {stopGame.current && <div className="stopGame"></div>}
+
             {(id || check || timeClass) &&
                 <div className="client__wrap">
                     <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "") + (timeClass === "errorTime" ? " errorTime" : timeClass === "dangerTime" ? " dangerTime" : "")}

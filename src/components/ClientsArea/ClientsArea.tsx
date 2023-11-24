@@ -1,11 +1,11 @@
-import { useState, useRef, useLayoutEffect, useCallback, useEffect } from "react";
+import { useRef, useLayoutEffect, useCallback, useEffect } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
 import ClientFake from "../Client/ClientFake";
-import ModalDiagnostics from "../Client/ModalDiagnostics";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
 import PopupClientTask1 from "../Tasks/Task1/PopupClientTask1";
+import { setTimer } from "../../store/reducers/timerReducer";
 
 
 interface IProps {
@@ -19,12 +19,6 @@ function ClientsArea(props: IProps) {
 
     const clients = useAppSelector((store) => store.arrClientsReducer).arrClients.slice(0, 4);
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
-    const [modal, setModal] = useState(false);
-    const openModalDiagnostics = () => {
-        setModal(true);
-        setTimeout(() => setModal(false), 1000)
-    }
-
     const ref = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const handler = useCallback(() => {
@@ -72,16 +66,16 @@ function ClientsArea(props: IProps) {
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
             if ((task === 1) && screen && (screen > 13)) return;
-
-
             funcWin();
-
+            dispatch(setTimer(false));
         }
 
     }, [funcWin, screen, task, dispatch, clients]);
+
+
+
     return (
         <>
-            {modal && <ModalDiagnostics />}
             <div className="clients" style={(task === 1 && screen === 1) ? { "zIndex": "99" } : {}} ref={ref}>
                 {task === 1 && <PopupClientTask1 screen={screen ? screen : -1} />}
                 {(screen === 20 || screen === 21 || screen === 42) && clients.map((item) => <ClientFake key={item.id} {...item} />)}
@@ -90,7 +84,7 @@ function ClientsArea(props: IProps) {
 
                 {(task === 1 || ((task === 2) && (screen === 22)) || ((task === 3) && (screen === 32)) || ((task === 4) && (screen === 43))) && clients.map((item, index) => {
                     if (!item) return <div className="client" key={Math.random()}></div>
-                    if (item.category === 4) return <Client key={item.id} index={index} task={task}  {...item} funcOpenModal={openModalDiagnostics} />
+
                     return <Client key={item.id} index={index} task={task} {...item} />
                 })}
             </div>
