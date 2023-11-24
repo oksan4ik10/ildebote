@@ -5,6 +5,7 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    z-index: 5;
 }
 
 .client__lives {
@@ -57,6 +58,7 @@
     position: absolute;
     top: 300px;
     left: 100px;
+    z-index: 4;
 }
 
 .modal__room h3 {
@@ -65,6 +67,7 @@
     font-size: 12px;
     margin-bottom: 2px;
     font-family: Montserrat;
+
 }
 
 .modal__room span {
@@ -133,4 +136,13 @@
     top: 5px;
     left: 14px;
     transform: none;
+}
+
+.stopGame-client {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
 }

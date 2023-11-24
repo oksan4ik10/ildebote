@@ -40,8 +40,8 @@ export const arrClientsSlice = createSlice({
         deleteClient(state, action: PayloadAction<IDeleteClient>) {
             const arrData = state.arrClients.slice(4);
             const { index, area, timer } = action.payload;
+            if (!state.arrClients[index]) return;
             if (area === "area") {
-                if (!state.arrClients[index]) return;
                 if (state.arrClients[index].check !== "success") {
                     state.arrClients[index].check = "wait";
                     return

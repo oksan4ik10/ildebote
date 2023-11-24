@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, memo, useState } from "react";
+import { useRef, useCallback, useEffect, memo } from "react";
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import "./Client.css";
 import src0 from "../../assets/images/services/0.png";
@@ -152,7 +152,6 @@ export const Client = memo(function (props: IPropsClient) {
         end();
     }
 
-    const [modal, setModal] = useState(false);
 
     const end = () => {
         if (category > 4) return;
@@ -168,16 +167,27 @@ export const Client = memo(function (props: IPropsClient) {
             //если пользователь разместил в нужную область
             if (win.current) {
                 if (category === 3) {
+                    stopGame.current = true;
                     dispatch(setTimer(false));
+                    targetDrag.style.opacity = "0";
+                    dispatch(createCheckArea(arrArea));
                     animation();
                     setTimeout(() => {
                         dispatch(setTimer(true));
-                    }, 0)
+                        const dataDelete: IDeleteClient = {
+                            area: "clients",
+                            index: index,
+                            timer: false
+                        }
+                        dispatch(deleteClient(dataDelete))
+
+                    }, 4500);
+                    return
                 }
 
                 if (category === 4) {
                     targetDrag.style.opacity = "0";
-                    setModal(true);
+                    if (modal.current) modal.current.style.opacity = "1";
                     setTimeout(() => {
                         const dataDelete: IDeleteClient = {
                             area: "clients",
@@ -231,11 +241,11 @@ export const Client = memo(function (props: IPropsClient) {
     }, [changeTimeClass, task, time])
 
 
-
+    const modal = useRef<HTMLDivElement>(null);
     return (
         <>
-            {modal && <ModalDiagnostics />}
-            {stopGame.current && <div className="stopGame"></div>}
+            {category === 4 && <ModalDiagnostics refClient={modal} />}
+            {stopGame.current && <div className="stopGame-client"></div>}
 
             {(id || check || timeClass) &&
                 <div className="client__wrap">
