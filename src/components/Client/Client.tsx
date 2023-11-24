@@ -16,7 +16,6 @@ import { TCheck } from "../../store/reducers/checkAreaReducer";
 import { IDeleteClient } from "../../store/reducers/arrClientsReducer";
 import { deleteClient, setTimeClass } from "../../store/reducers/arrClientsReducer";
 
-import { setTimer } from "../../store/reducers/timerReducer";
 
 import animation from "../utils/animation";
 
@@ -38,6 +37,8 @@ interface IPropsClient extends IClient {
     task: number;
 }
 
+type TEvent = "click" | "touch";
+
 export const Client = memo(function (props: IPropsClient) {
     const { img, category, index, check, id, timeClass, task, classIcon } = props;
     const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
@@ -55,19 +56,20 @@ export const Client = memo(function (props: IPropsClient) {
 
 
     let targetDrag: HTMLElement | undefined;
+
     const mouseStart = (e: React.MouseEvent<HTMLDivElement>) => {
         targetDrag = e.target as HTMLElement;
         startClick.current = true;
-        start();
+        start("click");
     }
 
     const startTouch = (e: React.TouchEvent<HTMLSpanElement>) => {
         targetDrag = e.changedTouches[0].target as HTMLElement;
-        start();
+        start("touch");
 
 
     }
-    const start = () => {
+    const start = (device: TEvent) => {
         if (category > 4) return;
         paused.current = true;
         disablePageScroll();
@@ -79,7 +81,7 @@ export const Client = memo(function (props: IPropsClient) {
             if (refServices.current) {
                 refServices.current.classList.add("none");
                 y = container.height - 83 - 16;
-                if (container.width > 400) y -= 10;
+                if ((device === "click") && (container.width > 399)) y -= 10;
             }
             targetDrag.style.left = x + "px";
             targetDrag.style.top = y + "px";
@@ -87,15 +89,15 @@ export const Client = memo(function (props: IPropsClient) {
     }
     const mouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!startClick.current) return;
-        move(e.pageY, e.pageX);
+        move(e.pageY, e.pageX, "click");
     }
     const dragMove = (e: React.TouchEvent<HTMLDivElement>) => {
         const data = e.changedTouches[0];
-        move(data.clientY, data.clientX);
+        move(data.clientY, data.clientX, "touch");
 
     }
 
-    const move = (clientY: number, clientX: number) => {
+    const move = (clientY: number, clientX: number, device: TEvent) => {
         if (category > 4) return;
 
         if (targetDrag) {
@@ -103,7 +105,7 @@ export const Client = memo(function (props: IPropsClient) {
             let x = clientX - container.left - (targetDrag.offsetWidth / 2);
             if (x < 0) x = 0;
             if (x > container.width - 64) x = container.width - 64;
-            if (container.width > 400) y -= 10;
+            if ((device === "click") && (container.width > 399)) y -= 10;
             if (y < topArea) y = topArea;
             if (y > container.height - 83) y = container.height - 83;
             targetDrag.style.top = y + "px";
@@ -168,12 +170,11 @@ export const Client = memo(function (props: IPropsClient) {
             if (win.current) {
                 if (category === 3) {
                     stopGame.current = true;
-                    dispatch(setTimer(false));
+                    paused.current = true;
                     targetDrag.style.opacity = "0";
                     dispatch(createCheckArea(arrArea));
                     animation();
                     setTimeout(() => {
-                        dispatch(setTimer(true));
                         const dataDelete: IDeleteClient = {
                             area: "clients",
                             index: index,
@@ -247,7 +248,7 @@ export const Client = memo(function (props: IPropsClient) {
             {category === 4 && <ModalDiagnostics refClient={modal} />}
             {stopGame.current && <div className="stopGame-client"></div>}
 
-            {(id || check || timeClass) &&
+            {(id || check || timeClass || timerAll) &&
                 <div className="client__wrap">
                     <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "") + (timeClass === "errorTime" ? " errorTime" : timeClass === "dangerTime" ? " dangerTime" : "")}
                         onMouseDown={mouseStart}

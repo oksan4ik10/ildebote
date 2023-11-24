@@ -27,10 +27,7 @@ function Task4(props: IPropsTask) {
 
 
     const [screen, setScreen] = useState(40);
-    const changeScreen = () => {
-        setScreen(screen + 1);
 
-    }
 
     const funcWinClient = () => {
         nextLevel();
@@ -68,6 +65,10 @@ function Task4(props: IPropsTask) {
         }
     })
 
+    useEffect(() => {
+        setTimeout(() => setScreen(screen + 1), 1000)
+    }, [])
+
 
 
 
@@ -103,7 +104,7 @@ function Task4(props: IPropsTask) {
 
             <Consultants openTest={openTest} screen={screen} question={question} />
 
-            {(screen === 40) && <StopGame screen={screen} funcBtn={changeScreen} />}
+            {(screen === 40) && <StopGame screen={screen} />}
             <Area task={4} screen={screen}></Area>
             <ClientsArea task={4} screen={screen} funcWin={funcWinClient}></ClientsArea>
 

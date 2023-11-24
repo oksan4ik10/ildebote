@@ -353,7 +353,7 @@ export const getClinets = (task: number) => {
         arrCat5[2],
 
         arrCat7[2],
-        arrCat0[0],
+        arrCat0[1],
         arrCat4[2],
 
         arrCat5[1],

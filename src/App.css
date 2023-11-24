@@ -8,6 +8,7 @@
   color: #000;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  word-spacing: 0;
 }
 
 #root {
@@ -51,22 +52,4 @@
     height: 100vh;
   }
 
-}
-
-.stop-game {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 999;
-}
-
-.stop-task1Icon {
-  width: 64px;
-  top: auto;
-  left: auto;
-  bottom: 16px;
-  right: 16px;
-  height: 64px;
 }

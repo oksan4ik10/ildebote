@@ -56,7 +56,7 @@ function ClientsArea(props: IProps) {
             dispatch(setCoordinateClients(arrCoordinate));
 
         }
-    }, [dispatch, container.top])
+    }, [])
 
     useEffect(() => {
         handler();

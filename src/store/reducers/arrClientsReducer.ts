@@ -65,7 +65,7 @@ export const arrClientsSlice = createSlice({
 
             const { index, category } = action.payload;
 
-            const arr = [...state.arrClients]
+            const arr = [...state.arrClients];
             if (!arr[index]) return;
             if (category === -1) {
                 arr[index].check = "wait";

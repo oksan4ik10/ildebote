@@ -1,13 +1,13 @@
-//for Task 1
+import "./StopGame.css";
 interface IProps {
-    funcBtn: () => void;
+    funcBtn?: () => void;
     screen: number;
 }
 
 function StopGame(props: IProps) {
     const { funcBtn, screen } = props;
     const click = () => {
-        funcBtn();
+        if (funcBtn) funcBtn();
     }
     return (
         <>

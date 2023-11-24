@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IPropsTask } from "../types";
 import ScreenBlur from "../../utils/ScreenBlur/ScreenBlur";
 import Experience from "../../Experience/Experience";
@@ -17,9 +17,7 @@ function Task2(props: IPropsTask) {
 
 
     const [screen, setScreen] = useState(20);
-    const changeScreen = () => {
-        setScreen(screen + 1);
-    }
+
 
     const funcWinClient = () => {
         nextLevel();
@@ -29,6 +27,10 @@ function Task2(props: IPropsTask) {
         setScreen(screen + 1);
         dispatch(setTimer(true));
     }
+
+    useEffect(() => {
+        setTimeout(() => setScreen(screen + 1), 1000)
+    }, [])
 
 
     return (
@@ -40,7 +42,7 @@ function Task2(props: IPropsTask) {
 
             <Experience screen={screen}></Experience>
 
-            {(screen === 20) && <StopGame screen={screen} funcBtn={changeScreen} />}
+            {(screen === 20) && <StopGame screen={screen} />}
             <Area task={2} screen={screen}></Area>
             <ClientsArea task={2} screen={screen} funcWin={funcWinClient}></ClientsArea>
 
