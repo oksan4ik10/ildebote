@@ -5,6 +5,7 @@ import { TTimeClass } from '../../components/Client/Client';
 export interface IArrClients {
     arrClients: IClient[];
     width: number;
+    countClients: number;
 }
 export interface ISetCheck {
     index: number,
@@ -21,7 +22,7 @@ export interface ISetTimeClass {
     index: number;
     timeClass: TTimeClass;
 }
-const initialState: IArrClients = { arrClients: [], width: 7 };
+const initialState: IArrClients = { arrClients: [], width: 7, countClients: 0 };
 
 export const arrClientsSlice = createSlice({
     name: 'arrClients',
@@ -51,6 +52,7 @@ export const arrClientsSlice = createSlice({
                 let points = 1;
                 if (state.arrClients[index].category === 3) points = 3;
                 state.width = state.width + points * 1.06;
+                state.countClients++;
             }
             delete state.arrClients[index];
 
@@ -85,6 +87,7 @@ export const arrClientsSlice = createSlice({
         //для консультантов
         setWidth(state, action: PayloadAction<number>) {
             state.width = state.width + action.payload * 1.06;
+            state.countClients++;
         },
     },
 });

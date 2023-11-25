@@ -207,15 +207,10 @@ const Area = memo(function (props: IProps) {
     const end = () => {
         if (screen && ((screen < 9) || (screen === 11))) return;
         if (targetDrag) {
-            console.log(targetDrag);
-
-
             targetDrag.style.left = "auto";
             targetDrag.style.top = "auto";
             targetDrag.style.display = "none";
             if (indexCheck.current !== -1) {
-                console.log(indexCheck.current);
-
                 const dataDelete: IDeleteClient = {
                     area: "area",
                     index: indexCheck.current,
