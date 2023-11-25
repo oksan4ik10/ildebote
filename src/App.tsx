@@ -15,12 +15,11 @@ import { setArrClients } from './store/reducers/arrClientsReducer';
 import { getClinets } from './components/utils/clients';
 
 function App() {
-  const [task, setTask] = useState(5);
+  const [task, setTask] = useState(0);
   const nextLevel = () => {
     setTask(task + 1);
     if (task === 0) return;
     if (task > 3) return;
-    console.log("app", task);
 
     dispatch(setArrClients(getClinets(task)))
   }
