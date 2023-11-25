@@ -188,6 +188,7 @@ export const Client = memo(function (props: IPropsClient) {
 
                 if (category === 4) {
                     targetDrag.style.opacity = "0";
+                    dispatch(setCheckArea({ category: 4, check: "wait" }));
                     if (modal.current) modal.current.style.opacity = "1";
                     setTimeout(() => {
                         const dataDelete: IDeleteClient = {
@@ -196,7 +197,7 @@ export const Client = memo(function (props: IPropsClient) {
                             timer: false
                         }
                         dispatch(deleteClient(dataDelete))
-                        dispatch(createCheckArea(arrArea));
+
                     }, 1000)
                     return;
                 }
