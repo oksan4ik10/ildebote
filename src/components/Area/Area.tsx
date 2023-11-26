@@ -68,8 +68,8 @@ const Area = memo(function (props: IProps) {
                 const makeTable = {
                     y1: data.top - 20,
                     y2: data.top + 20,
-                    x1: data.left - dataArea.left - 64 - 20,
-                    x2: data.left - dataArea.left - 64 + 20,
+                    x1: data.left - dataArea.left - 64 - 10,
+                    x2: data.left - dataArea.left - 64 + 30,
                 }
                 arrCoordinate.push(makeTable);
             }

@@ -9,9 +9,16 @@ import "./Task5.css"
 
 import { useAppSelector } from "../../../store/store";
 
+
+
 function Task5() {
 
     const [screen, setScreen] = useState(50);
+
+    const openPortal = () => {
+        window.location.href = "http://vk.com";
+    }
+
 
     const countClients = useAppSelector((store) => store.arrClientsReducer).countClients;
 
@@ -46,7 +53,11 @@ function Task5() {
                 </ScreenBlur>}
             {screen === 52 &&
                 <ScreenBlur>
-                    <Form />
+                    <Form openPortal={openPortal} sendForm={startGame} />
+                </ScreenBlur>}
+            {screen === 53 &&
+                <ScreenBlur>
+                    <Popup text="Если ты победишь, то мы отправим тебе <br> всю информацию на указанную почту. <br> Но победить можно не только <br> в розыгрыше, но и в жизни — нажимай <br> на кнопку ниже, чтобы узнать больше <br> о карьере в ИЛЬ ДЕ БОТЭ!" textBtn="На карьерный портал!" title="Ты участвуешь <br>в розыгрыше красоты!" funcBtn={openPortal} />
                 </ScreenBlur>}
 
             <Experience screen={screen}></Experience>

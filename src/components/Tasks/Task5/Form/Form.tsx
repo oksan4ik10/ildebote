@@ -6,13 +6,17 @@ import Button from "../../../utils/Button/Button";
 import srcCheck from "../../../../assets/images/check.svg"
 
 
-function Form() {
+interface IProps {
+    openPortal: () => void;
+    sendForm: () => void;
+}
+function Form(props: IProps) {
 
-    const { register, getValues, setValue } = useForm();
+    const { openPortal, sendForm } = props;
 
-    const openPortal = () => {
-        window.location.href = "http://vk.com";
-    }
+    const { register, getValues } = useForm();
+
+
     const [checkEmail, setCheckEmail] = useState(false);
     const [checkCheck, setCheckCheck] = useState(false);
 
@@ -31,7 +35,6 @@ function Form() {
         }
         if (!emailReg.test(email) || (email.length === 0)) {
             setCheckEmail(true);
-            setValue("email", "");
             correct++;
         } else {
             setCheckEmail(false);
@@ -42,7 +45,7 @@ function Form() {
 
 
         const url = "https://script.google.com/macros/s/AKfycbxc8OAXdi-n6uRGPB6_q950s56ApsjsOUZ29hXip5FW4IGC7PmKvYgb74ZhIcaBjB2t1w/exec";
-        const response = await fetch(url, {
+        await fetch(url, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
@@ -50,15 +53,10 @@ function Form() {
             mode: "no-cors",
             body: formBody
         });
-        console.log(response);
+        console.log("send");
 
+        sendForm();
 
-        const result = await response.json();
-        if (result.type === 'error') {
-            console.log(`Ошибка( ${result.errors}`)
-        }
-
-        console.log(result);
     }
 
 
@@ -75,7 +73,7 @@ function Form() {
                     Не забудь принять участие<br />в розыгрыше — оставляй свои<br />контакты, а мы случайным образом<br />выберем тех, кто получит частичку<br />красоты от ИЛЬ ДЕ БОТЭ!
                 </p>
                 <form className="form-modal__send" onSubmit={submitForm}>
-                    <input type="email" id="email" className={"send__email " + (checkEmail ? "error" : "")} placeholder="example@mail.ru" {...register("email")} />
+                    <input type="text" id="email" className={"send__email " + (checkEmail ? "error" : "")} placeholder="example@mail.ru" {...register("email")} />
                     <div className="form-modal__check">
                         <input type="checkbox" id="check-form" className="send__check" {...register("check")} />
                         <label htmlFor="check-form" className={"send__check-fake " + (checkCheck ? "error" : "")}>
