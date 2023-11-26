@@ -20,7 +20,7 @@ function Task3(props: IPropsTask) {
 
     const funcWinClient = () => {
         nextLevel();
-        dispatch(setTimer(false));
+        // dispatch(setTimer(false));
     }
     const startGame = () => {
         setScreen(screen + 1);
@@ -30,7 +30,6 @@ function Task3(props: IPropsTask) {
     useEffect(() => {
         setTimeout(() => setScreen(screen + 1), 1000)
     }, [])
-
 
 
     return (

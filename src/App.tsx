@@ -19,11 +19,15 @@ function App() {
   disablePageScroll();
   const [task, setTask] = useState(0);
   const nextLevel = () => {
+    console.log(task);
     setTask(task + 1);
     if (task === 0) return;
     if (task > 3) return;
+    console.log(task);
 
     dispatch(setArrClients(getClinets(task)))
+    console.log(task);
+
   }
 
   const ref = useRef<HTMLDivElement>(null);

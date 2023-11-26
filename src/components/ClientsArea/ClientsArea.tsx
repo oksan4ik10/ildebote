@@ -1,11 +1,9 @@
 import { useRef, useEffect, useCallback } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
-import ClientFake from "../Client/ClientFake";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { setCoordinateClients } from "../../store/reducers/clientsCoordinateReducer";
 import PopupClientTask1 from "../Tasks/Task1/PopupClientTask1";
-import { setTimer } from "../../store/reducers/timerReducer";
 
 
 interface IProps {
@@ -68,10 +66,10 @@ function ClientsArea(props: IProps) {
             if ((task === 1) && screen && (screen > 13)) return;
             if ((task === 4) && (document.querySelector(".modal-dialog"))) return;
             funcWin();
-            dispatch(setTimer(false));
+            return;
         }
 
-    }, [funcWin, screen, task, dispatch, clients]);
+    }, [screen, dispatch, clients]);
 
 
 
@@ -79,11 +77,11 @@ function ClientsArea(props: IProps) {
         <>
             <div className="clients" style={(task === 1 && screen === 1) ? { "zIndex": "99" } : {}} ref={ref}>
                 {task === 1 && <PopupClientTask1 screen={screen ? screen : -1} />}
-                {(screen === 20 || screen === 21 || screen === 42) && clients.map((item) => <ClientFake key={item.id} {...item} />)}
+                {/* {(screen === 20 || screen === 21 || screen === 42) && clients.map((item) => <ClientFake key={item.id} {...item} />)} */}
 
                 {(screen === 30 || screen === 31 || screen === 40 || screen === 41) && clients.map(() => <div className="client" key={Math.random()}></div>)}
 
-                {(task === 1 || ((task === 2) && (screen === 22)) || ((task === 3) && (screen === 32)) || ((task === 4) && (screen === 43))) && clients.map((item, index) => {
+                {(task === 1 || ((task === 2)) || ((task === 3) && (screen === 32)) || ((task === 4) && screen && (screen > 41))) && clients.map((item, index) => {
                     if (!item) return <div className="client" key={Math.random()}></div>
 
                     return <Client key={item.id} index={index} task={task} {...item} />
