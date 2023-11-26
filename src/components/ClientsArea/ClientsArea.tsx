@@ -1,4 +1,4 @@
-import { useRef, useLayoutEffect, useCallback, useEffect } from "react";
+import { useRef, useEffect, useCallback } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
 import ClientFake from "../Client/ClientFake";
@@ -62,10 +62,11 @@ function ClientsArea(props: IProps) {
         handler();
     }, [handler])
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
             if ((task === 1) && screen && (screen > 13)) return;
+            if ((task === 4) && (document.querySelector(".modal-dialog"))) return;
             funcWin();
             dispatch(setTimer(false));
         }

@@ -9,15 +9,16 @@ interface IProps {
     text: string;
     funcBtn: () => void;
     textBtn: string;
+    padding?: string;
 }
 
 function Popup(props: IProps) {
-    const { title, text, funcBtn, textBtn } = props;
+    const { title, text, funcBtn, textBtn, padding } = props;
 
     return (
         <>
             <div className="screen__popup">
-                <Modal title={title} text={text} size="14px" padding="25px 22px" />
+                <Modal title={title} text={text} size="14px" padding={padding ? padding : "25px 22px"} />
                 <Button funcBtn={funcBtn} textBtn={textBtn} classBtn="screen__btn" />
 
             </div>

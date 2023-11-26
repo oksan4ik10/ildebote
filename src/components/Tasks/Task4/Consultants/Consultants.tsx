@@ -22,14 +22,21 @@ function Consultants(props: IProps) {
     return (
         <>
             <div className="consultants" style={(screen === 42) ? { "zIndex": "99" } : {}} >
-                <img src={srcQuetion} alt="question" className={"cons__question " + (((question === 1) || (question === 7)) ? "first" : (question === 4) ? "second" : "")} />
-                <div className="cons" onClick={openDialog1}>
-                    <img src={src1} alt="cons1" className="cons__img" />
+                <div className="cons__wrap">
+                    <div className="cons" onClick={openDialog1}>
+                        <img src={src1} alt="cons1" className="cons__img" />
+                    </div>
+                    <img src={srcQuetion} alt="question" className={"cons__question " + (((question === 1) || (question === 7)) ? "second" : "")} />
+                </div>
 
+                <div className="cons__wrap">
+                    <div className="cons" onClick={openDialog2}>
+                        <img src={src2} alt="cons2" className="cons__img" />
+
+                    </div>
+                    <img src={srcQuetion} alt="question" className={"cons__question " + ((question === 4) ? "second" : "")} />
                 </div>
-                <div className="cons" onClick={openDialog2}>
-                    <img src={src2} alt="cons2" className="cons__img" />
-                </div>
+
             </div>
         </>
     )

@@ -100,7 +100,6 @@ const Area = memo(function (props: IProps) {
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
 
     const coordinateClients = useAppSelector((state) => state.clientsCoordinateReducer).coordintateClients;
-    console.log(coordinateClients[0].y1);
 
 
     const startClick = useRef(false);
@@ -239,10 +238,7 @@ const Area = memo(function (props: IProps) {
                 <img src={pomadeSrc} alt="parfumWall" draggable={false} />
             </div>
         </div>
-        , [mouseEnd, mouseMove, mouseOut])
-
-    console.log("render area");
-
+        , [])
 
     return (
         <>

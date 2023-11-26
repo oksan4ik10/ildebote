@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
+import { disablePageScroll } from 'scroll-lock';
 
 import './App.css'
 import Task0 from './components/Tasks/Task0/Task0';
@@ -15,6 +16,7 @@ import { setArrClients } from './store/reducers/arrClientsReducer';
 import { getClinets } from './components/utils/clients';
 
 function App() {
+  disablePageScroll();
   const [task, setTask] = useState(0);
   const nextLevel = () => {
     setTask(task + 1);

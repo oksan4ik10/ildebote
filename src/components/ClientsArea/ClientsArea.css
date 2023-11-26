@@ -1,8 +1,9 @@
 .clients {
+    flex: 1 0 162px;
     display: grid;
     grid-template-columns: repeat(4, 64px);
     justify-content: space-between;
-    padding: 0px 16px 16px 16px;
-    height: 178px;
+    padding: 0px 16px 0px 16px;
+    margin-bottom: 16px;
     align-items: end;
 }
