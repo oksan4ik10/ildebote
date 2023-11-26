@@ -224,7 +224,7 @@ const Area = memo(function (props: IProps) {
     }
 
     const componentElement = useMemo(() =>
-        <div>
+        <>
             <div id="wallCare" className="drag-block wall__img" onMouseMove={mouseMove} onMouseLeave={mouseOut}
                 onMouseUp={mouseEnd}>
                 <img src={creamSrc} alt="parfumWall" draggable={false} />
@@ -237,8 +237,8 @@ const Area = memo(function (props: IProps) {
                 onMouseUp={mouseEnd}>
                 <img src={pomadeSrc} alt="parfumWall" draggable={false} />
             </div>
-        </div>
-        , [])
+        </>
+        , [mouseEnd, mouseMove, mouseOut])
 
     return (
         <>

@@ -20,8 +20,8 @@ import src34 from "../../assets/images/clients/34.png";
 
 import src41 from "../../assets/images/clients/41.png";
 import src42 from "../../assets/images/clients/42.png";
-import src43 from "../../assets/images/clients/43.svg";
-import src44 from "../../assets/images/clients/44.svg";
+import src43 from "../../assets/images/clients/43.png";
+import src44 from "../../assets/images/clients/44.png";
 
 import src51 from "../../assets/images/clients/51.png";
 import src52 from "../../assets/images/clients/52.png";
@@ -33,9 +33,9 @@ import src53 from "../../assets/images/clients/53.png";
 import src61 from "../../assets/images/clients/61.png";
 import src62 from "../../assets/images/clients/62.png";
 
-import src71 from "../../assets/images/clients/71.svg";
-import src72 from "../../assets/images/clients/72.svg";
-import src73 from "../../assets/images/clients/73.svg";
+import src71 from "../../assets/images/clients/71.png";
+import src72 from "../../assets/images/clients/72.png";
+import src73 from "../../assets/images/clients/73.png";
 
 import { IClient } from "../Client/Client";
 export const getClinets = (task: number) => {

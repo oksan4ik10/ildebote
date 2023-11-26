@@ -20,7 +20,9 @@ function Task2(props: IPropsTask) {
 
 
     const funcWinClient = () => {
+        setScreen(screen + 1);
         nextLevel();
+
         // dispatch(setTimer(false));
     }
     const startGame = () => {

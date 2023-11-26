@@ -1,4 +1,4 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import "./Test.css"
 import Modal from '../Modal/Modal';
 import { arrQuestions } from "./TestQuestions";
@@ -56,6 +56,14 @@ function Test(props: IProps) {
         }
 
     }
+    useEffect(() => {
+        if (!inputNameRef.current) return;
+        if (inputNameRef.current.value) {
+            console.log(23);
+
+            inputNameRef.current.style.background = "#fff";
+        }
+    })
 
     return (
         <>

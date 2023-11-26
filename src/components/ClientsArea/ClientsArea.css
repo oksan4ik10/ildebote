@@ -1,9 +1,9 @@
 .clients {
-    flex: 1 0 162px;
+    flex: 0 0 148px;
     display: grid;
     grid-template-columns: repeat(4, 64px);
     justify-content: space-between;
-    padding: 0px 16px 0px 16px;
+    padding: 0px 20px 0px 20px;
     margin-bottom: 16px;
     align-items: end;
 }

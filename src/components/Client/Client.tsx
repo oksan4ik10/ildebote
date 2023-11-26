@@ -1,9 +1,7 @@
 import { useRef, useCallback, useEffect, memo } from "react";
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
 import "./Client.css";
-import src0 from "../../assets/images/services/0.png";
-import src1 from "../../assets/images/services/1.png"
-import src2 from "../../assets/images/services/2.png"
+
 import src3 from "../../assets/images/services/3.png"
 import src4 from "../../assets/images/services/4.png"
 import src5 from "../../assets/images/services/1-wall.png"
@@ -41,7 +39,7 @@ type TEvent = "click" | "touch";
 
 export const Client = memo(function (props: IPropsClient) {
     const { img, category, index, check, id, timeClass, task, classIcon } = props;
-    const arrImgCategories = [src0, src1, src2, src3, src4, src5, src6, src7];
+    const arrImgCategories = ["уход", "парфюмерия", "макияж", src3, src4, src5, src6, src7];
     const coordinate = useAppSelector((state) => state.areaCoordinateReducer).arr;
     const topArea = useAppSelector((state) => state.areaCoordinateReducer).topArea;
     const container = useAppSelector((state) => state.containerCoordinateReducer).container;
@@ -259,8 +257,14 @@ export const Client = memo(function (props: IPropsClient) {
                         onTouchStart={startTouch}
                         onTouchMove={dragMove}
                         onTouchEnd={dragEnd}>
-                        <div className="client__services" ref={refServices}>
-                            <img src={arrImgCategories[category]} alt={category + ""} />
+                        <div className={"client__services " + "cat" + category} ref={refServices}>
+                            {(category > 2) && <img src={arrImgCategories[category]} alt={category + ""} />}
+                            {(category <= 2) && <span>{arrImgCategories[category]}</span>}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="20" viewBox="0 0 13 20" fill="none">
+                                <path
+                                    d="M1.52495 9.07417C0.69805 9.87628 0.718014 11.2093 1.56856 11.9863L9.59224 19.3162C10.8759 20.4888 12.9412 19.5782 12.9412 17.8396L12.9412 2.72646C12.9412 0.959279 10.8171 0.0604663 9.54863 1.2909L1.52495 9.07417Z"
+                                    fill="#fff" />
+                            </svg>
                         </div>
                         <div className="client__lives">
                             <span></span>
