@@ -8,6 +8,9 @@
 
 .cons__wrap {
     position: relative;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
 }
 
 .cons {
@@ -30,20 +33,13 @@
 
 .cons__question {
     opacity: 0;
-}
-
-.cons__question.first {
     position: absolute;
-    opacity: 1;
-    top: 0px;
-    left: 48px;
-    z-index: 2;
-}
-
-.cons__question.second {
-    position: absolute;
-    opacity: 1;
     top: 0px;
     right: -10px;
     z-index: 99;
+}
+
+
+.cons__question.second {
+    opacity: 1;
 }

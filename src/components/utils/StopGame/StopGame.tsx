@@ -11,7 +11,7 @@ function StopGame(props: IProps) {
     }
     return (
         <>
-            <div className={"stop-game " + (((screen < 3) || (screen === 20) || (screen === 30) || (screen === 40)) ? "" : "stop-task1Icon")} onClick={click} onTouchStart={click}></div>
+            <div className={"stop-game " + (((screen < 3) || (screen === 20) || (screen === 30) || (screen === 40)) ? "" : "stop-task1Icon")} onClick={click}></div>
         </>
     )
 }

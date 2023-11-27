@@ -1,4 +1,4 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import "./ClientsArea.css";
 import Client from "../Client/Client";
 import { useAppDispatch, useAppSelector } from "../../store/store";
@@ -60,11 +60,14 @@ function ClientsArea(props: IProps) {
         handler();
     }, [handler])
 
+    const [opacity, setOpacity] = useState(false);
+
     useEffect(() => {
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
             if ((task === 1) && screen && (screen > 13)) return;
             if ((task === 4) && (document.querySelector(".modal-dialog"))) return;
+            setOpacity(true);
             funcWin();
             return;
         }
@@ -72,7 +75,7 @@ function ClientsArea(props: IProps) {
     }, [screen, clients, funcWin, task]);
     return (
         <>
-            <div className="clients" style={(task === 1 && screen === 1) ? { "zIndex": "99" } : {}} ref={ref}>
+            <div className={"clients " + (opacity ? "none" : "")} style={(task === 1 && screen === 1) ? { "zIndex": "99" } : {}} ref={ref}>
                 {task === 1 && <PopupClientTask1 screen={screen ? screen : -1} />}
                 {(screen === 30 || screen === 31 || screen === 40 || screen === 41) && clients.map(() => <div className="client" key={Math.random()}></div>)}
 

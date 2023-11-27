@@ -135,7 +135,7 @@
     position: relative;
     text-align: center;
     font-family: Montserrat;
-    font-size: 10px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
@@ -152,7 +152,7 @@
     color: #424242;
     text-align: center;
     font-family: Montserrat;
-    font-size: 10px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
@@ -166,5 +166,17 @@
 .answer__input:checked+.answer label {
     text-decoration: line-through;
     color: #505050;
+
+}
+
+@media (min-width: 700px) {
+    .nameTask1 {
+        font-size: 10px;
+    }
+
+    .nameTask1::placeholder,
+    .nameTask1::-webkit-input-placeholder {
+        font-size: 10px;
+    }
 
 }
