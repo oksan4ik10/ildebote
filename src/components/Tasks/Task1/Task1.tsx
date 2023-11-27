@@ -37,12 +37,6 @@ function Task1(props: IPropsTask) {
         setScreen(screen + 1);
     }
 
-    const changeStopGame = () => {
-        setScreen(screen + 1);
-        console.log("stop-game");
-
-    }
-
     //смена CientsArea
     const funcWinClient = () => {
         if (screen === 7) {
@@ -68,7 +62,7 @@ function Task1(props: IPropsTask) {
             <Experience screen={screen}></Experience>
             <Area task={1} screen={screen}></Area>
             <ClientsArea task={1} screen={screen} funcWin={funcWinClient}></ClientsArea>
-            {(screen < 3 || screen === 4 || screen === 8 || screen === 11) && <StopGame screen={screen} funcBtn={changeStopGame} />}
+            {(screen < 3 || screen === 4 || screen === 8 || screen === 11) && <StopGame screen={screen} funcBtn={changeScreen} />}
             {(screen > 4 && screen < 7) && <Test task={1} funcWin={changeScreenTest} funcError={changeScreen} />}
             {(screen === 9 || screen === 12) && <Dialog screen={screen} funcBtn={changeScreen} />}
 
