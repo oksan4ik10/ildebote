@@ -212,13 +212,13 @@ export const Client = memo(function (props: IPropsClient) {
 
     const paused = useRef(false);
     const over = useRef(false);
-    const time = useRef(10);
+    const time = useRef(15);
     const changeTimeClass = useCallback(() => {
         if (!timerAll) return;
         if (paused.current || over.current) return;
         time.current--;
-        if (time.current === 5) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
-        if (time.current === 3) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
+        if (time.current === 10) dispatch(setTimeClass({ index: index, timeClass: "dangerTime" }));
+        if (time.current === 5) dispatch(setTimeClass({ index: index, timeClass: "errorTime" }))
         if (time.current === 1) {
             over.current = true;
             dispatch(deleteClient({
@@ -272,8 +272,7 @@ export const Client = memo(function (props: IPropsClient) {
                             <span></span>
                             <span></span>
                         </div>
-                        <div className={"client__photo " + (classIcon ? classIcon : "")}>
-                            <img src={img} alt="photo" draggable="false" />
+                        <div className={"client__photo " + (classIcon ? classIcon : "")} dangerouslySetInnerHTML={{ __html: img }}>
                         </div>
 
                     </div>

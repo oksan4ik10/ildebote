@@ -40,6 +40,13 @@
     transform: translateX(-50%) translateY(-50%);
 }
 
+.client__photo svg {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .client__services.none {
     display: none;
 }
@@ -102,37 +109,37 @@
 
 
 /* иконки клиентов */
-.icon2 img {
+.icon2 svg {
     top: 5px;
     left: 11px;
     transform: none;
 }
 
-.icon3 img {
+.icon3 svg {
     top: 50%;
     left: 50%;
     transform: translateY(-40%) translateX(-40%) scale(1.2);
 }
 
-.icon01 img {
+.icon01 svg {
     top: 5px;
     left: 7px;
     transform: none;
 }
 
-.icon22 img {
+.icon22 svg {
     top: 7px;
     left: 11px;
     transform: none;
 }
 
-.icon52 img {
+.icon52 svg {
     top: 5px;
     left: 5px;
     transform: none;
 }
 
-.icon73 img {
+.icon73 svg {
     top: 5px;
     left: 14px;
     transform: none;
