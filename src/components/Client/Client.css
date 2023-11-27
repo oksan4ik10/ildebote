@@ -222,3 +222,22 @@
     width: 16px;
 
 }
+
+.client__drag-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.client__drag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 2;
+}

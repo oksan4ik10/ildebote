@@ -36,6 +36,7 @@ function Task2(props: IPropsTask) {
     }, [])
 
 
+
     return (
         <>
             {screen === 21 &&
@@ -47,7 +48,7 @@ function Task2(props: IPropsTask) {
 
             {(screen === 20) && <StopGame screen={screen} />}
             <Area task={2} screen={screen}></Area>
-            <ClientsArea task={2} screen={screen} funcWin={funcWinClient}></ClientsArea>
+            {(screen < 23) && <ClientsArea task={2} screen={screen} funcWin={funcWinClient}></ClientsArea>}
 
 
         </>

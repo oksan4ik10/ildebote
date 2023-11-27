@@ -250,13 +250,7 @@ export const Client = memo(function (props: IPropsClient) {
             {(id || check || timeClass || timerAll) &&
                 <div className="client__wrap">
                     <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "") + (timeClass === "errorTime" ? " errorTime" : timeClass === "dangerTime" ? " dangerTime" : "")}
-                        onMouseDown={mouseStart}
-                        onMouseMove={mouseMove}
-                        onMouseLeave={mouseOut}
-                        onMouseUp={mouseEnd}
-                        onTouchStart={startTouch}
-                        onTouchMove={dragMove}
-                        onTouchEnd={dragEnd}>
+                    >
                         <div className={"client__services " + "cat" + category} ref={refServices}>
                             {(category > 2) && <img src={arrImgCategories[category]} alt={category + ""} />}
                             {(category <= 2) && <span>{arrImgCategories[category]}</span>}
@@ -266,14 +260,24 @@ export const Client = memo(function (props: IPropsClient) {
                                     fill="#fff" />
                             </svg>
                         </div>
-                        <div className="client__lives">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                        <div className="client__drag-info">
+                            <div className="client__drag" onMouseDown={mouseStart}
+                                onMouseMove={mouseMove}
+                                onMouseOut={mouseOut}
+                                onMouseUp={mouseEnd}
+                                onTouchStart={startTouch}
+                                onTouchMove={dragMove}
+                                onTouchEnd={dragEnd}></div>
+                            <div className="client__lives">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <div className={"client__photo " + (classIcon ? classIcon : "")} dangerouslySetInnerHTML={{ __html: img }}>
+                            </div>
                         </div>
-                        <div className={"client__photo " + (classIcon ? classIcon : "")} dangerouslySetInnerHTML={{ __html: img }}>
-                        </div>
+
 
                     </div>
                 </div >

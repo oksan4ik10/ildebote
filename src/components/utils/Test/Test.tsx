@@ -66,6 +66,10 @@ function Test(props: IProps) {
         }
     })
 
+    const disableSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    }
+
     return (
         <>
             {checkAnswer && <div className="modal-client modal-top modal-error ">
@@ -79,7 +83,7 @@ function Test(props: IProps) {
                     <div className="question__text" dangerouslySetInnerHTML={{ __html: question }}>
                     </div>
                 </div>
-                <form className="answers" onChange={clickFormTest}>
+                <form className="answers" onChange={clickFormTest} onSubmit={disableSubmit}>
                     {
                         answers.map((item, index) => {
                             if (index === 0 && task === 1)
