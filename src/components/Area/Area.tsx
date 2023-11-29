@@ -66,9 +66,9 @@ const Area = memo(function (props: IProps) {
             if (refMakeTable.current) {
                 const data = refMakeTable.current.getBoundingClientRect();
                 const makeTable = {
-                    y1: data.top - 20,
-                    y2: data.top + 20,
-                    x1: data.left - dataArea.left - 64 - 10,
+                    y1: data.top - 30,
+                    y2: data.top + 30,
+                    x1: data.left - dataArea.left - 64 - 30,
                     x2: data.left - dataArea.left - 64 + 30,
                 }
                 arrCoordinate.push(makeTable);
@@ -262,30 +262,30 @@ const Area = memo(function (props: IProps) {
 
                     </div>
 
-                    <div className="area__wall wallParfum">
+                    <div className="area__wall wallParfum" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
                         <h3 className="wall__title">
                             Парфюмерия
                         </h3>
-                        <div className="wall__img"
-                            onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
+                        <div className="wall__img">
+
                             <img src={diorSrc} alt="parfum" draggable={false} />
                         </div>
 
                     </div>
-                    <div className="area__wall wallMake">
+                    <div className="area__wall wallMake" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
                         <h3 className="wall__title">
                             макияж
                         </h3>
-                        <div className="wall__img" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
+                        <div className="wall__img" >
                             <img src={pomadeSrc} alt="pomade" draggable={false} />
                         </div>
 
                     </div>
-                    <div className="area__wall wallCare">
+                    <div className="area__wall wallCare" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
                         <h3 className="wall__title">
                             уход
                         </h3>
-                        <div className="wall__img" onMouseDown={mouseStart} onTouchStart={dragStart} onTouchMove={dragMove} onTouchEnd={dragEnd}>
+                        <div className="wall__img" >
                             <img src={creamSrc} alt="cream" draggable={false} />
                         </div>
 

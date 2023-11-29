@@ -395,11 +395,7 @@ canvas.active {
     left: 0;
     z-index: 99;
     background: #fff;
-    height: 68px;
-}
-
-#wallParfum {
-    width: 59px;
+    height: 72px;
 }
 
 #wallMake {

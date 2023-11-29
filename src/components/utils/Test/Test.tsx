@@ -23,7 +23,6 @@ function Test(props: IProps) {
     const dispatch = useAppDispatch();
 
     const clickFormTest = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
         const target = e.target as HTMLInputElement;
         if (!target.matches(".answer__input")) {
             return
@@ -60,8 +59,6 @@ function Test(props: IProps) {
     useEffect(() => {
         if (!inputNameRef.current) return;
         if (inputNameRef.current.value) {
-            console.log(23);
-
             inputNameRef.current.style.background = "#fff";
         }
     })

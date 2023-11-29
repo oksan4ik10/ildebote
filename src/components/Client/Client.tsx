@@ -158,7 +158,7 @@ export const Client = memo(function (props: IPropsClient) {
 
         if (targetDrag) {
             paused.current = false;
-            targetDrag.style.position = "static";
+            targetDrag.style.position = "relative";
             targetDrag.style.top = "auto";
             targetDrag.style.left = "auto"
             refServices.current?.classList.remove("none");
@@ -251,6 +251,13 @@ export const Client = memo(function (props: IPropsClient) {
                 <div className="client__wrap">
                     <div className={"client " + (check === "error" ? "error" : check === "success" ? "success" : "") + (timeClass === "errorTime" ? " errorTime" : timeClass === "dangerTime" ? " dangerTime" : "")}
                     >
+                        <div className="client__drag" onMouseDown={mouseStart}
+                            onMouseMove={mouseMove}
+                            onMouseOut={mouseOut}
+                            onMouseUp={mouseEnd}
+                            onTouchStart={startTouch}
+                            onTouchMove={dragMove}
+                            onTouchEnd={dragEnd}></div>
                         <div className={"client__services " + "cat" + category} ref={refServices}>
                             {(category > 2) && <img src={arrImgCategories[category]} alt={category + ""} />}
                             {(category <= 2) && <span>{arrImgCategories[category]}</span>}
@@ -261,13 +268,7 @@ export const Client = memo(function (props: IPropsClient) {
                             </svg>
                         </div>
                         <div className="client__drag-info">
-                            <div className="client__drag" onMouseDown={mouseStart}
-                                onMouseMove={mouseMove}
-                                onMouseOut={mouseOut}
-                                onMouseUp={mouseEnd}
-                                onTouchStart={startTouch}
-                                onTouchMove={dragMove}
-                                onTouchEnd={dragEnd}></div>
+
                             <div className="client__lives">
                                 <span></span>
                                 <span></span>
