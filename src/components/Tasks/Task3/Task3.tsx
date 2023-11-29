@@ -10,6 +10,9 @@ import ClientsArea from "../../ClientsArea/ClientsArea";
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
 
+import { setArrClients } from '../../../store/reducers/arrClientsReducer';
+import { getClinets } from '../../../components/utils/clients';
+
 
 function Task3(props: IPropsTask) {
     const { nextLevel } = props;
@@ -28,7 +31,10 @@ function Task3(props: IPropsTask) {
     }
 
     useEffect(() => {
-        setTimeout(() => setScreen(screen + 1), 1000)
+        setTimeout(() => {
+            setScreen(screen + 1)
+            dispatch(setArrClients(getClinets(2)))
+        }, 1000)
     }, [])
 
 

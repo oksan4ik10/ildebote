@@ -1,6 +1,6 @@
 
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import "./Form.css";
 import Button from "../../../utils/Button/Button";
 import srcCheck from "../../../../assets/images/check.svg"
@@ -20,13 +20,13 @@ function Form(props: IProps) {
     const [checkEmail, setCheckEmail] = useState(false);
     const [checkCheck, setCheckCheck] = useState(false);
 
-
+    const emailReg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     const submitForm = async (e: React.FormEvent) => {
         e.preventDefault();
         const { check, email } = getValues();
         let correct = 0;
 
-        const emailReg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+
         if (!check) {
             setCheckCheck(true);
             correct++;
@@ -60,7 +60,11 @@ function Form(props: IProps) {
     }
 
 
+    const changeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
+        if (emailReg.test(target.value)) setCheckEmail(false);
 
+    }
 
     return (
         <>
@@ -73,7 +77,7 @@ function Form(props: IProps) {
                     Не забудь принять участие<br />в розыгрыше — оставляй свои<br />контакты, а мы случайным образом<br />выберем тех, кто получит частичку<br />красоты от ИЛЬ ДЕ БОТЭ!
                 </p>
                 <form className="form-modal__send" onSubmit={submitForm}>
-                    <input type="text" id="email" className={"send__email " + (checkEmail ? "error" : "")} placeholder="example@mail.ru" {...register("email")} />
+                    <input type="text" id="email" className={"send__email " + (checkEmail ? "error" : "")} placeholder="example@mail.ru" {...register("email")} onInput={changeEmail} />
                     <div className="form-modal__check">
                         <input type="checkbox" id="check-form" className="send__check" {...register("check")} />
                         <label htmlFor="check-form" className={"send__check-fake " + (checkCheck ? "error" : "")}>

@@ -66,9 +66,8 @@ function ClientsArea(props: IProps) {
         if (clients.length === 0) return;
         if (clients.filter((item) => item).length === 0) {
             if ((task === 1) && screen && (screen > 13)) return;
-            if ((task === 2) && (screen === 23)) return;
-            if ((task === 3) && (screen === 33)) return;
-            if ((task === 4) && (document.querySelector(".modal-dialog"))) return;
+            if ((task === 3) && screen && (screen !== 32)) return;
+            if (((task === 4) && screen && (screen < 43)) || ((task === 4) && (document.querySelector(".modal-dialog")))) return;
             setOpacity(true);
             funcWin();
             return;

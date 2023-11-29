@@ -22,7 +22,7 @@ function App() {
     setTask(task + 1);
     if (task === 0) return;
     if (task > 3) return;
-    dispatch(setArrClients(getClinets(task)))
+    if (task === 1) dispatch(setArrClients(getClinets(task)))
   }
 
   const ref = useRef<HTMLDivElement>(null);

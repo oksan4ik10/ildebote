@@ -14,6 +14,8 @@ import "./Task4.css"
 
 import Modal from "../../utils/Modal/Modal";
 
+import { setArrClients } from '../../../store/reducers/arrClientsReducer';
+import { getClinets } from '../../../components/utils/clients';
 
 import { useAppDispatch } from "../../../store/store";
 import { setTimer } from "../../../store/reducers/timerReducer";
@@ -35,6 +37,7 @@ function Task4(props: IPropsTask) {
     const startGame = () => {
         setScreen(screen + 1);
         setQuestion(1);
+        dispatch(setArrClients(getClinets(3)))
     }
 
     const [question, setQuestion] = useState(-1);
